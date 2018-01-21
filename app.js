@@ -11,10 +11,14 @@ app.use(express.static("public"));
 app.set("view engine","ejs");
 app.use(methodOverride("_method"));
 
-mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://127.0.0.1:27017/uzeDB");
-
 //==================================== DB setup ============
+mongoose.Promise = global.Promise;
+var uri = "mongodb://xianhomedroy:19980110.Zz@ds046267.mlab.com:46267/uzedb";
+mongoose.connect(uri);
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+
 //---------------------------- models
 var Dm = require("./models/demands");
 var Sp = require("./models/supply");
