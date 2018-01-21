@@ -14,6 +14,11 @@
 	font-size: 3em;
 }
 
+#map{
+        height: 400px;
+        width: 100%;
+       }
+
 #_headtitle_mobile{
 	display: none;
 }

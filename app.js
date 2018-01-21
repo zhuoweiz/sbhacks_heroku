@@ -4,7 +4,11 @@ var express = require("express"),
 	request = require("request"),
 	methodOverride = require("method-override"),
 	app = express(),
+	$ = require("jquery"),
 	mongoose = require("mongoose");
+
+//own files
+var notes = require("./others.js");
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
@@ -22,6 +26,9 @@ db.on('error', console.error.bind(console, 'connection error:'));
 //---------------------------- models
 var Dm = require("./models/demands");
 var Sp = require("./models/supply");
+
+//=============================== others =====
+
 
 //==================================== Routes =================
 app.get("/", function(req,res){
