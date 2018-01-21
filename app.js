@@ -4,7 +4,7 @@ var express = require("express"),
 	request = require("request"),
 	methodOverride = require("method-override"),
 	app = express(),
-	$ = require("jquery"),
+	// $ = require("jquery"),
 	mongoose = require("mongoose");
 
 //own files
