@@ -100,6 +100,11 @@ app.get("/supplied", function(req,res){
 // =========================  MAP REQUEST ==============
 
 
+// =========================  OTHER ROUTES ==========
+app.get("/contact", function(req,res){
+	res.render("contact");
+});
+
 //---------------------server setup---------------------
 app.listen(process.env.PORT,process.env.IP,function(){
 	console.log("Uze server started");

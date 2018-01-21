@@ -1,0 +1,89 @@
+<% include ./partials/header %>
+
+<div id="_header">
+		<label id="_headtitle">Your Best Storage Solution</label>
+		<label id="_headtitle_mobile">Uze</label>
+	</div>
+
+<div class="container _main _textCenter">
+
+<div class="_textCenter">
+	<h3>Uze tech location</h3>
+	<p>3131 S Hoover St, Los Angeles, 90089, CA, United States</p>
+	<p>Tel: 2132735476</p>
+	<a href="keybwarrior.com/undecided/undecided.html" style="text-decoration: none;">Join our email list!</a>
+</div>
+
+<p></p>
+
+<!-- ========================= MAP =================== -->
+	<div id="map"></div>
+	    <script>
+	      // Note: This example requires that you consent to location sharing when
+	      // prompted by your browser. If you see the error "The Geolocation service
+	      // failed.", it means you probably did not give permission for the browser to
+	      // locate you.
+
+	      var map, infoWindow;
+	      function initMap() {
+	        map = new google.maps.Map(document.getElementById('map'), {
+	          center: {lat: 34.0223519, lng: -118.285117},
+	          zoom: 6
+	        });
+	        infoWindow = new google.maps.InfoWindow;
+	        infoWindow.open(map);
+
+	        	//----------------------------------- relocate to the user
+	        // // Try HTML5 geolocation.
+	        // if (navigator.geolocation) {
+	        //   	navigator.geolocation.getCurrentPosition(function(position) {
+	        //     var pos = {
+	        //       lat: position.coords.latitude,
+	        //       lng: position.coords.longitude
+	        //     };
+
+	        //     infoWindow.setPosition(pos);
+	        //     infoWindow.setContent('Location found.');
+	        //     infoWindow.open(map);
+	        //     map.setCenter(pos);
+	        //   }, function() {
+	        //     handleLocationError(true, infoWindow, map.getCenter());
+	        //   });
+
+	        //   	//_test
+	        //   	console.log("location: ");
+	        // } else {
+	        //   // Browser doesn't support Geolocation
+	        //   handleLocationError(false, infoWindow, map.getCenter());
+	        //   alert("no support for geolocation");
+	        // }
+	      }
+
+	      // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+	      //   infoWindow.setPosition(pos);
+	      //   infoWindow.setContent(browserHasGeolocation ?
+	      //                         'Error: The Geolocation service failed.' :
+	      //                         'Error: Your browser doesn\'t support geolocation.');
+	      //   infoWindow.open(map);
+	      // }
+	    </script>
+	    <script async defer
+	    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXgzdvX_NggJZqfYKEceahh2do7zED09c&callback=initMap">
+	    </script>
+
+<!-- ============================== map ends ===================== -->
+
+	<p>Co-founders: Gary Huang & Bobby Chang</p>
+
+	
+
+	<br>
+	<form class="_donateButton" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="hosted_button_id" value="CSZE5ZW9J6LYN">
+		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+		<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+	</form>
+</div>
+
+<% include ./partials/footer %>
