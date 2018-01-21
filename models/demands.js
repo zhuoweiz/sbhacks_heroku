@@ -28,6 +28,5 @@ var demandSchema = new mongoose.Schema({
 });
 
 var Dm = mongoose.model("Demand", demandSchema);
-console.log("models working!");
 
 module.exports = Dm;

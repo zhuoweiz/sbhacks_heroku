@@ -29,6 +29,5 @@ var supplySchema = new mongoose.Schema({
 });
 
 var Sp = mongoose.model("Supply", supplySchema);
-console.log("models working!");
 
 module.exports = Sp;

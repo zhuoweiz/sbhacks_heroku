@@ -27,11 +27,22 @@ db.on('error', console.error.bind(console, 'connection error:'));
 var Dm = require("./models/demands");
 var Sp = require("./models/supply");
 
-//=============================== others =====
 
+//=============================== others =====
+// request('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCXgzdvX_NggJZqfYKEceahh2do7zED09c', function(err, response, body){
+// 	var parsedData = JSON.parse(body);
+
+// 	if(response.statusCode == 200) {     //things worked     console.log(body);
+//   		console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+//   		console.log('Sunset at Huwaii is at :', parsedData["homeMobileCountryCode"]); 
+//   	}
+// });
 
 //==================================== Routes =================
 app.get("/", function(req,res){
+	//map request
+
+
 	res.render("index");
 });
 
@@ -85,6 +96,8 @@ app.get("/supplied", function(req,res){
 // app.get("/demand",function(req,res){
 // 	res.render("demand");
 // });
+
+// =========================  MAP REQUEST ==============
 
 
 //---------------------server setup---------------------
