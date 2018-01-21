@@ -1,0 +1,146 @@
+<% include partials/header %>
+
+<div class="container">
+	<h1 class="_textCenter jumbotron">DEMAND PAGE</h1>
+	
+	<form class="_form" action="/demanded" method="POST">
+		<div class="form-group">
+			<label>Ur college<span class="_required">*</span></label>
+		  <div class="input-group">
+	        <div class="input-group-prepend">
+	          <span class="input-group-text">@</span>
+	        </div>
+	        <input type="text" class="form-control" id="username" placeholder="ucsb" name="demand[college]" required>
+	        <div class="invalid-feedback" style="width: 100%;">
+	          Your college name is required.
+	        </div>
+	      </div>
+		</div>
+
+	  <div class="form-row">
+	    <div class="form-group col-md-6">
+	      <label for="inputEmail4">Ur name<span class="_required">*</span></label>
+	      <input type="name" class="form-control" id="inputEmail4" placeholder="Bobby" name="demand[usernameF]" required>
+	    </div>
+	    <div class="form-group col-md-6">
+	      <label for="inputPassword4">Ur invitation code (Optional)</label>
+	      <input type="name" class="form-control" id="inputPassword4" placeholder="uzespace2018@usc" name="demand[code]">
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="exampleFormControlInput1">Ur email<span class="_required">*</span></label>
+	    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="demand[email]" required="">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="exampleFormControlInput1">Ur number<span class="_required">*</span></label>
+	    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="demand[email]" required="">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="exampleFormControlSelect1">number of Units U need<span class="_required">*</span></label>
+	    <select class="form-control" id="exampleFormControlSelect1" name="demand[unit]">
+	      <option>1 (minimum)</option>
+	      <option>2</option>
+	      <option>3</option>
+	      <option>4</option>
+	      <option>5 (maximum)</option>
+	    </select>
+	  </div>
+	  <!-- <div class="form-group">
+	    <label for="exampleFormControlSelect2">No. units u need</label>
+	    <select multiple class="form-control" id="exampleFormControlSelect2">
+	      <option>1</option>
+	      <option>2</option>
+	      <option>3</option>
+	      <option>4</option>
+	      <option>5</option>
+	    </select>
+	  </div> -->
+
+	  
+	  <div class="form-row">
+	  	<div class="form-group col-md-3">
+	  		<label>weight</label>
+	  		<input type="number" class="form-control" id="" placeholder="1" name="demand[weight]"><span> lbs</span>
+	  	</div>
+	  	<div class="form-group col-md-3">
+	  		<label>length</label>
+	  		<input type="number" class="form-control" id="" placeholder="1" name="demand[length]"><span> ft</span>
+	  	</div>
+	  	<div class="form-group col-md-3">
+	  		<label>height</label>
+	  		<input type="number" class="form-control" id="" placeholder="1" name="demand[height]"><span> ft</span>
+	  	</div>
+	  	<div class="form-group col-md-3">
+	  		<label>width</label>
+	  		<input type="number" class="form-control" id="" placeholder="1" name="demand[width]"><span> ft</span>
+	  	</div>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="exampleFormControlTextarea1">any special needs?</label>
+	    <textarea class="form-control" id="exampleFormControlTextarea1" name="demand[special]" rows="3"></textarea>
+	  </div>
+	  <div class="form-group">
+	    <label for="uploadAnImage">image of Ur boxes<span class="_note">(no other files accepted)</span></label>
+	    <input type="file" accept="image/*" name="demand[img]" class="form-control-file" id="uploadAnImage">
+	  </div>
+
+	  <!-- ======================= modal ======================= -->
+	  <!-- Button trigger modal -->
+		<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+		  Terms & agreement
+		</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Uzer terms</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		      	<ol>
+		      		<li>房东交付50刀押金</li>
+		      		<li>房东有责任保证包裹/物品的安全，防止偷窃等行为</li>
+		      		<li>房东必须使用公司统一封条（可能配有二维码）</li>
+		      	</ol>
+		      	<h4>服务流程：</h4>
+		      	<ol>
+		      		<li>加入网站注册信息</li>
+		      		<li>我们验证信息</li>
+		      		<li>我们进行匹配</li>
+					<li>我们交换模糊信息，确认后建立用户房东沟通渠道</li>
+					<li>房东交付押金</li>
+					<li>房东-用户自主交流</li>
+					<li>订单开始用户交付全额服务费用</li>
+					<li>订单完成后退还押金</li>
+		      	</ol>
+		      	<input type="checkbox" id="userAgreementCheckBox" name="" value=""> I agree to be a Uzer
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <input class="btn btn-outline-primary" type="submit" id="demandSubmitButton" name="">
+		      </div>
+		    </div>
+		  </div>
+		</div>	
+
+<!-- ======================== submit ===================== -->
+
+	  
+	</form>
+
+ 		
+	
+
+
+
+</div>
+
+<% include partials/footer %>
