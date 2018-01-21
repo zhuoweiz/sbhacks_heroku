@@ -77,6 +77,6 @@ app.get("/supplied", function(req,res){
 
 
 //---------------------server setup---------------------
-app.listen(3000,function(){
+app.listen(process.env.PORT,process.env.IP,function(){
 	console.log("Uze server started");
 });
