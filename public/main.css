@@ -78,6 +78,10 @@
 ._donateButton{
 	margin-top: 30px;
 }
+
+._logged{
+	color: lightblue;
+}
 /*.border-top { border-top: 1px solid #e5e5e5; }
 .border-bottom { border-bottom: 1px solid #e5e5e5; }
 .border-top-gray { border-top-color: #adb5bd; }
