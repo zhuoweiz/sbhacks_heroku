@@ -35,11 +35,12 @@
 
 	  <div class="form-group">
 	    <label for="supplyPhoneInput">Ur number<span class="_required">*</span></label>
-	    <input type="tel" class="form-control" id="supplyPhoneInput" placeholder="name@example.com" name="supply[s_email]" required="">
+	    <input type="tel" class="form-control" id="supplyPhoneInput" placeholder="1234567890" name="supply[s_email]" required="">
 	  </div>
 
 	  <div class="form-group">
-	    <label for="exampleFormControlSelect1">number of Units U need<span class="_required">*</span></label>
+	    <label for="exampleFormControlSelect1">number of uze units available<span class="_required">*</span></label>
+	    <label class="_note" data-toggle="tooltip" title="one uze unit refers to 20x20x20(inches)">&#8505;</label>
 	    <select class="form-control" id="exampleFormControlSelect1" name="supply[s_unit]">
 	      <option>1 (minimum)</option>
 	      <option>2</option>
@@ -47,6 +48,17 @@
 	      <option>4</option>
 	      <option>5 (maximum)</option>
 	    </select>
+	  </div>
+
+	  <div class="form-row">
+	    <div class="form-group col-md-6">
+	      <label for="demandInputStartingDate">Starting Date<span class="_required">*</span></label>
+	      <input type="date" class="form-control" id="demandInputStartingDate" placeholder="05/015/2018" name="demand[starting]" required>
+	    </div>
+	    <div class="form-group col-md-6">
+	      <label for="demandInputEndingDate">Ending Date<span class="_required">*</span></label>
+	      <input type="date" class="form-control" id="demandInputEndingDate" placeholder="08/18/2018" name="demand[ending]">
+	    </div>
 	  </div>
 
 	  <div class="form-group">
@@ -127,22 +139,33 @@
 					<li>订单开始用户交付全额服务费用</li>
 					<li>订单完成后退还押金</li>
 		      	</ol>
-		      	<input type="checkbox" id="userAgreementCheckBox" name="" value=""> I agree to be a Uzer
+		      	<input type="checkbox" id="supplyUserAgreementCheckBox" name="" value="">
+		      	<label for="supplyUserAgreementCheckBox">I agree to be a Uzer</label>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		        <input class="btn btn-outline-primary" type="submit" id="supplySs_ubmitButton" name="">
 		      </div>
 		    </div>
 		  </div>
 		</div>	
 
 <!-- ======================== submit ===================== -->
+	<button class="btn btn-outline-primary" type="submit" id="supplySubmitButton" disabled="">Submit</button>
+	<script type="">
+		var checkbox = document.querySelector("#supplyUserAgreementCheckBox");
+		var submitButton = document.querySelector("#supplySubmitButton");
 
-	  
+		checkbox.addEventListener("change", function(){
+			submitButton.disabled = !submitButton.disabled;
+		});
+	</script>
+
+
+
+
 	</form>
 
- 		
+
 	
 
 
