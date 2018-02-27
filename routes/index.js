@@ -38,7 +38,7 @@ router.post("/login", passport.authenticate("local",{
 	successRedirect: "/",
 	failureRedirect: "/login",
 	failureFlash: true,
-    successFlash: 'Welcome to YelpCamp!'
+    successFlash: 'Welcome to Uze!'
 }), function(req,res){
 });
 
