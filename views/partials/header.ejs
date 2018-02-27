@@ -5,10 +5,13 @@
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- google login -->
     <meta name="google-signin-client_id" content="1079090216942-snudlc7aaui42sd9a7e4q4fk2d2t11kr.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
 	<link rel="stylesheet" type="text/css" href="/main.css">
 	<link rel="stylesheet" type="text/css" href="/main_mobile.css">
 	<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css"> -->
@@ -63,4 +66,16 @@
 		<% } %>
 	  </div>
 	</nav>
+
+	  <div class="container">
+	     <% if(error && error.length > 0) { %>
+	       <div class="alert alert-danger"><p><%=error %></p></div>
+	     <% } %>
+	     
+	     <% if(success && success.length > 0) { %>
+	       <div class="alert alert-success"><p><%= success %></p></div>
+	     <% } %>
+	  </div>
+	
 </div>
+

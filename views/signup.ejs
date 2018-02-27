@@ -4,8 +4,14 @@
 	<h1 class="_textCenter jumbotron">Sign Up! 注册！</h1>
 	
 	<form class="_form" action="/signup" method="POST">
+
 		<div class="form-group">
-			<label for="signUpPageUsernameInput">Ur edu email(username)/你的学校edu邮箱（用户名）<span class="_required">*</span></label>
+			<label for="signUpPageUserDisplayNameInput">display name</label>
+			<input type="text" id="signUpPageUserDisplayNameInput" name="displayName">
+		</div>
+
+		<div class="form-group">
+			<label for="signUpPageUsernameInput">Ur email/你的学校edu邮箱（用户名）<span class="_required">*</span></label>
 		  <div class="input-group">
 	        <div class="input-group-prepend">
 	          <span class="input-group-text">@</span>
@@ -27,14 +33,15 @@
 		</button>
 		
 		<p></p>
-
-		<div class="_note">
-			<div>Already have an account? Login! </div>
-			<a href="/login" class="btn btn-outline-primary">
-			 Here!
-			</a>
-		</div>
 	</form>
+
+	<div class="_note">
+		<div>
+			Already have an account? Login!
+			<a href="/login" class="">Here!</a>
+		</div>
+		
+	</div>
 
 
  		

@@ -1,12 +1,19 @@
 //dependencies
 var bodyParser 		= require("body-parser"),
-	methodOverride  = require("method-override");
+	cookieParser 	= require("cookie-parser"),
+	methodOverride  = require("method-override"),
+	flash        	= require("connect-flash"),
+	session 		= require("express-session"),
 	request 		= require("request"),
 	mongoose 		= require("mongoose"),
 	express 		= require("express"),
 
 	passport 		= require("passport"),
 	LocalStrategy 	= require("passport-local"),
+	async 			= require("async"),
+	nodemailer 		= require("nodemailer"),
+	
+
 
 	//models
 	notes 			= require("./others.js")
@@ -15,12 +22,22 @@ var bodyParser 		= require("body-parser"),
 	User 			= require("./models/user"),
 	seedDB 			= require("./models/seeds");
 
+// configure dotenv
+// wtf is this
+require('dotenv').load();
+
+//requiring routes
+var indexRoutes     = require("./routes/index");
+    
 
 var app = express();
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static("public"));
+
 app.set("view engine","ejs");
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
+app.use(cookieParser('secret'));
+app.locals.moment = require('moment');
 
 //================== DB setup ============
 mongoose.Promise = global.Promise;
@@ -32,37 +49,29 @@ db.on('error', console.error.bind(console, 'connection error:'));
 
 //================== PASSPORT CONFIGURATION
 app.use(require("express-session")({
-	secret: "Rusty",
+	secret: "Rusty", //dont know wtf is this
 	resave: false,
 	saveUninitialized: false
 }));
+
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate())); //use the function form user model
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-//=============================== others =====
-// request('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCXgzdvX_NggJZqfYKEceahh2do7zED09c', function(err, response, body){
-// 	var parsedData = JSON.parse(body);
-
-// 	if(response.statusCode == 200) {     //things worked     console.log(body);
-//   		console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-//   		console.log('Sunset at Huwaii is at :', parsedData["homeMobileCountryCode"]); 
-//   	}
-// });
-
 //middleware
+//wtf is this
+//An object that contains response local variables scoped to the request, and therefore available only to the view(s) rendered during that request / response cycle (if any).
 app.use(function(req,res,next){
 	res.locals.currentUser = req.user;
+	res.locals.success = req.flash('success');
+	res.locals.error = req.flash('error');
 	next();
 });
 
 //==================================== Routes =================
-app.get("/", function(req,res){
-	//special
-	res.render("index", {currentUser: req.user});
-});
 
 //---------------demand
 app.get("/demand", isLoggedIn, function(req,res){
@@ -115,40 +124,14 @@ app.get("/supplied", function(req,res){
 // 	res.render("demand");
 // });
 
-// =========================  AUTH ROUTES SETUP ==============
-app.get("/signup", function(req,res){
-	res.render("signup");
-});
+app.use("/", indexRoutes);
 
-app.post("/signup", function(req,res){
-	var newUser = new User({username: req.body.username});
-	User.register(newUser, req.body.password, function(err, user){
-		if(err){
-			console.log(err);
-			return res.render("signup");
-		}
-		passport.authenticate("local")(req,res,function(){
-			console.log("register success!");
-			res.redirect("/");
-		});
-	});
-});
+// ======================================================
+// ======================== end of auth =================
 
-app.get("/login", function(req,res){
-	res.render("login");
-});
-
-app.post("/login", passport.authenticate("local",{
-	successRedirect: "/",
-	railureRedirect: "/login"
-}), function(req,res){
-});
-
-app.get("/logout", function(req,res){
-	req.logout();
-	res.redirect("/");
-});
-
+// ---------------------------------------------------
+// ---------------- start of middlewares -------------
+// ---------------------------------------------------
 function isLoggedIn(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
@@ -156,12 +139,14 @@ function isLoggedIn(req, res, next){
 	res.redirect("/login");
 }
 
+
+
 // =========================  OTHER ROUTES ==========
 app.get("/contact", function(req,res){
 	res.render("contact");
 });
 
-//---------------------server setup---------------------
+//---------------------server setup---------------------process.env.PORT,process.env.IP
 app.listen(process.env.PORT,process.env.IP,function(){
 	console.log("Uze server started");
 });
