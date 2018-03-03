@@ -10,6 +10,7 @@ var bodyParser 		= require("body-parser"),
 
 	passport 		= require("passport"),
 	LocalStrategy 	= require("passport-local"),
+	GoogleStrategy	= require("passport-google-oauth").OAuthStrategy,
 	async 			= require("async"),
 	nodemailer 		= require("nodemailer"),
 	
@@ -38,6 +39,20 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(cookieParser('secret'));
 app.locals.moment = require('moment');
+
+// --------------- google auth -----
+// passport.use(new GoogleStrategy({
+// 	consumerKey: ,
+// 	consumerSecret: ,
+// 	callbackURL: 
+// 	},
+
+// 	function(token, tokenSecret, profile, done){
+// 		User.findOrCreate({ googleID: profile.id }, function(err, user){
+// 			return done(err, user);
+// 		});
+// 	}
+// ));
 
 //================== DB setup ============
 mongoose.Promise = global.Promise;
@@ -147,6 +162,7 @@ app.get("/contact", function(req,res){
 });
 
 //---------------------server setup---------------------process.env.PORT,process.env.IP
-app.listen(process.env.PORT,process.env.IP,function(){
+var port = process.env.PORT || 5000;
+app.listen(port,function(){
 	console.log("Uze server started");
 });

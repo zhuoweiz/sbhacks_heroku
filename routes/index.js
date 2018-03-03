@@ -1,6 +1,7 @@
 var express 	= require("express"),
     router  	= express.Router(),
     passport 	= require("passport"),
+    GoogleStrategy = require("passport-google-oauth").OAuthStrategy,
     async 		= require("async"),
     crypto 		= require("crypto"),
     User 		= require("../models/user");
@@ -106,7 +107,7 @@ router.post('/forgot', function(req, res, next){
 			const sgMail = require('@sendgrid/mail');
 			var content = ' http://' + req.headers.host + '/reset/' + token;
 			sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-			const msg = {
+			var msg = {
 			  to: user.username,
 			  from: 'zhuoweiz@uzespace.com',
 			  subject: '[uzespace] Reset password confirmation',
@@ -184,10 +185,13 @@ router.post('/reset/:token', function(req, res) {
       //   done(err);
       // });
 
+      // using SendGrid's v3 Node.js Library
+// https://github.com/sendgrid/sendgrid-nodejs
+
       const sgMail = require('@sendgrid/mail');
 		sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-		const msg = {
+		var msg = {
 		  to: user.username,
 		  from: 'zhuoweiz@uzespace.com',
 		  subject: '[uzespace] Reset password confirmation',
