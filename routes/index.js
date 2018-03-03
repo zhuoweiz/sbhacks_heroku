@@ -4,6 +4,7 @@ var express 	= require("express"),
     GoogleStrategy = require("passport-google-oauth").OAuthStrategy,
     async 		= require("async"),
     crypto 		= require("crypto"),
+    nodemailer 	= require("nodemailer"),
     User 		= require("../models/user");
 
 router.get("/", function(req,res){
@@ -79,49 +80,49 @@ router.post('/forgot', function(req, res, next){
 		},
 		function(token, user, done){
 			// -- -- using nodemailer
-			// var smtpTransport = nodemailer.createTransport({
-			// 	service: 'Gmail',
-			// 	auth: {
-			// 		user: 'zhuoweiz@uzespace.com',
-			// 		pass: '19980110.Zz'
-			// 		//pass: process.env.GMAILPW -> terminal: export GMAILPW=blablabla
-			// 	}
-			// });
-			// var mailOptions = {
-			// 	to: user.username,
-			// 	from: 'zhuoweiz@uzespace.com',
-			// 	subject: 'Node.js Password Reset',
-			// 	text: 'You are receiving this because you r a proud uzer horay!!!' +
-			// 		'please click on the link below or paste it to the browser to proceed' +
-			// 		'http://' + req.headers.host + '/rest/' + token +'\n\n' +
-			// 		'if you didnt request this, please ignore this email'
-			// };
-			// smtpTransport.sendMail(mailOptions, function(err) {
-			// 	console.log('mail sent');
-			// 	req.flash('success', 'An email has been sent to ' + user.username + 'with further instructions.');
-			// 	done(err, 'done');
-			// });
+			var smtpTransport = nodemailer.createTransport({
+				service: 'Gmail',
+				auth: {
+					user: 'uzespace@gmail.com',
+					pass: 'GaryBob123'
+					//pass: process.env.GMAILPW -> terminal: export GMAILPW=blablabla
+				}
+			});
+			var mailOptions = {
+				to: user.username,
+				from: 'zhuoweiz@uzespace.com',
+				subject: 'Node.js Password Reset',
+				text: 'You are receiving this because you r a proud uzer horay!!!' +
+					'please click on the link below or paste it to the browser to proceed' +
+					'http://' + req.headers.host + '/rest/' + token +'\n\n' +
+					'if you didnt request this, please ignore this email'
+			};
+			smtpTransport.sendMail(mailOptions, function(err) {
+				console.log('mail sent');
+				req.flash('success', 'An email has been sent to ' + user.username + 'with further instructions.');
+				done(err, 'done');
+			});
 
 			// using SendGrid's v3 Node.js Library
 			// https://github.com/sendgrid/sendgrid-nodejs
-			const sgMail = require('@sendgrid/mail');
-			var content = ' http://' + req.headers.host + '/reset/' + token;
-			sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-			var msg = {
-			  to: user.username,
-			  from: 'zhuoweiz@uzespace.com',
-			  subject: '[uzespace] Reset password confirmation',
-			  text: 'You are receiving this because you r a proud uzer horay!!!' +
-					'please click on the link below or paste it to the browser to proceed' +
-					content  + '\n\n' +
-					' if you didnt request this, please ignore this email'
-			  // ,html: '<button href=content>click me</button>'
-			};
-			sgMail.send(msg);
+			// const sgMail = require('@sendgrid/mail');
+			// var content = ' http://' + req.headers.host + '/reset/' + token;
+			// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+			// var msg = {
+			//   to: user.username,
+			//   from: 'zhuoweiz@uzespace.com',
+			//   subject: '[uzespace] Reset password confirmation',
+			//   text: 'You are receiving this because you r a proud uzer horay!!!' +
+			// 		'please click on the link below or paste it to the browser to proceed' +
+			// 		content  + '\n\n' +
+			// 		' if you didnt request this, please ignore this email'
+			//   // ,html: '<button href=content>click me</button>'
+			// };
+			// sgMail.send(msg);
 
-			req.flash('success', 'An email has been sent to ' + user.username + 'with further instructions.');
-			res.redirect('/');
-			console.log("sent");
+			// req.flash('success', 'An email has been sent to ' + user.username + 'with further instructions.');
+			// res.redirect('/');
+			// console.log("sent");
 		}
 	], function(err) {
 		if (err) return next(err);
@@ -166,43 +167,46 @@ router.post('/reset/:token', function(req, res) {
       });
     },
     function(user, done) {
-      // var smtpTransport = nodemailer.createTransport({
-      //   service: 'Gmail', 
-      //   auth: {
-      //     user: 'learntocodeinfo@gmail.com',
-      //     pass: process.env.GMAILPW
-      //   }
-      // });
-      // var mailOptions = {
-      //   to: user.email,
-      //   from: 'learntocodeinfo@mail.com',
-      //   subject: 'Your password has been changed',
-      //   text: 'Hello,\n\n' +
-      //     'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
-      // };
-      // smtpTransport.sendMail(mailOptions, function(err) {
-      //   req.flash('success', 'Success! Your password has been changed.');
-      //   done(err);
-      // });
+    	// -- -- using nodemailer
+		var smtpTransport = nodemailer.createTransport({
+			service: 'Gmail',
+			auth: {
+				user: 'uzespace@gmail.com',
+				pass: 'GaryBob123'
+				//pass: process.env.GMAILPW -> terminal: export GMAILPW=blablabla
+			}
+		});
+		var mailOptions = {
+			to: user.username,
+			from: 'zhuoweiz@uzespace.com',
+			subject: 'Node.js Password Reset',
+			text: 'Hello,\n\n' +
+   			     'This is a confirmation that the password for your account ' + user.username + ' has just been changed.\n'
+		};
+		smtpTransport.sendMail(mailOptions, function(err) {
+			console.log('mail sent');
+			req.flash('success', 'An email has been sent to ' + user.username + 'with further instructions.');
+			done(err, 'done');
+		});
 
       // using SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
 
-      const sgMail = require('@sendgrid/mail');
-		sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  //     const sgMail = require('@sendgrid/mail');
+		// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-		var msg = {
-		  to: user.username,
-		  from: 'zhuoweiz@uzespace.com',
-		  subject: '[uzespace] Reset password confirmation',
-		  text: 'Hello,\n\n' +
-   			     'This is a confirmation that the password for your account ' + user.username + ' has just been changed.\n'
-		  // ,html: '<button href=content>click me</button>'
-		};
-		sgMail.send(msg);
+		// var msg = {
+		//   to: user.username,
+		//   from: 'zhuoweiz@uzespace.com',
+		//   subject: '[uzespace] Reset password confirmation',
+		//   text: 'Hello,\n\n' +
+  //  			     'This is a confirmation that the password for your account ' + user.username + ' has just been changed.\n'
+		//   // ,html: '<button href=content>click me</button>'
+		// };
+		// sgMail.send(msg);
 
-		req.flash('success','new password set!');
-		res.redirect('/');
+		// req.flash('success','new password set!');
+		// res.redirect('/');
 
     }
   ], function(err) {
