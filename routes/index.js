@@ -28,7 +28,7 @@ router.post("/signup", function(req,res){
 		}
 		passport.authenticate("local")(req,res,function(){
 			console.log("register success!");
-			done(err, user);
+			res.redirect('/');
 		});
 	});
 });
@@ -100,7 +100,7 @@ router.post('/forgot', function(req, res, next){
 			};
 			smtpTransport.sendMail(mailOptions, function(err) {
 				console.log('mail sent');
-				req.flash('success', 'An email has been sent to ' + user.username + 'with further instructions.');
+				req.flash('success', 'An email has been sent to ' + user.username + ' with further instructions.');
 				done(err, 'done');
 			});
 
