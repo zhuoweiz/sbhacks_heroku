@@ -84,7 +84,7 @@ router.post('/forgot', function(req, res, next){
 				service: 'Gmail',
 				auth: {
 					user: 'uzespace@gmail.com',
-					pass: 'GaryBob123'
+					pass: process.env.GMAILPW
 					//pass: process.env.GMAILPW -> terminal: export GMAILPW=blablabla
 				}
 			});
@@ -172,7 +172,7 @@ router.post('/reset/:token', function(req, res) {
 			service: 'Gmail',
 			auth: {
 				user: 'uzespace@gmail.com',
-				pass: 'GaryBob123'
+				pass: process.env.GMAILPW
 				//pass: process.env.GMAILPW -> terminal: export GMAILPW=blablabla
 			}
 		});
