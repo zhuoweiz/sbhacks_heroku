@@ -23,11 +23,12 @@ router.post("/signup", function(req,res){
 	User.register(newUser, req.body.password, function(err, user){
 		if(err){
 			console.log(err);
+			req.flash('error','Sorry, but the email is already used for the account, pls contact customer service for further assistance');
 			return res.render("signup");
 		}
 		passport.authenticate("local")(req,res,function(){
 			console.log("register success!");
-			res.redirect("/");
+			done(err, user);
 		});
 	});
 });
@@ -94,7 +95,7 @@ router.post('/forgot', function(req, res, next){
 				subject: 'Node.js Password Reset',
 				text: 'You are receiving this because you r a proud uzer horay!!!' +
 					'please click on the link below or paste it to the browser to proceed' +
-					'http://' + req.headers.host + '/rest/' + token +'\n\n' +
+					' http://' + req.headers.host + '/rest/' + token +'\n\n' +
 					'if you didnt request this, please ignore this email'
 			};
 			smtpTransport.sendMail(mailOptions, function(err) {
@@ -188,28 +189,9 @@ router.post('/reset/:token', function(req, res) {
 			req.flash('success', 'An email has been sent to ' + user.username + 'with further instructions.');
 			done(err, 'done');
 		});
-
-      // using SendGrid's v3 Node.js Library
-// https://github.com/sendgrid/sendgrid-nodejs
-
-  //     const sgMail = require('@sendgrid/mail');
-		// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-		// var msg = {
-		//   to: user.username,
-		//   from: 'zhuoweiz@uzespace.com',
-		//   subject: '[uzespace] Reset password confirmation',
-		//   text: 'Hello,\n\n' +
-  //  			     'This is a confirmation that the password for your account ' + user.username + ' has just been changed.\n'
-		//   // ,html: '<button href=content>click me</button>'
-		// };
-		// sgMail.send(msg);
-
-		// req.flash('success','new password set!');
-		// res.redirect('/');
-
     }
   ], function(err) {
+
   	req.flash('error','oops');
     res.redirect('/campgrounds');
   });
