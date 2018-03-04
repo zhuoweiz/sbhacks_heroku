@@ -25,7 +25,7 @@ var bodyParser 		= require("body-parser"),
 
 // configure dotenv
 // wtf is this
-require('dotenv').load();
+require('dotenv').config();
 
 //requiring routes
 var indexRoutes     = require("./routes/index");

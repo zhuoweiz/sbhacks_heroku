@@ -7,6 +7,8 @@ var express 	= require("express"),
     nodemailer 	= require("nodemailer"),
     User 		= require("../models/user");
 
+require('dotenv').config();
+
 router.get("/", function(req,res){
 	res.render("index");
 });
