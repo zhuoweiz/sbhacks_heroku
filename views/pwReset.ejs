@@ -1,6 +1,7 @@
 <% include ./partials/header %>
-<div class="_form">
-	<form action="/reset/<%= token %>" method="POST">
+
+<div class="container">
+	<form class="_form" action="/reset/<%= token %>" method="POST">
 		  <legend>Reset Password</legend>
 		  <div class="form-group">
 		    <label for="password">New Password</label>
@@ -15,4 +16,5 @@
 		  </div>
 		</form>
 </div>
+
 <% include ./partials/footer %>

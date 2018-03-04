@@ -195,7 +195,7 @@ router.post('/reset/:token', function(req, res) {
   ], function(err) {
 
   	req.flash('error','oops');
-    res.redirect('/campgrounds');
+    res.redirect('/');
   });
 });
 
