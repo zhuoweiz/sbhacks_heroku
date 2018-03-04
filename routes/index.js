@@ -97,7 +97,7 @@ router.post('/forgot', function(req, res, next){
 				subject: 'Node.js Password Reset',
 				text: 'You are receiving this because you r a proud uzer horay!!!' +
 					'please click on the link below or paste it to the browser to proceed' +
-					' http://' + req.headers.host + '/rest/' + token +'\n\n' +
+					' http://' + req.headers.host + '/reset/' + token +'\n\n' +
 					'if you didnt request this, please ignore this email'
 			};
 			smtpTransport.sendMail(mailOptions, function(err) {
