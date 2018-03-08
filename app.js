@@ -118,8 +118,10 @@ app.get("/supply", isLoggedIn, function(req,res){
 });
 
 app.post("/supplied", isLoggedIn, function(req,res){
+	var supply_query = req.body.supply;
+	
 	//-----------------need modification
-	Sp.create(req.body.supply, function(err, newDemand){
+	Sp.create(supply_query, function(err, newDemand){
 		if(err){
 			console.log("storing demand POST error!");
 			console.log(err);

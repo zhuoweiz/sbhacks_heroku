@@ -19,7 +19,7 @@
 
 	  <div class="form-row">
 	    <div class="form-group col-md-6">
-	      <label for="inputEmail4">User<span class="_required">*</span></label>
+	      <label for="inputEmail4">Ur name<span class="_required">*</span></label>
 	      <input type="name" class="form-control" id="inputEmail4" placeholder="Bobby" name="supply[s_usernameF]" required>
 	    </div>
 	    <div class="form-group col-md-6">
@@ -30,7 +30,8 @@
 
 	  <div class="form-group">
 	    <label for="exampleFormControlInput1">Ur email<span class="_required">*</span></label>
-	    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="supply[s_email]" required="" disabled="" value="<%= currentUser.email %>">
+	    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="supply[s_email]" required="" <%= currentUser.username %>>
+	    <!-- <label name="supply[s_email]"></label> -->
 	  </div>
 
 	  <div class="form-group">
@@ -53,11 +54,11 @@
 	  <div class="form-row">
 	    <div class="form-group col-md-6">
 	      <label for="demandInputStartingDate">Starting Date<span class="_required">*</span></label>
-	      <input type="date" class="form-control" id="demandInputStartingDate" placeholder="05/015/2018" name="demand[starting]" required>
+	      <input type="date" class="form-control" id="demandInputStartingDate" placeholder="05/015/2018" name="demand[s_starting]" required>
 	    </div>
 	    <div class="form-group col-md-6">
 	      <label for="demandInputEndingDate">Ending Date<span class="_required">*</span></label>
-	      <input type="date" class="form-control" id="demandInputEndingDate" placeholder="08/18/2018" name="demand[ending]">
+	      <input type="date" class="form-control" id="demandInputEndingDate" placeholder="08/18/2018" name="demand[s_ending]">
 	    </div>
 	  </div>
 
@@ -68,7 +69,7 @@
 
 	  <div class="form-group">
 	  	<label for="supplyAddressInput">Ur street address</label>
-	  	<input type="text" class="form-control" pattern="" id="supplyAddressInput" title="" />
+	  	<input type="text" class="form-control" id="supplyAddressInput" title="" />
 	  </div>
 	  <!-- <div class="form-group">
 	    <label for="exampleFormControlSelect2">No. units u need</label>
