@@ -194,7 +194,7 @@ router.post('/reset/:token', function(req, res) {
     }
   ], function(err) {
 
-  	req.flash('error','oops');
+  	req.flash('error','still in test');
     res.redirect('/');
   });
 });
