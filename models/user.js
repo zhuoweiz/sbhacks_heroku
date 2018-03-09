@@ -23,7 +23,7 @@ var UserSchema = new mongoose.Schema({
 	demandPosts: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Demand'
-	}]
+	}],
 
 	//other
 	s_created: 
