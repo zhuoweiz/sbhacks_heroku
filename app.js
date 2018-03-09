@@ -112,23 +112,52 @@ app.get("/demanded", function(req,res){
 	res.render("demanded");
 });
 
-//----------------supply
+//----------------create supply
 app.get("/supply", isLoggedIn, function(req,res){
 	res.render("supply");
 });
 
 app.post("/supplied", isLoggedIn, function(req,res){
 	var supply_query = req.body.supply;
-	
+
 	//-----------------need modification
-	Sp.create(supply_query, function(err, newDemand){
+	Sp.create(supply_query, function(err, newSupply){
 		if(err){
 			console.log("storing demand POST error!");
 			console.log(err);
 		}else{
+			var tempUser = req.user;
+			console.log("======================== SUCCSSS: ", tempUser.username);
+
+			tempUser.supplyPosts.push(newSupply);
+			tempUser.save(function(err,data){
+				if(err){
+					console.log("zhuo: new supply save user error");
+					console.log(err);
+				}else{
+					console.log('zhuo: here is the new supplypost saved to the user')
+					console.log(data);
+				}
+			})
+
+			// User.findOne({email:"bob@gmail.com"}, function(err, foundUser){
+			// 	if(err){
+			// 		console.log(err);
+			// 	}else{
+			// 		foundUser.posts.push(post);
+			// 		foundUser.save(function(err, data){
+			// 			if(err){
+			// 				console.log(err);
+			// 			}else{
+			// 				console.log(data);
+			// 			}
+			// 		});
+			// 	}
+			// });
+
 			console.log("================== here is the new supply: ==========");
-			console.log(newDemand);
-			console.log("================== end of the new demand data =======");
+			console.log(newSupply);
+			console.log("================== end of the new supply data =======");
 			res.redirect("/supplied");
 		}
 	});
