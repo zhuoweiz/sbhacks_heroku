@@ -1,0 +1,42 @@
+<% include partials/header %>
+
+	<div class="container">
+
+		<div class="jumbotron _textCenter">
+			<h3>My account page</h3>
+		</div>
+
+		<form class="_form">
+			<button type="button" class="btn btn-outline-secondary">Edit(testing)</button>
+			
+			<% if(!currentUser.displayName){ %>
+				<div class="_note">
+					No display setup yet, change
+					<a href="">here</a>
+				</div>
+			<% }else{ %>
+				<div>
+					<label>Display name: </label>
+					<h4><%= currentUser.displayName%></h4>
+				</div>
+			<% } %>
+
+			<label>Your registered Email: </label>
+			<h4><%= currentUser.username %></h4>
+
+
+			<a href="/userpage/<%= currentUser._id %>/ss" class="btn btn-primary" >
+			  Listing <span class="badge badge-light"><%= thisUser.supplyPosts.length%></span>
+			  <span class="sr-only">unread messages</span>
+			</a>
+
+			<a href="/userpage/<%= currentUser._id %>/ds" class="btn btn-primary" >
+			  Request <span class="badge badge-light"><%= thisUser.demandPosts.length%></span>
+			  <span class="sr-only">unread messages</span>
+			</a>
+		</form>
+
+	</div>
+	
+	
+<% include partials/footer %>

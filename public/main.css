@@ -54,8 +54,9 @@
 	width: 500px;
 }
 
-.container {
-  max-width: 960px;
+._container {
+  width: 960px;
+  margin: auto;
 }
 
 ._largeFormGroup{
@@ -86,6 +87,15 @@
 ._backgroundWhite{
 	background-color: white;
 }
+
+/*card*/
+._cardImgBox{
+	width: 80%;
+	height: 150px;
+	margin: auto;
+	background-color: lightgrey;
+}
+
 /*.border-top { border-top: 1px solid #e5e5e5; }
 .border-bottom { border-bottom: 1px solid #e5e5e5; }
 .border-top-gray { border-top-color: #adb5bd; }

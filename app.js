@@ -12,9 +12,7 @@ var bodyParser 		= require("body-parser"),
 	LocalStrategy 	= require("passport-local"),
 	GoogleStrategy	= require("passport-google-oauth").OAuthStrategy,
 	async 			= require("async"),
-	nodemailer 		= require("nodemailer"),
-	
-
+	nodemailer 		= require("nodemailer"),	
 
 	//models
 	notes 			= require("./others.js")
@@ -27,15 +25,13 @@ var bodyParser 		= require("body-parser"),
 // wtf is this
 require('dotenv').config();
 
-//requiring routes
-var indexRoutes     = require("./routes/index");
-    
-
+//system configuration
 var app = express();
 
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static(__dirname + "/public"));
+// app.use(express.static('public'));
+app.use(express.static(__dirname+"/public"));
 app.use(methodOverride("_method"));
 app.use(cookieParser('secret'));
 app.locals.moment = require('moment');
@@ -88,6 +84,12 @@ app.use(function(req,res,next){
 
 //==================================== Routes =================
 
+//============= routes configuration ========
+var indexRoutes = require("./routes/index");
+var userpageRoutes = require("./routes/userpage");
+app.use("/", indexRoutes);
+app.use('/userpage/', userpageRoutes);
+
 //---------------demand
 app.get("/demand", isLoggedIn, function(req,res){
 	res.render("demand");
@@ -123,22 +125,29 @@ app.post("/supplied", isLoggedIn, function(req,res){
 	//-----------------need modification
 	Sp.create(supply_query, function(err, newSupply){
 		if(err){
-			console.log("storing demand POST error!");
+			console.log("storing supply POST error!");
 			console.log(err);
 		}else{
-			var tempUser = req.user;
-			console.log("======================== SUCCSSS: ", tempUser.username);
+			// var tempUser = req.user;
+			console.log("======================== create supply SUCCSSS: ", req.user);
 
-			tempUser.supplyPosts.push(newSupply);
-			tempUser.save(function(err,data){
+			var tempUserEmail = req.user.username;
+			User.findOne({username:req.user.username}, function(err, foundUser){
 				if(err){
-					console.log("zhuo: new supply save user error");
 					console.log(err);
 				}else{
-					console.log('zhuo: here is the new supplypost saved to the user')
-					console.log(data);
+					foundUser.supplyPosts.push(newSupply._id);
+					foundUser.save(function(err,data){
+						if(err){
+							console.log("zhuo: new supply save user error");
+							console.log(err);
+						}else{
+							console.log('zhuo: here is the new user data after adding a supply');
+							console.log(data);
+						}
+					});
 				}
-			})
+			});
 
 			// User.findOne({email:"bob@gmail.com"}, function(err, foundUser){
 			// 	if(err){
@@ -161,6 +170,9 @@ app.post("/supplied", isLoggedIn, function(req,res){
 			res.redirect("/supplied");
 		}
 	});
+
+
+
 });
 
 app.get("/supplied", function(req,res){
@@ -169,8 +181,6 @@ app.get("/supplied", function(req,res){
 // app.get("/demand",function(req,res){
 // 	res.render("demand");
 // });
-
-app.use("/", indexRoutes);
 
 // ======================================================
 // ======================== end of auth =================

@@ -14,6 +14,7 @@ var supplySchema = new mongoose.Schema({
 	s_unit: String,
 	s_starting: String,
 	s_ending: String,
+	s_description: String,
 
 	//optional
 	s_code: String,
