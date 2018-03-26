@@ -97,11 +97,44 @@ app.get("/demand", isLoggedIn, function(req,res){
 
 app.post("/demanded", isLoggedIn, function(req,res){
 	//-----------------need modification
+	// Dm.create(req.body.demand, function(err, newDemand){
+	// 	if(err){
+	// 		console.log("storing demand POST error!");
+	// 		console.log(err);
+	// 	}else{
+	// 		console.log("================== here is the new demand: ==========");
+	// 		console.log(newDemand);
+	// 		console.log("================== end of the new demand data =======");
+	// 		res.redirect("/demanded");
+	// 	}
+	// });
+
 	Dm.create(req.body.demand, function(err, newDemand){
 		if(err){
 			console.log("storing demand POST error!");
 			console.log(err);
 		}else{
+			// var tempUser = req.user;
+			console.log("======================== create demand SUCCSSS: ");
+
+			var tempUserEmail = req.user.username;
+			User.findOne({username:req.user.username}, function(err, foundUser){
+				if(err){
+					console.log(err);
+				}else{
+					foundUser.demandPosts.push(newDemand._id);
+					foundUser.save(function(err,data){
+						if(err){
+							console.log("zhuo: new demand save user error");
+							console.log(err);
+						}else{
+							console.log('zhuo: here is the new user data after adding a demand');
+							console.log(data);
+						}
+					});
+				}
+			});
+
 			console.log("================== here is the new demand: ==========");
 			console.log(newDemand);
 			console.log("================== end of the new demand data =======");
