@@ -11,7 +11,7 @@
 	<h3>Uze tech location</h3>
 	<p>3131 S Hoover St, Los Angeles, 90089, CA, United States</p>
 	<p>Tel: 2132735476</p>
-	<a href="www.keybwarrior.com/undecided/undecided.html" style="text-decoration: none;">Join our email list!</a>
+	<a href="emaillist" style="text-decoration: none;">Join our email list!</a>
 </div>
 
 <p></p>
@@ -26,12 +26,18 @@
 
 	      var map, infoWindow;
 	      function initMap() {
+	      	var uluru = {lat: 34.0223519, lng: -118.285117};
 	        map = new google.maps.Map(document.getElementById('map'), {
-	          center: {lat: 34.0223519, lng: -118.285117},
-	          zoom: 6
+	          center: uluru,
+	          zoom: 13
 	        });
-	        infoWindow = new google.maps.InfoWindow;
-	        infoWindow.open(map);
+
+	        var marker = new google.maps.Marker({
+	          position: uluru,
+	          map: map
+	        });
+	        // infoWindow = new google.maps.InfoWindow;
+	        // infoWindow.open(map);
 
 	        	//----------------------------------- relocate to the user
 	        // // Try HTML5 geolocation.
@@ -73,7 +79,7 @@
 
 <!-- ============================== map ends ===================== -->
 
-	<p>Co-founders: Gary Huang & Bobby Chang</p>
+	<p>Co-founders: Gary Huang & Bobby Zhang</p>
 
 	
 

@@ -19,6 +19,7 @@ var bodyParser 		= require("body-parser"),
 	Dm 				= require("./models/demands"),
 	Sp 				= require("./models/supply"),
 	User 			= require("./models/user"),
+	haha				= require("./models/googleMapApi"),
 	seedDB 			= require("./models/seeds");
 
 // configure dotenv
@@ -82,7 +83,6 @@ app.use(function(req,res,next){
 	next();
 });
 
-//==================================== Routes =================
 
 //============= routes configuration ========
 var indexRoutes = require("./routes/index");
@@ -90,9 +90,97 @@ var userpageRoutes = require("./routes/userpage");
 app.use("/", indexRoutes);
 app.use('/userpage/', userpageRoutes);
 
+//==================================== Routes =================
+function requestMapLocation(){
+	
+}
+
+
+app.get("/", function(req,res){
+	var formData = {
+	  'homeMobileCountryCode' : 310
+	};
+	// JSON.stringify(formData);
+	
+	var options = {
+	  uri: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDmnNAnAymv6aHy1S48ABCJNc9DV-F3vtk',
+	  method: 'POST',
+	  json: true,
+	  body: formData
+	};
+
+	request(options, function (err, httpResponse, body) {
+	  if (!err && httpResponse.statusCode == 200) {
+	      // var info = JSON.parse(body);
+	      var thisLocation = {
+					param1:body.location.lat,
+					param2:body.location.lng
+				}
+	      // console.log(typeof body.location.lat);
+	      // console.log(typeof body.location.lng);
+	     	
+	     	console.log('function output: ',thisLocation );
+				res.render('index',{thisLocation:thisLocation});
+
+	  } else {
+	      console.log('err: ',err);
+	      // console.log('res: ', httpResponse);
+	      console.log('body: ',body);
+
+	      var thisLocation = {
+					param1:'34',
+					param2:'-118'
+				}
+				console.log('function output: ',thisLocation );
+				res.render('index',{thisLocation:thisLocation});
+	  }
+	});
+});
+
+
+
 //---------------demand
 app.get("/demand", isLoggedIn, function(req,res){
-	res.render("demand");
+
+	var formData = {
+	  'homeMobileCountryCode' : 310
+	};
+	// JSON.stringify(formData);
+	
+	var options = {
+	  uri: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDmnNAnAymv6aHy1S48ABCJNc9DV-F3vtk',
+	  method: 'POST',
+	  json: true,
+	  body: formData
+	};
+
+	request(options, function (err, httpResponse, body) {
+	  if (!err && httpResponse.statusCode == 200) {
+	      // var info = JSON.parse(body);
+	      var thisLocation = {
+					param1:body.location.lat,
+					param2:body.location.lng
+				}
+	      // console.log(typeof body.location.lat);
+	      // console.log(typeof body.location.lng);
+	     	
+	     	console.log('function output: ',thisLocation );
+				res.render('demand',{thisLocation:thisLocation});
+
+	  } else {
+	      console.log('err: ',err);
+	      // console.log('res: ', httpResponse);
+	      console.log('body: ',body);
+
+	      var thisLocation = {
+					param1:'34',
+					param2:'-118'
+				}
+				console.log('function output: ',thisLocation );
+				res.render('demand',{thisLocation:thisLocation});
+	  }
+	});
+
 });
 
 app.post("/demanded", isLoggedIn, function(req,res){
@@ -203,14 +291,15 @@ app.post("/supplied", isLoggedIn, function(req,res){
 			res.redirect("/supplied");
 		}
 	});
-
-
-
 });
 
 app.get("/supplied", function(req,res){
 	res.render("supplied");
 });
+
+app.get("/emaillist",function(req,res){
+	res.redirect('http://keybwarrior.com/undecided/undecided.html');
+})
 // app.get("/demand",function(req,res){
 // 	res.render("demand");
 // });

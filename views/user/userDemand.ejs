@@ -5,12 +5,12 @@
 
 		<div class="card" style="width: 18rem;">
 			<div class="_cardImgBox">
-				<img class="card-img-top" src="..." alt="Do you know the way">
+				<!-- <img class="card-img-top _cardImgBoxImg" src="/img/logo2.png" alt="Do you know the way2"> -->
 			</div>
 		  <div class="card-body">
 		    <h5 class="card-title"><%= demand.s_unit%> units place</h5>
 		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="#" class="btn btn-primary">Go somewhere</a>
+		    <a href="" class="btn btn-primary">Go Detail</a>
 		  </div>
 		</div>
 
@@ -37,7 +37,7 @@
       },
 
       funding: {
-        allowed: [ paypal.FUNDING.CREDIT ]
+        // allowed: [ paypal.FUNDING.CREDIT ]
     	},
 
       payment: function(data, actions) {
@@ -108,7 +108,7 @@
   </script>
 
   <br>
-  <div id="paypal-button-container"></div>
+  <!-- <div id="paypal-button-container"></div> -->
 
     <script>
         paypal.Button.render({

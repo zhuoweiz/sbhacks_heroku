@@ -9,10 +9,6 @@ var express 	= require("express"),
 
 require('dotenv').config();
 
-router.get("/", function(req,res){
-	res.render("index");
-});
-
 // ----------------------------------------------------------
 // ---------------------  AUTH ROUTES SETUP -----------------
 // ----------------------------------------------------------

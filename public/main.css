@@ -3,7 +3,7 @@
 	height: 400px;
 	margin: 0px;
 
-	background-image: url('img/headerbackground.png');
+	background-image: url('/img/headerbackground.png');
 	background-size: cover;
 
 	text-align: center;
@@ -93,7 +93,14 @@
 	width: 80%;
 	height: 150px;
 	margin: auto;
-	background-color: lightgrey;
+	margin-top: 0px;
+	background-image: url('/img/logo2.png');
+	background-size: cover;
+	background-position: center;
+}
+
+._cardImgBoxImg{
+
 }
 
 /*.border-top { border-top: 1px solid #e5e5e5; }
