@@ -49,9 +49,9 @@
     				function initMap() {
     					map = new google.maps.Map(document.getElementById('map'), {
     						center: {lat: -34.397, lng: 150.644},
-    						zoom: 13
+    						zoom: 13,
 
-    						[
+    						styles: [
     						{
     							"elementType": "geometry",
     							"stylers": [
@@ -286,25 +286,6 @@
     						]
     					});
 
-    					// Create an array of alphabetical characters used to label the markers.
-			        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-			        var returnlat, returnlng;
-
-			        // Add some markers to the map.
-			        // Note: The code uses the JavaScript Array.prototype.map() method to
-			        // create an array of markers based on a given "locations" array.
-			        // The map() method here has nothing to do with the Google Maps API.
-			        var markers = locations.map(function(location, i) {
-			          return new google.maps.Marker({
-			            position: location,
-			            label: labels[i % labels.length]
-			          });
-			        });
-
-			        // Add a marker clusterer to manage the markers.
-			        var markerCluster = new MarkerClusterer(map, markers,
-			            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
     					infoWindow = new google.maps.InfoWindow;
 
 
@@ -316,8 +297,7 @@
       			lng: position.coords.longitude
       		};
 
-      		returnlat = position.coords.latitude;
-      		returnlng = position.coords.longitude;
+      		console.log('geolocation!');
 
       		infoWindow.setPosition(pos);
       		infoWindow.setContent('Location found.');
@@ -332,13 +312,6 @@
 	        }
 	      }
 
-	      var locations = [
-	      	{lat: 34.0225483,lng:-118.28188530000001},
-	      	{lat: 34.0235483,lng:-118.28288530000001},
-	      	{lat: 34.0215483,lng:-118.28088530000001},
-	      	{lat: returnlat+0.002,lng:returnlng-0.002}
-	      ];
-
 	      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 	      	infoWindow.setPosition(pos);
 	      	infoWindow.setContent(browserHasGeolocation ?
@@ -346,10 +319,13 @@
 	      		'Error: Your browser doesn\'t support geolocation.');
 	      	infoWindow.open(map);
 	      }
+
+
+
 	    </script>
 	    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
-	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=process.env.GMAILPW%>=initMap">
+	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=process.env.GOOGLEJSAPI%>=initMap">
 	    </script>
 	    <!-- ============================== map ends ===================== -->
 
