@@ -10,7 +10,7 @@ var express 	= require("express"),
 
 require('dotenv').config();
 
-function activateFunc(req,res){
+function activateFunc(req,res,next){
 	async.waterfall([
 		function(done){
 			crypto.randomBytes(20, function(err, buf){
@@ -74,7 +74,7 @@ router.get("/signup", function(req,res){
 	res.render("signup");
 });
 
-router.post("/signup", function(req,res){
+router.post("/signup", function(req,res,next){
 	var newUser = new User({username: req.body.username, displayName: req.body.displayName});
 	User.register(newUser, req.body.password, function(err, user){
 		if(err){
@@ -85,16 +85,16 @@ router.post("/signup", function(req,res){
 		passport.authenticate("local")(req,res,function(){
 			console.log("register success!");
 			// res.redirect('/');
-			activateFunc(req,res);
+			activateFunc(req,res,next);
 		});
 	});
 });
 
-router.post('/sendActivation', function(req,res){
+router.post('/sendActivation', function(req,res,next){
 	User.findOne({username:req.user.username}, function(err, foundUser){
 		if(!err){
 			console.log('userfind in send activation post request: ',foundUser);
-			activateFunc(req,res);
+			activateFunc(req,res,next);
 		}
 	});
 });
@@ -112,7 +112,7 @@ router.get('/activate/:token', function(req,res){
   });
 });
 
-router.post('/activate/:token', function(req,res){
+router.post('/activate/:token', function(req,res,next){
 	async.waterfall([
     function(done) {
       User.findOne({ activationToken: req.params.token, activationExpires: { $gt: Date.now() } }, function(err, user) {
