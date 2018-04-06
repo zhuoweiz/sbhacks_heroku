@@ -12,6 +12,9 @@ var demandSchema = new mongoose.Schema({
 	unit: String,
 	starting: String,
 	ending: String,
+	matched: {type: Boolean, default: false},
+	payed: {type: Boolean, default: false},
+
 
 	//optional
 	code: String,

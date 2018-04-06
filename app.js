@@ -84,17 +84,15 @@ app.use(function(req,res,next){
 });
 
 
-//============= routes configuration ========
+//============= routes config ========
 var indexRoutes = require("./routes/index");
 var userpageRoutes = require("./routes/userpage");
+var paymentRoute = require("./routes/payment");
 app.use("/", indexRoutes);
 app.use('/userpage/', userpageRoutes);
+app.use('/payment/', paymentRoute);
 
 //==================================== Routes =================
-function requestMapLocation(){
-	
-}
-
 
 app.get("/", function(req,res){
 	var formData = {
@@ -140,7 +138,7 @@ app.get("/", function(req,res){
 
 
 //---------------demand
-app.get("/demand", isLoggedIn, function(req,res){
+app.get("/demand", isLoggedIn,isActivated, function(req,res){
 
 	var formData = {
 	  'homeMobileCountryCode' : 310
@@ -183,7 +181,7 @@ app.get("/demand", isLoggedIn, function(req,res){
 
 });
 
-app.post("/demanded", isLoggedIn, function(req,res){
+app.post("/demanded", isLoggedIn,isActivated, function(req,res){
 	//-----------------need modification
 	// Dm.create(req.body.demand, function(err, newDemand){
 	// 	if(err){
@@ -236,11 +234,11 @@ app.get("/demanded", function(req,res){
 });
 
 //----------------create supply
-app.get("/supply", isLoggedIn, function(req,res){
+app.get("/supply", isLoggedIn,isActivated, function(req,res){
 	res.render("supply");
 });
 
-app.post("/supplied", isLoggedIn, function(req,res){
+app.post("/supplied", isLoggedIn,isActivated, function(req,res){
 	var supply_query = req.body.supply;
 
 	//-----------------need modification
@@ -293,6 +291,8 @@ app.post("/supplied", isLoggedIn, function(req,res){
 	});
 });
 
+
+
 app.get("/supplied", function(req,res){
 	res.render("supplied");
 });
@@ -300,16 +300,20 @@ app.get("/supplied", function(req,res){
 app.get("/emaillist",function(req,res){
 	res.redirect('http://keybwarrior.com/undecided/undecided.html');
 })
-// app.get("/demand",function(req,res){
-// 	res.render("demand");
-// });
-
-// ======================================================
-// ======================== end of auth =================
 
 // ---------------------------------------------------
 // ---------------- start of middlewares -------------
 // ---------------------------------------------------
+function isActivated(req, res, next){
+	User.findOne({username:req.user.username}, function(err, foundUser){
+			if(foundUser.isActivated!='false'){
+				return next();
+			}
+			req.flash('error','Not activated yet');
+			res.redirect("/userpage/"+foundUser._id+"/myaccount");
+		});
+}
+
 function isLoggedIn(req, res, next){
 	if(req.isAuthenticated()){
 		return next();

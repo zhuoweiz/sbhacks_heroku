@@ -6,6 +6,12 @@
 			<h3>My account page</h3>
 		</div>
 
+		<% if(currentUser.isActivated=='false'){ %>
+			<form class="_form" action="/sendActivation" method="POST">
+				<button type="submit" class="btn btn-outline-primary">Send activation code</button>
+			</form>
+		<%}%>
+
 		<form class="_form">
 			<button type="button" class="btn btn-outline-secondary">Edit(testing)</button>
 			

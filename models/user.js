@@ -9,9 +9,12 @@ var UserSchema = new mongoose.Schema({
     avatar: String,
     firstName: String,
     lastName: String,
+    activationToken: String,
+    activationExpires: Date,
+    isActivated: {type: String, default: 'false'} ,
     resetPasswordToken: String,
     resetPasswordExpires: Date,
-    isAdmin: {type: Boolean, default: false},
+    isSupplier: {type: Boolean, default: false},
 
 
     //data association
