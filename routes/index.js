@@ -44,14 +44,24 @@ function activateFunc(req,res,next){
 					//pass: process.env.GMAILPW -> terminal: export GMAILPW=blablabla
 				}
 			});
+			var link = 'http://' + req.headers.host + '/activate/' + token;
 			var mailOptions = {
 				to: user.username,
 				from: 'zhuoweiz@uzespace.com',
 				subject: 'uzespace account activation',
 				text: 'Activate your account and become a proud uzer today!!!' +
 					'please click on the link below or paste it to the browser to proceed' +
-					' http://' + req.headers.host + '/activate/' + token +'\n\n' +
+					'http://' + req.headers.host + '/activate/' + token +'\n\n' +
 					'if you didnt request this, please ignore this email'
+				// ,html:
+				// '<div style="text-align: center;">'+
+				// 	'<h1 style="color: lightblue;">Activate your account and become a proud uzer today!!!</h1>'+
+				// 	'<div style="width: 300px;margin: auto;height: 100px; background-color: lightblue;">'+
+				// 	'<p>please click on the link below or paste it to the browser to proceed</p>'+
+				// 	'<a href="http://<%=req.headers.host%>/activate/<%=token%>">Click me</a>'+
+				// 	'<p style="color: grey;font-size: 0.8em;">if you didnt request this, please ignore this email</p>'+
+				// 	'</div>'+
+				// 	'</div>'
 			};
 			smtpTransport.sendMail(mailOptions, function(err) {
 				console.log('mail sent');
@@ -62,7 +72,7 @@ function activateFunc(req,res,next){
 	], function(err) {
 		if (err) return next(err);
 		// req.flash('error','sorry but activation is not successful -3');
-		res.redirect('/forgot');
+		res.redirect('/');
 		console.log("test");
 	});
 }
@@ -80,7 +90,7 @@ router.post("/signup", function(req,res,next){
 		if(err){
 			console.log(err);
 			req.flash('error','Sorry, but the email is already used for the account, pls contact customer service for further assistance');
-			return res.render("signup");
+			return res.redirect("signup");
 		}
 		passport.authenticate("local")(req,res,function(){
 			console.log("register success!");
@@ -159,7 +169,7 @@ router.post('/activate/:token', function(req,res,next){
 	  ], function(err) {
 	  	if (err) return next(err);
 
-			res.redirect('/forgot');
+			res.redirect('/');
 			console.log("activation success");
 	  });
 });
@@ -224,10 +234,19 @@ router.post('/forgot', function(req, res, next){
 				to: user.username,
 				from: 'zhuoweiz@uzespace.com',
 				subject: 'uzespace Password Reset',
-				text: 'You are receiving this for resetting your uzespace account password!!!' +
-					'please click on the link below or paste it to the browser to proceed' +
+				text: 'please click on the link below or paste it to the browser to proceed' +
 					' http://' + req.headers.host + '/reset/' + token +'\n\n' +
 					'if you didnt request this, please ignore this email'
+				// ,html: 
+				// 	' <div style="text-align: center;"> '+
+				// 	' 	<h1>Welcome to uze</h1> '+
+				// 	'		<h2 style="color: lightblue;">password resetting</h2>'+
+				// 	'   <div style="width: 300px;margin: auto;height: 180px; background-color: lightblue;">'+
+				// 	'   <p>Hello, You are receiving this for resetting your uzespace account password!!!</p>'+
+				// 	'   <a href="www.uzespace.com">Click me</a>'+
+				// 	'  <p style="color: grey;font-size: 0.8em;">amazing journey starts</p>'+
+				// 	'</div>'+
+				// 	'</div>'
 			};
 			smtpTransport.sendMail(mailOptions, function(err) {
 				console.log('mail sent');
@@ -311,9 +330,17 @@ router.post('/reset/:token', function(req, res) {
 		var mailOptions = {
 			to: user.username,
 			from: 'zhuoweiz@uzespace.com',
-			subject: 'Node.js Password Reset',
-			text: 'Hello,\n\n' +
-   			     'This is a confirmation that the password for your account ' + user.username + ' has just been changed.\n'
+			subject: 'uze Password Reset',
+			text:  'test',
+			html:
+			'<div style="text-align: center;">'+
+			'<h1>uze Password Reset</h1>'+
+				'<div style="width: 300px;margin: auto;height: 180px; background-color: lightblue;">'+
+						'<p>Hello, This is a confirmation that the password for your account has just been changed.</p>'+
+					'<a href="www.uzespace.com">Click me</a>'+
+					'<p style="color: grey;font-size: 0.8em;">amazing journey starts</p>'+
+				'</div>'+
+			'</div>'
 		};
 		smtpTransport.sendMail(mailOptions, function(err) {
 			console.log('mail sent');
