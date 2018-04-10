@@ -1,6 +1,6 @@
 //dependencies
 var bodyParser 		= require("body-parser"),
-	cookieParser 	= require("cookie-parser"),
+		cookieParser 	= require("cookie-parser"),
 	methodOverride  = require("method-override"),
 	flash        	= require("connect-flash"),
 	session 		= require("express-session"),
@@ -134,8 +134,6 @@ app.get("/", function(req,res){
 	  }
 	});
 });
-
-
 
 //---------------demand
 app.get("/demand", isLoggedIn,isActivated, function(req,res){
@@ -326,6 +324,10 @@ function isLoggedIn(req, res, next){
 // =========================  OTHER ROUTES ==========
 app.get("/contact", function(req,res){
 	res.render("contact");
+});
+
+app.get('/qna', (req,res)=>{
+	res.render("webpages/qna");
 });
 
 //---------------------server setup---------------------process.env.PORT,process.env.IP

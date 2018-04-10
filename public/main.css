@@ -7,11 +7,9 @@
 	background-size: cover;
 
 	text-align: center;
-	line-height: 400px;
 	color: white;
 	text-shadow: 2px 2px black, 2px 2px black, 2px 2px black, 2px 2px black;
 	font-family: "Arial", Georgia, Sans-serif;
-	font-size: 3em;
 }
 
 #map{
@@ -20,11 +18,28 @@
        }
 
 #_headtitle_mobile{
+	font-size: 3em;
 	display: none;
 }
 
 #_headtitle{
+	font-size: 4em;
+	padding-top: 130px;
+	line-height: 100px;
 	display: block;
+}
+
+#_headerDirect{
+	/*line-height: 20px;*/
+	text-decoration-color: none;
+	text-shadow: none;
+
+	background-color: Transparent;
+    /*background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;*/
 }
 
 #_logo{
@@ -41,8 +56,38 @@
 	margin-top: 30px;
 }
 
+/* ================== index button =========== */
+#_indexButtonL{
+	height: 300px;
+	width: 45%;
+	line-height: 300px;
+	border-radius: 10px 0px 0px 10px;
+	margin: 0px;
+
+	font-size: 1.4em;
+}
+
+#_indexButtonR{
+	height: 300px;
+	width: 45%;
+	line-height: 300px;
+	border-radius: 0px 10px 10px 0px;
+	margin: 0px;
+
+	color: lightskyblue;
+	border-color: lightskyblue;
+
+	font-size: 1.4em;
+}
+
+#_indexButtonR:hover {
+	color: white;
+	background-color: lightskyblue;
+	border-color: skyblue;
+}
+
 ._main{
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 ._textCenter{
@@ -101,6 +146,12 @@
 
 ._cardImgBoxImg{
 
+}
+
+/**/
+._pageQna{
+	color: #00aae7;
+	font-weight: bold;
 }
 
 /*.border-top { border-top: 1px solid #e5e5e5; }
