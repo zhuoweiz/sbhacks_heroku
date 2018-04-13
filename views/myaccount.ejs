@@ -14,7 +14,7 @@
 			</form>
 		<%}%>
 
-		<form class="_form">
+		<div class="_form">
 			<button type="button" class="btn btn-outline-secondary">Edit(testing)</button>
 			
 			<% if(!currentUser.displayName){ %>
@@ -29,10 +29,36 @@
 				</div>
 			<% } %>
 
+			<hr>
 			<label>Your registered Email: </label>
 			<h4><%= currentUser.username %></h4>
 
+			<hr>
+			<label>My promocode</label>
+			<!-- The text field -->
+			<input readonly type="text" value="<%= currentUser.username+'2018'%>" id="myInput">
 
+			<!-- The button used to copy the text -->
+			<button id="promocodeCopyButton" onclick="myFunction()" data-toggle="tooltip" title="click to copy">copy</button>
+
+			<script type="text/javascript">
+				function myFunction() {
+			  /* Get the text field */
+			  var copyText = document.getElementById("myInput");
+
+			  /* Select the text field */
+			  copyText.select();
+
+			  /* Copy the text inside the text field */
+			  document.execCommand("Copy");
+
+			  /* Alert the copied text */
+			  // alert("Copied the text: " + copyText.value);
+			  document.querySelector('#promocodeCopyButton').innerHTML = "copied";
+			}
+			</script>
+
+			<hr>
 			<a href="/userpage/<%= currentUser._id %>/ss" class="btn btn-primary" >
 			  Listing <span class="badge badge-light"><%= thisUser.supplyPosts.length%></span>
 			  <span class="sr-only">unread messages</span>
@@ -42,7 +68,12 @@
 			  Request <span class="badge badge-light"><%= thisUser.demandPosts.length%></span>
 			  <span class="sr-only">unread messages</span>
 			</a>
-		</form>
+
+			<a href="/userpage/<%= currentUser._id %>/or" class="btn btn-primary" >
+			  Orders <span class="badge badge-light"><%= thisUser.orders.length%></span>
+			  <span class="sr-only">unread messages</span>
+			</a>
+		</div>
 
 	</div>
 	

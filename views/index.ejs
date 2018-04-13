@@ -1,5 +1,19 @@
 <% include ./partials/header %>
 
+<script type="application/ld+json">
+{
+  "@context": "http://www.uzespace.com",
+  "@type": "Platform",
+  "url": "http://www.uzespace.com",
+  "name": "uzespace storage stacking sharing",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-213-273-5476",
+    "contactType": "Customer service"
+  }
+}
+</script>
+
 <div id="_header">
   <label id="_headtitle">uzespace</label>
   <label id="_headtitle_mobile">uzespace</label>
@@ -9,7 +23,7 @@
     $("#_headerDirect").click(function() {
       $('html, body').animate({
           scrollTop: $("#_indexButtonBlock").offset().top
-      }, 2500);
+      }, 2800);
     });
   </script>
   

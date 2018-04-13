@@ -95,7 +95,7 @@
 	    </div>
 	    <div class="form-group col-md-6">
 	      <label for="inputPassword4">Ur invitation code (Optional)</label>
-	      <input type="name" class="form-control" id="inputPassword4" placeholder="uzespace2018@usc" name="demand[code]">
+	      <input disabled type="name" class="form-control" id="inputPassword4" placeholder="uzespace2018@usc" name="demand[code]">
 	    </div>
 	  </div>
 
@@ -112,7 +112,7 @@
 
 	  <div class="form-group">
 	    <label for="exampleFormControlInput1">Ur number<span class="_required">*</span></label>
-	    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="2132735477" name="demand[email]" required="">
+	    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="2132735477" name="demand[number]" required="">
 	  </div>
 
 	  <div class="form-group">
@@ -124,7 +124,10 @@
 	      <option>2</option>
 	      <option>3</option>
 	      <option>4</option>
-	      <option>5 (maximum)</option>
+	      <% for(let i=5;i<10;i++){ %>
+	     	 <option><%=i%></option>
+	   		<% } %>
+	      <option>10 (maximum)</option>
 	    </select>
 	  </div>
 
@@ -135,7 +138,7 @@
 	    </div>
 	    <div class="form-group col-md-6">
 	      <label for="demandInputEndingDate">Ending Date<span class="_required">*</span></label>
-	      <input type="date" class="form-control" id="demandInputEndingDate" placeholder="08/18/2018" name="demand[ending]">
+	      <input type="date" class="form-control" id="demandInputEndingDate" placeholder="08/18/2018" name="demand[ending]" required>
 	    </div>
 	  </div>
 	  <!-- <div class="form-group">
@@ -173,10 +176,10 @@
 	    <label for="exampleFormControlTextarea1">any special needs?</label>
 	    <textarea class="form-control" id="exampleFormControlTextarea1" name="demand[special]" rows="2"></textarea>
 	  </div>
-	  <div class="form-group">
+	  <!-- <div class="form-group">
 	    <label for="uploadAnImage">image of Ur boxes<span class="_note">(no other files accepted)</span></label>
 	    <input type="file" accept="image/*" name="demand[img]" class="form-control-file" id="uploadAnImage">
-	  </div>
+	  </div> -->
 
 	  <!-- ======================= modal ======================= -->
 	  <!-- Button trigger modal -->

@@ -12,9 +12,14 @@ var demandSchema = new mongoose.Schema({
 	unit: String,
 	starting: String,
 	ending: String,
+	
+	//checkout flow
 	matched: {type: Boolean, default: false},
+	supplier: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+	supply: {type: mongoose.Schema.Types.ObjectId, ref: 'Supply'},
+	price: {type: Number, default: '0'},
 	payed: {type: Boolean, default: false},
-
+	closed: {type: Boolean, default: false},
 
 	//optional
 	code: String,

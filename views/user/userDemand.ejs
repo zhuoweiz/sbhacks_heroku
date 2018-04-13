@@ -8,18 +8,18 @@
 				<!-- <img class="card-img-top _cardImgBoxImg" src="/img/logo2.png" alt="Do you know the way2"> -->
 			</div>
 		  <div class="card-body">
-		    <h5 class="card-title"><%= demand.s_unit%> units place</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <form action="/payment/<%= currentUser._id %>/buy/" method="post">
+		    <h5 class="card-title"><span style="color: #00aae7;"><%= demand.unit%></span> units demand</h5>
+		    <p class="card-text"><%= demand.college%></p>
+		    
+		    <p style="font-size: 0.7em;" class="card-text"><%= demand.starting%> -> <%= demand.ending%></p>
+        <form action="/payment" method="get">
           <button type="submit">uzePay</button>
-          <label class="_note" data-toggle="tooltip" title="If you dont have a PayPal account, choose Pay with Debit or Credit Card">&#8505;</label>
         </form>
+
 		  </div>
 		</div>
 
 	<% }); %>
-
-
   <br>
 
 </div>

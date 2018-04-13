@@ -50,7 +50,7 @@ function activateFunc(req,res,next){
 				from: 'zhuoweiz@uzespace.com',
 				subject: 'uzespace account activation',
 				text: 'Activate your account and become a proud uzer today!!!' +
-					'please click on the link below or paste it to the browser to proceed' +
+					'please click on the link below or paste it to the browser to proceed: ' +
 					'http://' + req.headers.host + '/activate/' + token +'\n\n' +
 					'if you didnt request this, please ignore this email'
 				// ,html:
@@ -327,6 +327,7 @@ router.post('/reset/:token', function(req, res) {
 				//pass: process.env.GMAILPW -> terminal: export GMAILPW=blablabla
 			}
 		});
+		var test = 'www.baidu.com';
 		var mailOptions = {
 			to: user.username,
 			from: 'zhuoweiz@uzespace.com',
@@ -337,7 +338,7 @@ router.post('/reset/:token', function(req, res) {
 			'<h1>uze Password Reset</h1>'+
 				'<div style="width: 300px;margin: auto;height: 180px; background-color: lightblue;">'+
 						'<p>Hello, This is a confirmation that the password for your account has just been changed.</p>'+
-					'<a href="www.uzespace.com">Click me</a>'+
+					'<a href=<%=test%> >Click me</a>'+
 					'<p style="color: grey;font-size: 0.8em;">amazing journey starts</p>'+
 				'</div>'+
 			'</div>'

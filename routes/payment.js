@@ -8,6 +8,9 @@ paypal.configure({
   'client_secret': 'EC0ocDbg7ghekY0g8uiIqWWGStd_FgFF3L1-TVsaiPb0MHdkw3HUHn5GUFtkwOvdPhvjxIYfE6ueLKLH'
 });
 
+payRouter.get('/', (req,res) => {
+	res.render('venmoPay');
+});
 
 payRouter.post('/:id/buy', (req, res) => {
 	var create_payment_json = {
@@ -16,8 +19,8 @@ payRouter.post('/:id/buy', (req, res) => {
 	        "payment_method": "paypal"
 	    },
 	    "redirect_urls": {
-	        "return_url": "http://localhost:3000/payment/success",
-	        "cancel_url": "http://localhost:3000/payment/cancel"
+	        "return_url": "http://localhost:5000/payment/success/",
+	        "cancel_url": "http://localhost:5000/payment/cancel/"
 	    },
 	    "transactions": [{
 	        "item_list": {
@@ -63,7 +66,7 @@ payRouter.get('/success',(req, res)=>{
     "transactions": [{
         "amount": {
             "currency": "USD",
-            "total": "1.00"
+            "total": "14.00"
         }
     }]
 	};
@@ -81,7 +84,7 @@ payRouter.get('/success',(req, res)=>{
 	});
 });
 
-payRouter.get('/cancel', (req, res)=>{
+payRouter.get('/cancel/:token', (req, res)=>{
 	res.send('cancelled');
 })
 

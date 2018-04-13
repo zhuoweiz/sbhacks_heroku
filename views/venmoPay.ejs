@@ -1,0 +1,23 @@
+<% include partials/header %>
+
+<div class="container">
+
+	<h2>You can choose to pay with either venmo or paypal</h2>
+	<hr>
+
+	<h4>Method 1: Scan the QR code below to pay the amount shown above, and we will process your order in 1 hour</h4>
+	<div style="width: 100%;">
+		<img class="_checkoutimg" src="/img/venmoCheckout.png">
+	</div>
+	
+
+	<hr>
+	<h4>Method 2: Click the button below using PayPal and we will direct you through the process</h4>
+	<form action="/payment/<%= currentUser._id %>/buy/" method="post">
+    <button disabled type="submit">PayPal</button>
+    <label class="_note" data-toggle="tooltip" title="If you dont have a PayPal account, choose Pay with Debit or Credit Card">&#8505;</label>
+    <label style="color: red;">papal still in testing</label>
+  </form>
+</div>
+
+<% include partials/footer %>

@@ -157,9 +157,7 @@ app.get("/demand", isLoggedIn,isActivated, function(req,res){
 					param1:body.location.lat,
 					param2:body.location.lng
 				}
-	      // console.log(typeof body.location.lat);
-	      // console.log(typeof body.location.lng);
-	     	
+
 	     	console.log('function output: ',thisLocation );
 				res.render('demand',{thisLocation:thisLocation});
 
@@ -206,6 +204,7 @@ app.post("/demanded", isLoggedIn,isActivated, function(req,res){
 				if(err){
 					console.log(err);
 				}else{
+					
 					foundUser.demandPosts.push(newDemand._id);
 					foundUser.save(function(err,data){
 						if(err){

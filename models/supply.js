@@ -16,6 +16,8 @@ var supplySchema = new mongoose.Schema({
 	s_ending: String,
 	s_description: String,
 
+	//checkout flow
+
 	//optional
 	s_code: String,
 	s_length: String,
