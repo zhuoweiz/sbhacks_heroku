@@ -83,6 +83,25 @@ app.use(function(req,res,next){
 	next();
 });
 
+// ---------------------------------------------------
+// ---------------- start of middlewares -------------
+// ---------------------------------------------------
+function isActivated(req, res, next){
+	User.findOne({username:req.user.username}, function(err, foundUser){
+			if(foundUser.isActivated!='false'){
+				return next();
+			}
+			req.flash('error','Not activated yet');
+			res.redirect("/userpage/"+foundUser._id+"/myaccount");
+		});
+}
+
+function isLoggedIn(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	res.redirect("/login");
+}
 
 //============= routes config ========
 var indexRoutes = require("./routes/index");
@@ -204,7 +223,7 @@ app.post("/demanded", isLoggedIn,isActivated, function(req,res){
 				if(err){
 					console.log(err);
 				}else{
-					
+
 					foundUser.demandPosts.push(newDemand._id);
 					foundUser.save(function(err,data){
 						if(err){
@@ -298,25 +317,6 @@ app.get("/emaillist",function(req,res){
 	res.redirect('http://keybwarrior.com/undecided/undecided.html');
 })
 
-// ---------------------------------------------------
-// ---------------- start of middlewares -------------
-// ---------------------------------------------------
-function isActivated(req, res, next){
-	User.findOne({username:req.user.username}, function(err, foundUser){
-			if(foundUser.isActivated!='false'){
-				return next();
-			}
-			req.flash('error','Not activated yet');
-			res.redirect("/userpage/"+foundUser._id+"/myaccount");
-		});
-}
-
-function isLoggedIn(req, res, next){
-	if(req.isAuthenticated()){
-		return next();
-	}
-	res.redirect("/login");
-}
 
 
 

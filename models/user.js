@@ -20,7 +20,8 @@ var UserSchema = new mongoose.Schema({
     //promocode
     demandpromoUsed: {type: Boolean, default: false},
     promocode: String,
-    
+    timeReferred: {type: Number, default: 0},
+
 
     isSupplier: {type: Boolean, default: false},
     verifiedSupplier: {type: Boolean, default: false},

@@ -12,7 +12,7 @@
 		    <p class="card-text"><%= demand.college%></p>
 		    
 		    <p style="font-size: 0.7em;" class="card-text"><%= demand.starting%> -> <%= demand.ending%></p>
-        <form action="/payment" method="get">
+        <form action="/payment/demand/<%= demand._id%>" method="post">
           <button type="submit">uzePay</button>
         </form>
 
@@ -21,8 +21,6 @@
 
 	<% }); %>
   <br>
-
 </div>
-
 
 <% include ../partials/footer %>

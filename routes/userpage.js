@@ -5,7 +5,7 @@ var express 	= require("express"),
 
 //get user page
 router.get("/:id/myaccount",isLoggedIn, function(req,res){
-
+	
 	User.findById(req.params.id).populate("supplyPosts").exec(function(err,thisUser){
 		if(err){
 			console.log(err);

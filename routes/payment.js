@@ -8,8 +8,114 @@ paypal.configure({
   'client_secret': 'EC0ocDbg7ghekY0g8uiIqWWGStd_FgFF3L1-TVsaiPb0MHdkw3HUHn5GUFtkwOvdPhvjxIYfE6ueLKLH'
 });
 
-payRouter.get('/', (req,res) => {
-	res.render('venmoPay');
+payRouter.post('/demand/:id',isLoggedIn, isActivated, (req,res) => {
+	Dm.findById(req.params.id, (err, foundDemand) => {
+		if(foundDemand.price == 0){
+			foundDemand.price = Number(foundDemand.unit[0])*7;
+			console.log('recalculating the price');
+		}
+
+		foundDemand.save(function(err){
+			if(err){
+				console.log("oops => demandpage getting price calculation savint error on payment.js-16");
+				console.log(err);
+			}else{
+				res.render('venmoPay',{foundDemand, foundDemand});
+			}
+		});
+	});
+});
+
+payRouter.post('/:demandId/promo', (req,res)=>{
+
+	let promo = req.body.promocode;
+	let promoInvitor = promo.substring(0,promo.length-4);
+	// console.log('tested: ',promoInvitor);
+
+	let data = {
+		self: '-1',
+		found: '-1',
+		used: '-1',
+		added: '-1',
+		newPrice: '10'
+	};
+
+	//invitor cant be self
+	if((req.user.username!=promoInvitor)){
+		data.self = '0';
+		//invitor has to be found in the db
+		User.findOne({username: promoInvitor}, (err, foundInvitor)=>{
+			if(err){
+				console.log(err);
+			}else if(foundInvitor){
+				data.found = '1';
+				
+				User.findById(req.user._id, (err, foundInvitee)=>{
+					//check if used promo before
+					if(foundInvitee.demandpromoUsed){
+						data.used = '1';
+						res.send(data);
+					}else{
+						foundInvitee.demandpromoUsed = true;
+						foundInvitee.save((err)=>{
+							if(err){
+								console.log("opps => promocode validation error caused in saving invitee with updating promousage status");
+								console.log(err);
+							}else{
+								data.used = '0';
+
+								//add one for invitor
+								foundInvitor.timeReferred += 1;
+								foundInvitor.save((err)=>{
+									if(err){
+										console.log("opps => promocode validation error caused in saving invitor new timeRefered");
+										console.log(err);
+									}else{
+										data.added = '1';
+										Dm.findById(req.params.demandId, (err, foundDemand)=>{
+
+											foundDemand.price = foundDemand.price-10;
+											data.newPrice = foundDemand.price.toString()+'.00';
+											console.log("price price price: ",foundDemand.price);
+											foundDemand.save((err)=>{
+												if(err){
+													console.log("opps => promocode cutting 10 dollars to this demand order saving error");
+													console.log(err);
+												}else{
+													console.log("promocode working");
+													res.send(data);
+												}
+											});
+										});
+									}
+								});
+							}
+						});
+					}
+				});
+			}else{
+				data.found ='0';
+				res.send(data);
+			}
+		});
+	}else{
+		data.self = '1';
+		res.send(data);
+	}
+
+	//no more promo can be used
+	
+});
+
+payRouter.get('/ajaxtest', (req,res)=>{
+	console.log("ajax-node working: ----- ----- ---");
+
+	var data = {
+		name: 'bob',
+		girlfriend: 'zoe'
+	};
+
+	res.send(data);
 });
 
 payRouter.post('/:id/buy', (req, res) => {
@@ -87,5 +193,23 @@ payRouter.get('/success',(req, res)=>{
 payRouter.get('/cancel/:token', (req, res)=>{
 	res.send('cancelled');
 })
+
+//middle wares
+function isActivated(req, res, next){
+	User.findOne({username:req.user.username}, function(err, foundUser){
+			if(foundUser.isActivated!='false'){
+				return next();
+			}
+			req.flash('error','Not activated yet');
+			res.redirect("/userpage/"+foundUser._id+"/myaccount");
+		});
+}
+
+function isLoggedIn(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	res.redirect("/login");
+}
 
 module.exports = payRouter;

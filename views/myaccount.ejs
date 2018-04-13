@@ -59,6 +59,9 @@
 			</script>
 
 			<hr>
+			<label>I have refered <span style="color: red;"><%= thisUser.timeReferred%></span> people</label>
+
+			<hr>
 			<a href="/userpage/<%= currentUser._id %>/ss" class="btn btn-primary" >
 			  Listing <span class="badge badge-light"><%= thisUser.supplyPosts.length%></span>
 			  <span class="sr-only">unread messages</span>
