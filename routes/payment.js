@@ -10,6 +10,7 @@ paypal.configure({
 
 payRouter.post('/demand/:id',isLoggedIn, isActivated, (req,res) => {
 	Dm.findById(req.params.id, (err, foundDemand) => {
+		//old users who posted uncalculated prices gets this price, so are new users thb
 		if(foundDemand.price == 0){
 			foundDemand.price = Number(foundDemand.unit[0])*7;
 			console.log('recalculating the price');
