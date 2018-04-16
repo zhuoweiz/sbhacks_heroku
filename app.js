@@ -243,6 +243,8 @@ app.post("/demanded", isLoggedIn,isActivated, function(req,res){
 			res.redirect("/demanded");
 		}
 	});
+
+	console.log("后来者");
 });
 
 app.get("/demanded", function(req,res){

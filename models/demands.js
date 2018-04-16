@@ -12,6 +12,7 @@ var demandSchema = new mongoose.Schema({
 	unit: String,
 	starting: String,
 	ending: String,
+	willingToDrive: String, // "yes", "maybe", "no"
 	
 	//checkout flow
 	matched: {type: Boolean, default: false},

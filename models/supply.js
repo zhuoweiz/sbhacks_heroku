@@ -15,6 +15,7 @@ var supplySchema = new mongoose.Schema({
 	s_starting: String,
 	s_ending: String,
 	s_description: String,
+	s_willingToDrive: {type: String, default: "maybe"}, // "yes", "maybe", "no"
 
 	//checkout flow
 

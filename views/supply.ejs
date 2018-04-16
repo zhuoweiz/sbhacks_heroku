@@ -38,18 +38,32 @@
 	    <label class="_note" data-toggle="tooltip" title="one uze unit refers to 76cm/30&#34;(Height) * 48cm/19&#34;(Width) * 29cm/11&#34;(Depth) ">&#8505;</label>
 	    <select class="form-control" id="exampleFormControlSelect1" name="supply[s_unit]">
 	    	<option>0 (unknown)</option>
-	      	<option>1</option>
-	      	<option>2</option>
-	      	<option>3</option>
-	      	<option>4</option>
-	      	<option>5</option>
-	      	<option>other</option>
+      	<option>1 (minimum)</option>
+	      <% for(let i=2;i<10;i++){ %>
+	     	 <option><%=i%></option>
+	   		<% } %>
+	      <option>10 (maximum)</option>
 	    </select>
+	  </div>
+	  
+	  <label>How big is your space</label>
+	  <div class="form-row">
+	  	<div class="form-group col-md-4">
+	  		<label>length<span class="_note">(ft)</span></label>
+	  		<input type="number" class="form-control" id="" placeholder="1" name="supply[s_length]">
+	  	</div>
+	  	<div class="form-group col-md-4">
+	  		<label>height <span class="_note">(ft)</span></label>
+	  		<input type="number" class="form-control" id="" placeholder="1" name="supply[s_height]">
+	  	</div>
+	  	<div class="form-group col-md-4">
+	  		<label>width <span class="_note">(ft)</span></label>
+	  		<input type="number" class="form-control" id="" placeholder="1" name="supply[s_width]">
+	  	</div>
 	  </div>
 
 	  <div class="form-row">
 	    	<div class="form-group col-md-6">
-
 	    	<% var today = new Date(); var dd = today.getDate(); dd = (dd < 10 ? "0" : "") + dd; var mm = today.getMonth()+1; mm = (mm < 10 ? "0" : "") + mm; var yyyy = today.getFullYear(); %>
 	    	<% console.log(yyyy+'-'+mm+'-'+dd) %>
 	      
@@ -68,44 +82,36 @@
 	  </div>
 
 	  <div class="form-group">
-	  	<label for="supplyAddressInput">Ur street address</label>
-	  	<input type="text" class="form-control" id="supplyAddressInput" title="" />
+	  	<label for="supplyAddressInput">Ur street address<span class="_required">*</span></label>
+	  	<input type="text" required="" class="form-control" id="supplyAddressInput" title="" />
 	  </div>
-	  <!-- <div class="form-group">
-	    <label for="exampleFormControlSelect2">No. units u need</label>
-	    <select multiple class="form-control" id="exampleFormControlSelect2">
-	      <option>1</option>
-	      <option>2</option>
-	      <option>3</option>
-	      <option>4</option>
-	      <option>5</option>
-	    </select>
-	  </div> -->
 
-	  
-	  <div class="form-row">
-	  	<div class="form-group col-md-4">
-	  		<label>length<span class="_note">(ft)</span></label>
-	  		<input type="number" class="form-control" id="" placeholder="1" name="supply[s_length]">
-	  	</div>
-	  	<div class="form-group col-md-4">
-	  		<label>height <span class="_note">(ft)</span></label>
-	  		<input type="number" class="form-control" id="" placeholder="1" name="supply[s_height]">
-	  	</div>
-	  	<div class="form-group col-md-4">
-	  		<label>width <span class="_note">(ft)</span></label>
-	  		<input type="number" class="form-control" id="" placeholder="1" name="supply[s_width]">
-	  	</div>
+	  <div class="form-group">
+	  	<label for="">Are you willing drive for the boxes and get extra income?<span class="_required">*</span></label>
+	  	<br>
+		  <div class="custom-control custom-radio custom-control-inline">
+			  <input type="radio" id="customRadioInline1" value="yes" name="supply[s_willingToDrive]" class="custom-control-input">
+			  <label class="custom-control-label" for="customRadioInline1">Yes</label>
+			</div>
+			<div class="custom-control custom-radio custom-control-inline">
+			  <input type="radio" id="customRadioInline2" value="no" name="supply[s_willingToDrive]" class="custom-control-input">
+			  <label class="custom-control-label" for="customRadioInline2">No</label>
+			</div>
+			<div class="custom-control custom-radio custom-control-inline">
+			  <input type="radio" id="customRadioInline3" value="maybe" name="supply[s_willingToDrive]" class="custom-control-input">
+			  <label class="custom-control-label" for="customRadioInline3">Maybe(decide later)</label>
+			</div>
 	  </div>
 
 	  <div class="form-group">
 	    <label for="exampleFormControlTextarea1">Breifly describe your space: where, what kind, etc.<span class="_required">*</span></label>
 	    <textarea required class="form-control" id="exampleFormControlTextarea1" name="supply[s_description]" rows="3"></textarea>
 	  </div>
-	  <div class="form-group">
+
+	  <!-- <div class="form-group">
 	    <label for="uploadAnImage">image of Ur boxes<span class="_note">(no other files accepted)</span></label>
 	    <input type="file" accept="image/*" name="supply[s_img]" class="form-control-file" id="uploadAnImage">
-	  </div>
+	  </div> -->
 
 	  <!-- ======================= modal ======================= -->
 	  <!-- Button trigger modal -->
