@@ -33,6 +33,9 @@
 	/*line-height: 20px;*/
 	text-decoration-color: none;
 	text-shadow: none;
+	width: 160px;
+	height: 50px;
+	font-size: 1.5em;
 
 	background-color: Transparent;
     /*background-repeat:no-repeat;
@@ -158,6 +161,8 @@
 	width: 300px;
 	margin: auto;
 }
+
+
 
 /* ============== toolip ============ */
 

@@ -15,15 +15,22 @@
 </script>
 
 <div id="_header">
-  <label id="_headtitle">uzespace</label>
-  <label id="_headtitle_mobile">uzespace</label>
-  <button id="_headerDirect" class="btn btn-outline-light btn-lg">get started</button>
+  <label id="_headtitle">A better storage awaits</label>
+  <label id="_headtitle_mobile">A better storage awaits</label>
+  <button id="_headerDirect" class="btn btn-outline-light _headerDirect1">Get Started</button>
+  <button id="_headerDirect" class="btn btn-outline-light _headerDirect2">Get 20$</button>
 
   <script type="text/javascript">
-    $("#_headerDirect").click(function() {
+    $("._headerDirect1").click(function() {
       $('html, body').animate({
           scrollTop: $("#_indexButtonBlock").offset().top
       }, 2800);
+    });
+
+    $("._headerDirect2").click(function() {
+      $('html, body').animate({
+          scrollTop: $(".typeform-widget").offset().top
+      }, 3200);
     });
   </script>
   
@@ -74,7 +81,7 @@
               function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
                   center: {lat: 34.0227, lng: -118.28},
-                  zoom: 13.3
+                  zoom: 13.5
                 });
                 infoWindow = new google.maps.InfoWindow;
 
@@ -167,51 +174,15 @@
         <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
         <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
       </form>
+
+
+            <hr>
+<h4 style="color: #00aae7; margin-bottom: 20px;">New visitors</h4>
+<div class="typeform-widget" data-url="https://brucewayne1648.typeform.com/to/cbLdUh" data-transparency="10" data-hide-headers=true data-hide-footer=true style="width: 100%; height: 500px;"></div> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm", b="https://embed.typeform.com/"; if(!gi.call(d,id)) { js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script> <div style="font-family: Sans-Serif;font-size: 12px;color: #999;opacity: 0.5; padding-top: 5px;"> powered by <a href="https://admin.typeform.com/signup?utm_campaign=cbLdUh&utm_source=typeform.com-11988118-Basic&utm_medium=typeform&utm_content=typeform-embedded-poweredbytypeform&utm_term=EN" style="color: #999" target="_blank">Typeform</a> </div>
     </div>
 
-    <hr>
 
-  <!-- ============ qna ============ -->
-    <div class="container" style="width: 90%">
-      <h3 style="color: #00aae7;" class="_textCenter">Q&A</h3>
-      <div class="_questionBlock">
-        <h5 class="_questionHeader">Q1. How does everything work</h5>
-        <ul>
-          <li><span class="_pageQna">Step one:</span> Signup with the easiest email registration system</li>
-          <li><span class="_pageQna">Step two:</span> Fill the form of demand</li>
-          <li><span class="_pageQna">Step Three (starting at April 30th):</span> We will assign you a house owner in 1 days</li>
-          <li><span class="_pageQna">Step four:</span> Check out</li>
-          <li><span class="_pageQna">Step five:</span> A courier will pick up your boxes</li>
-        </ul>
-      </div>
 
-      <div clsss="_questionBlock">
-        <h5 class="_questionHeader">Q2. Uze terms explained</h5>
-        <ol>
-          <li><span class="_pageQna">uze provider</span> The party who supplies the space.</li>
-          <li><span class="_pageQna">uzer</span> The party who utilizes the space.</li>
-          <li><span class="_pageQna">courier</span></span> The party who helps the delivery of boxes.</li>
-          <li><span class="_pageQna">uze unit</span> Our standardized measure of volume of boxes.</li>
-        </ol>
-      </div>
 
-      <div class="_questionBlock">
-        <h5 class="_questionHeader">Q3. How do we keep your boxes safe</h5>
-        <ol>
-          <li>
-            <span class="_pageQna">Deposit:</span> uze providers are charged a deposit of at least 100 when they start the registration. If they violate user terms, the deposit will be taken and they will be downgraded by rating and get less available deals or banned from using uzespace forever.
-          </li>
-          <li>
-            <span class="_pageQna">SSN check:</span> Every uze provider’s id is bonded to their ssn, so they cant reregister after being banned.
-          </li>
-          <li>
-            <span class="_pageQna">Ratings:</span> uze providers are required to send pictures of proof of intactness at the beginning and end of the contract period. Signed uze stickers must intact from the start to the end of each order.
-          </li>
-          <li>
-            <span class="_pageQna">Insureance:</span> We are working with insurance companies to come up with the best solution for covering potential losses.
-          </li>
-        </ol>
-      </div>
-    </div>
 
     <% include ./partials/footer %>

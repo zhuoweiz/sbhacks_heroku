@@ -323,8 +323,8 @@ app.get("/emaillist",function(req,res){
 
 
 // =========================  OTHER ROUTES ==========
-app.get("/contact", function(req,res){
-	res.render("contact");
+app.get("/feedback", function(req,res){
+	res.render("webpages/feedback");
 });
 
 app.get('/qna', (req,res)=>{

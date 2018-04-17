@@ -110,13 +110,14 @@
 	  </div> -->
 
 	  <div class="form-group">
-	    <label for="exampleFormControlInput1">Ur number<span class="_required">*</span></label>
+	    <label for="exampleFormControlInput1">Your phone number<span class="_required">*</span></label>
 	    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="2132735477" name="demand[number]" required="">
 	  </div>
 
 	  <div class="form-group">
-	    <label for="exampleFormControlSelect1">number of uze units U need<span class="_required">*</span></label>
-	     <label class="_note" data-toggle="tooltip" title="one uze unit refers to 76cm/30&#34;(Height) * 48cm/19&#34;(Width) * 29cm/11&#34;(Depth) ">&#8505;</label>
+	    <label for="exampleFormControlSelect1">Estimate number of uze units U need<span class="_required">*</span></label>
+	     <label class="_note" data-toggle="tooltip" title="one uze unit refers to a 76cm/30&#34;(Height) * 48cm/19&#34;(Width) * 29cm/11&#34;(Depth) sized travel case">&#8505;</label>
+	     <p class="_footer">The estimation is only purposed to help us roughly understand the space needed. No accuracy is required.</p>
 		
 	    <select class="form-control" id="exampleFormControlSelect1" name="demand[unit]">
 	      <option>1 (minimum)</option>
@@ -217,9 +218,10 @@
 		  </div>
 		</div>	
 
+		<p>If you have any confusions check out the <a href="/qna" target="_blank">Q&A</a> section or message our customer support on the bottom right</p>
+
 <!-- ======================== submit/validate terms agreement ===================== -->
 		<button class="btn btn-outline-primary" type="submit" id="demandSubmitButton" disabled="">Submit</button>
-
 		<script type="">
 			var checkbox = document.querySelector("#userAgreementCheckBox");
 			var submitButton = document.querySelector("#demandSubmitButton");

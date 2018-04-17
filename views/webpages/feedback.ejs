@@ -1,23 +1,29 @@
-<% include ./partials/header %>
-
-<div id="_header">
-		<label id="_headtitle">Your Best Storage Solution</label>
-		<label id="_headtitle_mobile">Uze</label>
-	</div>
+<% include ../partials/header %>
 
 <div class="container _main _textCenter">
 
-<div class="_textCenter">
-	<h3>Uze tech location</h3>
+	
+<div class="_textCenter" style="margin-bottom: 20px;">
+	
+	
+	<h4 style="color: #00aae7;">Any feedbacks?</h4>
+	<p>try the message channel on the bottom right corner~</p>
+
+	<hr>
+	<h3>uze tech Inc.</h3>
 	<p>3131 S Hoover St, Los Angeles, 90089, CA, United States</p>
 	<p>Tel: 2132735476</p>
-	<a href="emaillist" style="text-decoration: none;">Join our email list!</a>
+	<a href="/emaillist" style="text-decoration: none;">Join our email list!</a>
 </div>
 
-<p></p>
+
+
+<div id="map"></div>
+
+
 
 <!-- ========================= MAP =================== -->
-	<div id="map"></div>
+
 	    <script>
 	      // Note: This example requires that you consent to location sharing when
 	      // prompted by your browser. If you see the error "The Geolocation service
@@ -26,10 +32,10 @@
 
 	      var map, infoWindow;
 	      function initMap() {
-	      	var uluru = {lat: 34.0223519, lng: -118.285117};
+	      	var uluru = {lat: 34.0223519, lng: -118.285122};
 	        map = new google.maps.Map(document.getElementById('map'), {
 	          center: uluru,
-	          zoom: 13
+	          zoom: 14
 	        });
 
 	        var marker = new google.maps.Marker({
@@ -73,15 +79,19 @@
 	      //   infoWindow.open(map);
 	      // }
 	    </script>
+
+	    <hr>
+	 
+
+	    <hr>
+<h4 style="color: #00aae7;">New visitors</h4>
+<div class="typeform-widget" data-url="https://brucewayne1648.typeform.com/to/cbLdUh" data-transparency="20" data-hide-headers=true data-hide-footer=true style="width: 100%; height: 500px;"></div> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm", b="https://embed.typeform.com/"; if(!gi.call(d,id)) { js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script> <div style="font-family: Sans-Serif;font-size: 12px;color: #999;opacity: 0.5; padding-top: 5px;"> powered by <a href="https://admin.typeform.com/signup?utm_campaign=cbLdUh&utm_source=typeform.com-11988118-Basic&utm_medium=typeform&utm_content=typeform-embedded-poweredbytypeform&utm_term=EN" style="color: #999" target="_blank">Typeform</a> </div>
+
 	    <script async defer
 	    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiZJGNbzddhCp0Y4esDRwEHuHm7TJ5oG8&callback=initMap">
 	    </script>
 
 <!-- ============================== map ends ===================== -->
-
-	<p>Co-founders: Gary Huang & Bobby Zhang</p>
-
-	
 
 	<br>
 	<form class="_donateButton" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -92,4 +102,4 @@
 	</form>
 </div>
 
-<% include ./partials/footer %>
+<% include ../partials/footer %>
