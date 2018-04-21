@@ -240,15 +240,26 @@ app.post("/demanded", isLoggedIn,isActivated, function(req,res){
 							console.log(data);
 
 							//sending notification email after saving the new demand
-							var data = {
+							var data1 = {
 							  from: 'Zhuowei Zhang <zhuoweiz@uzespace.com>',
-							  to: 'zhuoweiz@usc.edu',
+							  to: 'Admin Bob <zhuoweiz@uzespace.com>, Admin Gary <qingsheh@usc.edu>',
 							  subject: '[uze]NewDemand',
-							  text: 'Hello from the other side (mailgun)'
+							  text: 'Hello from the other side. 张卓玮叫你去接单。。'
+							};
+
+							var receiptant = req.user.username;
+							var data2 = {
+							  from: 'Zhuowei Zhang <zhuoweiz@uzespace.com>',
+							  to: receiptant,
+							  subject: '[uze] new demand created',
+							  text: 'Hello, this is a notification that you just created a new demand. You can always check the status and information on your account page at uzespace.com'
 							};
 
 							console.log("sending mailgun email....");
-							mailgun.messages().send(data, function (error, body) {
+							mailgun.messages().send(data1, function (error, body) {
+						  console.log(body);
+							});
+							mailgun.messages().send(data2, function (error, body) {
 						  console.log(body);
 							});
 						}
@@ -302,15 +313,26 @@ app.post("/supplied", isLoggedIn,isActivated, function(req,res){
 							console.log(data);
 
 							//sending notification email after saving the new supply
-							var data = {
+							var data1 = {
 							  from: 'Zhuowei Zhang <zhuoweiz@uzespace.com>',
-							  to: 'zhuoweiz@usc.edu',
-							  subject: '[uze]NewDemand',
-							  text: 'Hello from the other side (mailgun)'
+							  to: 'Admin Bob <zhuoweiz@uzespace.com>, Admin Gary <qingsheh@usc.edu>',
+							  subject: '[uzeAdmin]NewSupply',
+							  text: 'Hello from the other side. 张卓玮叫你去接单。。'
+							};
+
+							var receiptant = req.user.username;
+							var data2 = {
+							  from: 'Zhuowei Zhang <zhuoweiz@uzespace.com>',
+							  to: receiptant,
+							  subject: '[uze] new supply created',
+							  text: 'Hello, this is a notification that you just created a new supply. You can always check the status and information on your account page at uzespace.com'
 							};
 
 							console.log("sending mailgun email....");
-							mailgun.messages().send(data, function (error, body) {
+							mailgun.messages().send(data1, function (error, body) {
+						  console.log(body);
+							});
+							mailgun.messages().send(data2, function (error, body) {
 						  console.log(body);
 							});
 						}
