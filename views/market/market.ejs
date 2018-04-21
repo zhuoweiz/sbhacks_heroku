@@ -1,4 +1,27 @@
-<% include ./partials/header %>
+<% include ../partials/header %>
+	
+	<div class="container">
+		<h1 class="_textCenter">Sorry uzespace market[BETA] is still in development</h1>
+
+    <% supplySet.forEach(function(supply) { %>
+    	<div class="card _floated" style="width: 18rem;">
+				<div class="_cardImgBox">
+					<!-- <img class="card-img-top" src="..." alt="Do u know the way"> -->
+				</div>
+			  <div class="card-body">
+			    <h6 class="card-title"><%= supply.s_unit%> unit(s) available</h6>
+			    <p class="card-text"><%= supply.s_description%></p>
+			    <p><%=supply.s_college%>: <span></span></p>
+			    <a href="#" class="btn btn-primary">Detail</a>
+			    <a href="#" class="btn btn-secondary">Edit</a>
+			  </div>
+			</div>
+      <!-- userMap[user._id] = user; -->
+    <% }); %>
+
+    <div class="_clearFloat"></div>
+	</div>
 
 
-<% include ./partials/footer %>
+
+<% include ../partials/footer %>

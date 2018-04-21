@@ -7,6 +7,7 @@ var demandSchema = new mongoose.Schema({
 	college: String,
 	usernameF: String,
 	usernameL: String,
+	d_owner: String,
 	number: Number,
 	email: String,
 	unit: String,

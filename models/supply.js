@@ -7,6 +7,7 @@ var supplySchema = new mongoose.Schema({
 	s_college: String,
 	s_usernameF: String,
 	s_usernameL: String,
+	s_owner: String,
 	s_number: Number,
 	s_email: String,
 	s_postcode: String,

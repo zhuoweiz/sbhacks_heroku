@@ -58,29 +58,37 @@
 	  
 	  <div class="collapse navbar-collapse" id="navbarNav">
 	    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item active">
+	      <li class="nav-item">
 	        <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
 	      </li>
 	      <li class="nav-item">
-	      	<a class="nav-link" href="/qna">Help<span class="sr-only">(current)</span></a>
+	        <a class="nav-link" href="/market" style="padding-right: 1px;">Market</a>
+	      </li>
+	      <span style="font-size: 0.6em; padding-top: 8px;padding-right: 6px; margin: 0px; color: #00aae7;">beta</span>
+
+	      <!-- <span>beta</span> -->
+	      <li class="nav-item">
+	      	<a class="nav-link" href="/qna">Help<% %></a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="/feedback">Feedback<span class="sr-only"></span></a>
+	        <a class="nav-link" href="/feedback">Feedback</a>
 	      </li>
 
-	    	<% if(!currentUser){ %>
-	    		<span class="nav-item">
-		        	<a class="nav-link" href="/login">login<span class="sr-only"></span></a>
-		    	</span>
-		    	<span class="nav-item">
-		    		<a class="nav-link" href="/signup">signup<span class="sr-only"></span></a>
-		    	</span>
-	  		<% }else{ %>
-	  			<li class="nav-item">
-	        		<a class="nav-link" href="/logout">logout<span class="sr-only"></span></a>
-	    		</li>
-	  		<% } %>
+	    	
 	    </ul>
+
+	    <% if(!currentUser){ %>
+    		<div class="nav-item">
+	        	<a class="nav-link" href="/login">login<span class="sr-only"></span></a>
+	    	</div>
+	    	<div class="nav-item">
+	    		<a class="nav-link" href="/signup">signup<span class="sr-only"></span></a>
+	    	</div>
+  		<% }else{ %>
+  			<div class="nav-item">
+        		<a class="nav-link" href="/logout">logout<span class="sr-only"></span></a>
+    		</div>
+  		<% } %>
 
 	    <% if(currentUser){ %>
 	    <span class="_logged">

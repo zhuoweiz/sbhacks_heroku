@@ -168,6 +168,7 @@ app.get("/demand", isLoggedIn,isActivated, function(req,res){
 	};
 	// JSON.stringify(formData);
 	
+	// ajax geolocation usage
 	var options = {
 	  uri: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDmnNAnAymv6aHy1S48ABCJNc9DV-F3vtk',
 	  method: 'POST',
@@ -225,6 +226,7 @@ app.post("/demanded", isLoggedIn,isActivated, function(req,res){
 			console.log("======================== create demand SUCCSSS: ");
 
 			var tempUserEmail = req.user.username;
+			newDemand.d_owner = tempUserEmail;
 			User.findOne({username:req.user.username}, function(err, foundUser){
 				if(err){
 					console.log(err);
@@ -299,6 +301,7 @@ app.post("/supplied", isLoggedIn,isActivated, function(req,res){
 			console.log("======================== create supply SUCCSSS: ", req.user);
 
 			var tempUserEmail = req.user.username;
+			newSupply.s_owner = tempUserEmail;
 			User.findOne({username:req.user.username}, function(err, foundUser){
 				if(err){
 					console.log(err);
@@ -365,7 +368,11 @@ app.post("/supplied", isLoggedIn,isActivated, function(req,res){
 
 // ====================== market route ===============
 app.get('/market', (req,res)=>{
-	res.render("market");
+	Sp.find({}, function(err, supplySet) {
+
+
+		res.render("market/market", {supplySet:supplySet});
+	});
 });
 
 
