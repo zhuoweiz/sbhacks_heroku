@@ -366,7 +366,7 @@ app.post("/supplied", isLoggedIn,isActivated, function(req,res){
 // ====================== market route ===============
 app.get('/market', (req,res)=>{
 	res.render("market");
-})
+});
 
 
 app.get("/supplied", function(req,res){
