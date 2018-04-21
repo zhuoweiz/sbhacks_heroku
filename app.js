@@ -20,11 +20,17 @@ var bodyParser 		= require("body-parser"),
 	Sp 				= require("./models/supply"),
 	User 			= require("./models/user"),
 	haha				= require("./models/googleMapApi"),
+	mailgun   = require("./models/mailgun.js"),
 	seedDB 			= require("./models/seeds");
 
 // configure dotenv
 // wtf is this
 require('dotenv').config();
+
+//env configurations
+var api_key = 'key-1c2251d88f27f8bf7a7bc29542816f5c';
+var domain = 'mail.uzespace.com';
+var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 //system configuration
 var app = express();
@@ -107,12 +113,12 @@ function isLoggedIn(req, res, next){
 var indexRoutes = require("./routes/index");
 var userpageRoutes = require("./routes/userpage");
 var paymentRoute = require("./routes/payment");
+// var mailgunRoutes = require("./routes/mailgun");
 app.use("/", indexRoutes);
 app.use('/userpage/', userpageRoutes);
 app.use('/payment/', paymentRoute);
 
 //==================================== Routes =================
-
 app.get("/", function(req,res){
 	var formData = {
 	  'homeMobileCountryCode' : 310
@@ -232,6 +238,19 @@ app.post("/demanded", isLoggedIn,isActivated, function(req,res){
 						}else{
 							console.log('zhuo: here is the new user data after adding a demand');
 							console.log(data);
+
+							//sending notification email after saving the new demand
+							var data = {
+							  from: 'Zhuowei Zhang <zhuoweiz@uzespace.com>',
+							  to: 'zhuoweiz@usc.edu',
+							  subject: '[uze]NewDemand',
+							  text: 'Hello from the other side (mailgun)'
+							};
+
+							console.log("sending mailgun email....");
+							mailgun.messages().send(data, function (error, body) {
+						  console.log(body);
+							});
 						}
 					});
 				}
@@ -281,6 +300,19 @@ app.post("/supplied", isLoggedIn,isActivated, function(req,res){
 						}else{
 							console.log('zhuo: here is the new user data after adding a supply');
 							console.log(data);
+
+							//sending notification email after saving the new supply
+							var data = {
+							  from: 'Zhuowei Zhang <zhuoweiz@uzespace.com>',
+							  to: 'zhuoweiz@usc.edu',
+							  subject: '[uze]NewDemand',
+							  text: 'Hello from the other side (mailgun)'
+							};
+
+							console.log("sending mailgun email....");
+							mailgun.messages().send(data, function (error, body) {
+						  console.log(body);
+							});
 						}
 					});
 				}
@@ -309,6 +341,10 @@ app.post("/supplied", isLoggedIn,isActivated, function(req,res){
 	});
 });
 
+// ====================== market route ===============
+app.get('/market', (req,res)=>{
+	res.render("market");
+})
 
 
 app.get("/supplied", function(req,res){
@@ -317,10 +353,7 @@ app.get("/supplied", function(req,res){
 
 app.get("/emaillist",function(req,res){
 	res.redirect('http://keybwarrior.com/undecided/undecided.html');
-})
-
-
-
+});
 
 // =========================  OTHER ROUTES ==========
 app.get("/feedback", function(req,res){
