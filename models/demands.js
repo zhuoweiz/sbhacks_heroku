@@ -10,7 +10,6 @@ var demandSchema = new mongoose.Schema({
 	d_owner: String,
 	number: Number,
 	email: String,
-	unit: String,
 	starting: String,
 	ending: String,
 	willingToDrive: String, // "yes", "maybe", "no"
@@ -23,13 +22,19 @@ var demandSchema = new mongoose.Schema({
 	payed: {type: Boolean, default: false},
 	closed: {type: Boolean, default: false},
 
-	//optional
-	code: String,
-	weight: String,
+	//size refactor
+	unit: String,
+	d_boxes: [{
+		type: Object, 
+		}],
 	length: String,
 	height: String,
 	width: String,
 	special: String,
+
+	//optionals
+	code: String,
+	weight: String,
 	img: { data: Buffer, contentType: String },
 
 	//other

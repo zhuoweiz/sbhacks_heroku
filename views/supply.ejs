@@ -19,7 +19,7 @@
 		<label>
 	    Nearest college from you<span class="_required">*</span>
 	  </label>
-	  <label class="_note" data-toggle="tooltip" title="Sorry but we currently only support the best ">&#8505;</label>
+	  <label class="_note" data-toggle="tooltip" title="Sorry but we currently only support these three universities ">&#8505;</label>
 		<div class="form-group">
 	    <select class="form-control" id="exampleFormControlSelect1" name="supply[s_college]">
 	    	<option>USC (University of Southern California)</option>
@@ -47,21 +47,8 @@
 	    <label class="_note" data-toggle="tooltip" title="We use this information to help matched supplier contact you. No one will have access to it until you allow so">&#8505;</label>
 	    <input type="tel" class="form-control" id="supplyPhoneInput" placeholder="1231231231" name="supply[s_number]" required="">
 	  </div>
-
-	  <div class="form-group">
-	    <label for="exampleFormControlSelect1">number of uze units you can provide<span class="_required">*</span></label>
-	    <label class="_note" data-toggle="tooltip" title="one uze unit refers to 76cm/30&#34;(Height) * 48cm/19&#34;(Width) * 29cm/11&#34;(Depth) ">&#8505;</label>
-	    <select class="form-control" id="exampleFormControlSelect1" name="supply[s_unit]">
-	    	<option>0 (unknown)</option>
-      	<option>1 (minimum)</option>
-	      <% for(let i=2;i<10;i++){ %>
-	     	 <option><%=i%></option>
-	   		<% } %>
-	      <option>10 (maximum)</option>
-	    </select>
-	  </div>
 	  
-	  <label>How big is your space</label>
+	  <label>How big is your space <span class="_note">1m = 3.28ft</span></label>
 	  <div class="form-row">
 	  	<div class="form-group col-md-4">
 	  		<label>length<span class="_note">(ft)</span></label>
