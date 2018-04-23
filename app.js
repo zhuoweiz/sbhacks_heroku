@@ -227,6 +227,10 @@ app.post("/demanded", isLoggedIn,isActivated, function(req,res){
 
 			var tempUserEmail = req.user.username;
 			newDemand.d_owner = tempUserEmail;
+			//换算
+			var product = newDemand.length*newDemand.height*newDemand.width/6270;
+			newDemand.unit = Math.round( product * 10 ) / 10;
+
 			User.findOne({username:req.user.username}, function(err, foundUser){
 				if(err){
 					console.log(err);
@@ -302,6 +306,10 @@ app.post("/supplied", isLoggedIn,isActivated, function(req,res){
 
 			var tempUserEmail = req.user.username;
 			newSupply.s_owner = tempUserEmail;
+			//换算
+			var product = newSupply.length*newSupply.height*newSupply.width/6270;
+			newSupply.s_unit = Math.round( product * 10 ) / 10;
+
 			User.findOne({username:req.user.username}, function(err, foundUser){
 				if(err){
 					console.log(err);

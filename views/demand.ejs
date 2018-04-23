@@ -142,8 +142,8 @@
 	  <hr>
 	  <h3 class=""><span style="color: #00aae7;">2/3</span> SIZE ESTIMATE <span class="_note">1m = 3.28ft</span></h3>
 
-	  <div class="form-group">
-	    <a for="exampleFormControlSelect1">Estimate number of uze units U need<span class="_required">*</span></a>
+	  <label for="exampleFormControlSelect1">Estimate number of uze units U need <span class="_note">1m = 3.28ft; 1ft = 12inches</span></label>
+	  <div class="form-row">
 	    <!-- <label class="_note" data-toggle="tooltip" title="one uze unit refers to a 76cm/30&#34;(Height) * 48cm/19&#34;(Width) * 29cm/11&#34;(Depth) sized travel case">&#8505;</label>
 	     <p class="_footer">The estimation is only purposed to help us roughly understand the space needed. No accuracy is required.</p>
 		
@@ -152,16 +152,25 @@
 	      <option>10 (maximum)</option>
 	    </select> -->
 	    <div class="form-group col-md-4">
-	  		<label>length</label>
-	  		<input type="number" class="form-control" id="" placeholder="1" name="demand[length]"><span> ft</span>
+	  		<label>length<span class="_note">(inches)</span><span class="_required">*</span></label>
+	  		<input type="number" required class="form-control" id="" placeholder="1" name="demand[length]">
+	  		<div class="invalid-feedback">
+		     	input invalid
+		    </div>
 	  	</div>
 	  	<div class="form-group col-md-4">
-	  		<label>height</label>
-	  		<input type="number" class="form-control" id="" placeholder="1" name="demand[height]"><span> ft</span>
+	  		<label>height <span class="_note">(inches)</span><span class="_required">*</span></label>
+	  		<input type="number" required="" class="form-control" id="" placeholder="1" name="demand[height]">
+	  		<div class="invalid-feedback">
+		     	input invalid
+		    </div>
 	  	</div>
 	  	<div class="form-group col-md-4">
-	  		<label>width</label>
-	  		<input type="number" class="form-control" id="" placeholder="1" name="demand[width]"><span> ft</span>
+	  		<label>width <span class="_note">(inches)</span><span class="_required">*</span></label>
+	  		<input type="number" required="" class="form-control" id="" placeholder="1" name="demand[width]">
+	  		<div class="invalid-feedback">
+		     	input invalid
+		    </div>
 	  	</div>
 	  </div>
 	  
