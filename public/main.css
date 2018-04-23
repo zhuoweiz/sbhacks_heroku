@@ -145,9 +145,9 @@
 	height: 150px;
 	margin: auto;
 	margin-top: 0px;
-	background-image: url('/img/logo2.png');
+	/*background-image: url('/img/logo2.png');
 	background-size: cover;
-	background-position: center;
+	background-position: center;*/
 }
 
 ._cardImgBoxImg{

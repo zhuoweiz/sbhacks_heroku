@@ -45,7 +45,8 @@ var UserSchema = new mongoose.Schema({
 
 	//other
 	s_created: 
-		{type: Date, default: Date.now}
+		{type: Date, default: Date.now},
+    UID: String
 }
 ,{usePushEach: true}
 );

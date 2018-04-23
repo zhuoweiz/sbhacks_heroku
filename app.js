@@ -1,5 +1,5 @@
 //dependencies
-var bodyParser 		= require("body-parser"),
+const bodyParser 		= require("body-parser"),
 		cookieParser 	= require("cookie-parser"),
 	methodOverride  = require("method-override"),
 	flash        	= require("connect-flash"),
@@ -7,6 +7,7 @@ var bodyParser 		= require("body-parser"),
 	request 		= require("request"),
 	mongoose 		= require("mongoose"),
 	express 		= require("express"),
+	multer = require('multer'); 
 
 	passport 		= require("passport"),
 	LocalStrategy 	= require("passport-local"),
@@ -20,7 +21,8 @@ var bodyParser 		= require("body-parser"),
 	Sp 				= require("./models/supply"),
 	User 			= require("./models/user"),
 	haha				= require("./models/googleMapApi"),
-	mailgun   = require("./models/mailgun.js"),
+	mailgun   = require("./models/mailgun.js"), //not used
+	// middleware = require("./models/middleware.js"), //not used
 	seedDB 			= require("./models/seeds");
 
 // configure dotenv
@@ -109,6 +111,45 @@ function isLoggedIn(req, res, next){
 	res.redirect("/login");
 }
 
+// ================== MULTER CONFIG: to get file photos to temp server storage
+let tempSupplyPhotoIdType = ".jpeg";
+const multerConfig = {
+    
+storage: multer.diskStorage({
+ //Setup where the user's file will go
+ destination: function(req, file, next){
+   next(null, './public/photo-db');
+   },   
+    
+    //Then give the file a unique name
+    filename: function(req, file, next){
+        console.log(file);
+        const ext = file.mimetype.split('/')[1];
+        tempSupplyPhotoIdType = '.'+ext
+        // next(null, file.fieldname + '-' + Date.now() + '.'+ext);
+        var postArrayLength = req.user.supplyPosts.length + 1;
+        next(null, req.user.username +'-supply-'+ postArrayLength + tempSupplyPhotoIdType);
+      }
+    }),   
+    
+    //A means of ensuring only images are uploaded. 
+    fileFilter: function(req, file, next){
+          if(!file){
+            next();
+          }
+        const image = file.mimetype.startsWith('image/');
+        if(image){
+          console.log('photo uploaded');
+          next(null, true);
+        }else{
+          console.log("file not supported");
+          
+          //TODO:  A better message response to user on failure.
+          return next();
+        }
+    }
+  };
+
 //============= routes config ========
 var indexRoutes = require("./routes/index");
 var userpageRoutes = require("./routes/userpage");
@@ -118,7 +159,9 @@ app.use("/", indexRoutes);
 app.use('/userpage/', userpageRoutes);
 app.use('/payment/', paymentRoute);
 
-//==================================== Routes =================
+// ===========================================
+// ---------------- ROUTES -------------
+// ===========================================
 app.get("/", function(req,res){
 	var formData = {
 	  'homeMobileCountryCode' : 310
@@ -292,8 +335,20 @@ app.get("/supply", isLoggedIn,isActivated, function(req,res){
 	res.render("supply");
 });
 
-app.post("/supplied", isLoggedIn,isActivated, function(req,res){
+app.post("/supplied", isLoggedIn,isActivated, multer(multerConfig).single('photo'), function(req,res){
 	var supply_query = req.body.supply;
+
+	//dealing with input data
+	var tempUserEmail = req.user.username;
+	supply_query.s_owner = tempUserEmail;
+	console.log(" == adding supply... dimention "+ supply_query.s_length,supply_query.s_height);
+	//换算
+	var product = supply_query.s_length * supply_query.s_height * supply_query.s_width / 6270;
+	supply_query.s_unit = Math.round( product * 10 ) / 10;
+	console.log(" = = = = huansuan: ",product +' - > '+supply_query.s_unit);
+	//图片命名id
+	var supplyOwnedIdNumber = req.user.supplyPosts.length+1;
+	supply_query.s_ownedId = supplyOwnedIdNumber.toString() + tempSupplyPhotoIdType;
 
 	//-----------------need modification
 	Sp.create(supply_query, function(err, newSupply){
@@ -302,13 +357,7 @@ app.post("/supplied", isLoggedIn,isActivated, function(req,res){
 			console.log(err);
 		}else{
 			// var tempUser = req.user;
-			console.log("======================== create supply SUCCSSS: ", req.user);
-
-			var tempUserEmail = req.user.username;
-			newSupply.s_owner = tempUserEmail;
-			//换算
-			var product = newSupply.length*newSupply.height*newSupply.width/6270;
-			newSupply.s_unit = Math.round( product * 10 ) / 10;
+			console.log("======================== create supply SUCCSSS: ");
 
 			User.findOne({username:req.user.username}, function(err, foundUser){
 				if(err){

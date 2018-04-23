@@ -3,7 +3,7 @@
 <div class="container">
 	<h1 class="_textCenter jumbotron">SUPPLY PAGE</h1>
 	
-	<form class="_form" action="/supplied" method="POST">
+	<form class="_form" enctype="multipart/form-data" action="/supplied" method="POST">
 		<!-- <div class="form-group">
 			<label>Ur nearest college<span class="_required">*</span></label>
 		  <div class="input-group">
@@ -61,15 +61,15 @@
 		    </div>
 	  	</div>
 	  	<div class="form-group col-md-4">
-	  		<label>height <span class="_note">(inches)</span><span class="_required">*</span></label>
-	  		<input type="number" required="" class="form-control" id="" placeholder="1" name="supply[s_height]">
+	  		<label>width <span class="_note">(inches)</span><span class="_required">*</span></label>
+	  		<input type="number" required="" class="form-control" id="" placeholder="1" name="supply[s_width]">
 	  		<div class="invalid-feedback">
 		     	input invalid
 		    </div>
 	  	</div>
 	  	<div class="form-group col-md-4">
-	  		<label>width <span class="_note">(inches)</span><span class="_required">*</span></label>
-	  		<input type="number" required="" class="form-control" id="" placeholder="1" name="supply[s_width]">
+	  		<label>height <span class="_note">(inches)</span><span class="_required">*</span></label>
+	  		<input type="number" required="" class="form-control" id="" placeholder="1" name="supply[s_height]">
 	  		<div class="invalid-feedback">
 		     	input invalid
 		    </div>
@@ -134,10 +134,10 @@
 	    </div>
 	  </div>
 
-	  <!-- <div class="form-group">
-	    <label for="uploadAnImage">image of Ur boxes<span class="_note">(no other files accepted)</span></label>
-	    <input type="file" accept="image/*" name="supply[s_img]" class="form-control-file" id="uploadAnImage">
-	  </div> -->
+	  <div class="form-group">
+	    <label for="uploadAnImage">Photos of your space (strongly recommended)</label>
+	    <input type="file" accept="image/*" class="form-control-file" id="uploadAnImage" name="photo" /><span class="_note">(no other files accepted)</span>
+	  </div>
 
 	  <!-- ======================= modal ======================= -->
 	  <!-- Button trigger modal -->
