@@ -43,24 +43,36 @@
 	  </div>
 
 	  <div class="form-group">
-	    <label for="supplyPhoneInput">Ur number<span class="_required">*</span></label>
+	    <label for="supplyPhoneInput">Ur phone number<span class="_required">*</span></label>
 	    <label class="_note" data-toggle="tooltip" title="We use this information to help matched supplier contact you. No one will have access to it until you allow so">&#8505;</label>
 	    <input type="tel" class="form-control" id="supplyPhoneInput" placeholder="1231231231" name="supply[s_number]" required="">
+	    <div class="invalid-feedback">
+	     	Phone number input invalid
+	    </div>
 	  </div>
 	  
 	  <label>How big is your space <span class="_note">1m = 3.28ft</span></label>
 	  <div class="form-row">
 	  	<div class="form-group col-md-4">
-	  		<label>length<span class="_note">(ft)</span></label>
-	  		<input type="number" class="form-control" id="" placeholder="1" name="supply[s_length]">
+	  		<label>length<span class="_note">(ft)</span><span class="_required">*</span></label>
+	  		<input type="number" required class="form-control" id="" placeholder="1" name="supply[s_length]">
+	  		<div class="invalid-feedback">
+		     	input invalid
+		    </div>
 	  	</div>
 	  	<div class="form-group col-md-4">
-	  		<label>height <span class="_note">(ft)</span></label>
-	  		<input type="number" class="form-control" id="" placeholder="1" name="supply[s_height]">
+	  		<label>height <span class="_note">(ft)</span><span class="_required">*</span></label>
+	  		<input type="number" required="" class="form-control" id="" placeholder="1" name="supply[s_height]">
+	  		<div class="invalid-feedback">
+		     	input invalid
+		    </div>
 	  	</div>
 	  	<div class="form-group col-md-4">
-	  		<label>width <span class="_note">(ft)</span></label>
-	  		<input type="number" class="form-control" id="" placeholder="1" name="supply[s_width]">
+	  		<label>width <span class="_note">(ft)</span><span class="_required">*</span></label>
+	  		<input type="number" required="" class="form-control" id="" placeholder="1" name="supply[s_width]">
+	  		<div class="invalid-feedback">
+		     	input invalid
+		    </div>
 	  	</div>
 	  </div>
 
@@ -75,21 +87,30 @@
 	    <div class="form-group col-md-6">
 	      <label for="demandInputEndingDate">Ending Date<span class="_required">*</span></label>
 	      <input type="date" class="form-control" id="demandInputEndingDate" min=<%= yyyy+'-'+mm+'-'+dd %> name="supply[s_ending]" required>
+	      <div class="invalid-feedback">
+		     	input invalid
+		    </div>
 	    </div>
 	  </div>
 
 	  <div class="form-group">
 	  	<label for="supplyPostcodeInput">Ur postcode<span class="_required">*</span></label>
-	  	<input type="text" class="form-control" pattern="(\d{5}([\-]\d{4})?)" id="supplyPostcodeInput" title="Five digit zip code" />
+	  	<input type="text" class="form-control" pattern="(\d{5}([\-]\d{4})?)" id="supplyPostcodeInput" title="Five digit zip code" required />
+	  	<div class="invalid-feedback">
+	     	input invalid
+	    </div>
 	  </div>
 
 	  <div class="form-group">
 	  	<label for="supplyAddressInput">Ur street address<span class="_required">*</span></label>
-	  	<input type="text" required="" class="form-control" id="supplyAddressInput" title="" />
+	  	<input type="text" required class="form-control" id="supplyAddressInput" title="" />
+	  	<div class="invalid-feedback">
+	     	input invalid
+	    </div>
 	  </div>
 
 	  <div class="form-group">
-	  	<label for="">Are you willing drive for the boxes and get extra income?<span class="_required">*</span></label>
+	  	<label for="">Are you willing drive for the boxes and get extra income?</label>
 	  	<br>
 		  <div class="custom-control custom-radio custom-control-inline">
 			  <input type="radio" id="customRadioInline1" value="yes" name="supply[s_willingToDrive]" class="custom-control-input">
@@ -108,6 +129,9 @@
 	  <div class="form-group">
 	    <label for="exampleFormControlTextarea1">Breifly describe your space: where, what kind, etc.<span class="_required">*</span></label>
 	    <textarea required class="form-control" id="exampleFormControlTextarea1" name="supply[s_description]" rows="3"></textarea>
+	    <div class="invalid-feedback">
+	     	input invalid
+	    </div>
 	  </div>
 
 	  <!-- <div class="form-group">
