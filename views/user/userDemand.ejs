@@ -1,25 +1,37 @@
 <% include ../partials/header %>
 
 <div class="container">
+
+	<h1 class="_textCenter jumbotron">MY REQUESTS</h1>
+
+	<p class="_footer" style="font-style: italic;">"One uze unit refers to a 76cm/30&#34;(Height) * 48cm/19&#34;(Width) * 29cm/11&#34;(Depth) sized travel case"  —— A uzespace cofounder</p>
+
 	<% thisUser.demandPosts.forEach(function(demand){ %>
 
-		<div class="card" style="width: 18rem;">
-			<div class="_cardImgBox">
-				<!-- <img class="card-img-top _cardImgBoxImg" src="/img/logo2.png" alt="Do you know the way2"> -->
+		<div class="card _floatedL" style="width: 18rem;">
+			<div class="_cardImgBox" style="padding-top: 25px;">
+				<p style="font-size: 2em; color: #5fb6e6; text-align: left;" ><%= demand.starting%></p>
+				<p style="font-size: 2em; color: #5fb6e6; text-align: right;" ><%= demand.ending%></p>
 			</div>
 		  <div class="card-body">
 		    <h5 class="card-title"><span style="color: #00aae7;"><%= demand.unit%></span> units demand</h5>
-		    <p class="card-text"><%= demand.college%></p>
+		    <p class="card-text"><%= demand.college%> </p>
 		    
-		    <p style="font-size: 0.7em;" class="card-text"><%= demand.starting%> -> <%= demand.ending%></p>
+		    <% if(!demand.matched){ %>
+		    	<p>Not matched yet</p>
+		    <% }else{ %>
+		    	<p>Matched </p>
+		    <% } %>
+		    
         <form action="/payment/demand/<%= demand._id%>" method="post">
-          <button type="submit">uzePay</button>
+          <button type="submit">Reserve the space</button>
+          <label class="_note" data-toggle="tooltip" title="We recommend you pay the reserve fee after confirmation, because reserve fees are not refundable">&#8505;</label>
         </form>
-
 		  </div>
 		</div>
 
 	<% }); %>
+	<div class="_clearFloat"></div>
   <br>
 </div>
 

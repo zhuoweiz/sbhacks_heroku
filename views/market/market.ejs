@@ -1,10 +1,11 @@
 <% include ../partials/header %>
 	
 	<div class="container">
-		<h1 class="_textCenter">Market[BETA] in development...</h1>
+		
+		<h1 class="_textCenter jumbotron">Uzespace Market[BETA]</h1>
 
     <% supplySet.forEach(function(supply) { %>
-    	<div class="card _floated" style="width: 18rem;">
+    	<div class="card _floatedL" style="width: 18rem;">
 				<div class="_cardImgBox">
 					<!-- /img/logo2.png -->
 					<img class="card-img-top" style="height: 100%;object-fit: cover;" src="/photo-db/<%=supply.s_owner+"-supply-"+supply.s_ownedId%>" alt="Do u know the way" onerror="this.onerror=null;this.src='/img/logo2.png';">

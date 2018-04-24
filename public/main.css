@@ -168,8 +168,12 @@
 
 /*others*/
 
-._floated{
+._floatedL{
 	float: left;
+}
+
+._floatedR{
+	float: right;
 }
 
 ._clearFloat{

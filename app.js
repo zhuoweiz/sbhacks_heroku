@@ -288,12 +288,13 @@ app.post("/demanded", isLoggedIn,isActivated, function(req,res){
 							console.log('zhuo: here is the new user data after adding a demand');
 							console.log(data);
 
+								// Admin Gary <qingsheh@usc.edu>'
 							//sending notification email after saving the new demand
 							var data1 = {
 							  from: 'Zhuowei Zhang <zhuoweiz@uzespace.com>',
-							  to: 'Admin Bob <zhuoweiz@uzespace.com>, Admin Gary <qingsheh@usc.edu>',
+							  to: 'Admin Bob <zhuoweiz@uzespace.com>',
 							  subject: '[uze]NewDemand',
-							  text: 'Hello from the other side. 张卓玮叫你去接单。。'
+							  text: 'Hello from the other side. 张卓玮叫你去接单。。'+data.username
 							};
 
 							var receiptant = req.user.username;
@@ -306,11 +307,14 @@ app.post("/demanded", isLoggedIn,isActivated, function(req,res){
 
 							console.log("sending mailgun email....");
 							mailgun.messages().send(data1, function (error, body) {
-						  console.log(body);
+						  	// console.log(body);
 							});
 							mailgun.messages().send(data2, function (error, body) {
-						  console.log(body);
+						  	// console.log(body);
 							});
+
+							//take you to the deposit page.
+
 						}
 					});
 				}
@@ -375,9 +379,9 @@ app.post("/supplied", isLoggedIn,isActivated, multer(multerConfig).single('photo
 							//sending notification email after saving the new supply
 							var data1 = {
 							  from: 'Zhuowei Zhang <zhuoweiz@uzespace.com>',
-							  to: 'Admin Bob <zhuoweiz@uzespace.com>, Admin Gary <qingsheh@usc.edu>',
+							  to: 'Admin Bob <zhuoweiz@uzespace.com>',
 							  subject: '[uzeAdmin]NewSupply',
-							  text: 'Hello from the other side. 张卓玮叫你去接单。。'
+							  text: 'Hello from the other side. 张卓玮叫你去接单。。'+data.username 
 							};
 
 							var receiptant = req.user.username;
@@ -418,7 +422,25 @@ app.post("/supplied", isLoggedIn,isActivated, multer(multerConfig).single('photo
 			console.log("================== here is the new supply: ==========");
 			console.log(newSupply);
 			console.log("================== end of the new supply data =======");
-			res.redirect("/supplied");
+			
+			// Dm.findById(req.params.id, (err, foundDemand) => {
+			// 	//old users who posted uncalculated prices gets this price, so are new users thb
+			// 	if(foundDemand.price == 0){
+			// 		foundDemand.price = Number(foundDemand.unit[0])*7 + 25;
+			// 		console.log('recalculating the price');
+			// 	}
+
+			// 	foundDemand.save(function(err){
+			// 		if(err){
+			// 			console.log("oops => demandpage getting price calculation savint error on payment.js-16");
+			// 			console.log(err);
+			// 		}else{
+			// 			res.render('venmoPay',{foundDemand, foundDemand});
+			// 		}
+			// 	});
+			// });
+
+			res.redirect('/supplied');
 		}
 	});
 });

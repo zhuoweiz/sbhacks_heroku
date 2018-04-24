@@ -14,6 +14,8 @@
 
 	
 	<form class="_form" action="/demanded" method="POST">
+		<p class="_footer" style="font-style: italic;">"Easy as 1, 2, 3"                   庆绅黄</p>
+
 	    <!-- <div id="map"></div>
 	    <script>
 	      function initMap() {
@@ -66,10 +68,6 @@
 		        });
 		      }
 	    </script> -->
-
-	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbARI9ogE8aiMvaaWX_Vi0HdvAQvJz6ng&callback=initMap">
-			</script>
-
 	    <!-- =========================== form ========================= -->
 
 	    <p></p>
@@ -91,12 +89,12 @@
 
 	  <div class="form-row">
 	    <div class="form-group col-md-6">
-	      <label for="inputEmail4">Your name<span class="_required">*</span></label>
-	      <input type="name" class="form-control" id="inputEmail4" placeholder="Bobby" name="demand[usernameF]" required>
+	      <label for="inputEmail4">First Name<span class="_required">*</span></label>
+	      <input type="name" class="form-control" id="inputEmail4" placeholder="Bobby" name="demand[usernameF]" style="text-transform: uppercase;" required>
 	    </div>
 	    <div class="form-group col-md-6">
-	      <label for="inputPassword4">Ur invitation code (Optional)</label>
-	      <input disabled type="name" class="form-control" id="inputPassword4" placeholder="uzespace2018@usc" name="demand[code]">
+	      <label for="inputPassword4">Last Name</label>
+	      <input type="name" class="form-control" id="inputPassword4" placeholder="Axerald" name="demand[usernameL]" style="text-transform: uppercase;" required>
 	    </div>
 	  </div>
 
@@ -140,9 +138,10 @@
 	    </select>
 	  </div> -->
 	  <hr>
-	  <h3 class=""><span style="color: #00aae7;">2/3</span> SIZE ESTIMATE <span class="_note">1m = 3.28ft</span></h3>
+	  <h3 class=""><span style="color: #00aae7;">2/3</span> SIZE ESTIMATE</h3>
 
-	  <label for="exampleFormControlSelect1">Estimate number of uze units U need <span class="_note">1m = 3.28ft; 1ft = 12inches</span></label>
+	  <label for="exampleFormControlSelect1">How much space do u roughly need <span class="_note">1m = 3.28ft; 1ft = 12inches</span></label>
+	  <label class="_note" data-toggle="tooltip" title="The estimation is only purposed to help us roughly understand the space needed. Real price will be recalculated when boxes are stored.">&#8505;</label>
 	  <div class="form-row">
 	    <!-- <label class="_note" data-toggle="tooltip" title="one uze unit refers to a 76cm/30&#34;(Height) * 48cm/19&#34;(Width) * 29cm/11&#34;(Depth) sized travel case">&#8505;</label>
 	     <p class="_footer">The estimation is only purposed to help us roughly understand the space needed. No accuracy is required.</p>
@@ -233,6 +232,12 @@
 							<li>Space providers reach out to uzers</li>
 							<li>Confirm the order and checkout</li>
 							<li>Service delivery</li>
+		      	</ol>
+		      	<h4>User Agreement</h4>
+		      	<ol>
+		      		<li>Reserve fees are required for the order to start taking effect after your request is matched with a supplier.</li>
+		      		<li>Reserve fees are not refundable.</li>
+		      		<li>Full payment will be required after boxes have been packed up and stored in the supplier's space after mutual confirmation between uzers and suppliers.</li>
 		      	</ol>
 		      	<input type="checkbox" id="userAgreementCheckBox" name="" value=""> I agree to be a Uzer
 		      </div>

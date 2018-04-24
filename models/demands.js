@@ -19,17 +19,18 @@ var demandSchema = new mongoose.Schema({
 	supplier: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	supply: {type: mongoose.Schema.Types.ObjectId, ref: 'Supply'},
 	price: {type: Number, default: '0'},
+	d_realPrice: {type: Number, default: '0'},
 	payed: {type: Boolean, default: false},
 	closed: {type: Boolean, default: false},
 
 	//size refactor
-	unit: String,
+	unit: Number,
 	d_boxes: [{
 		type: Object, 
 		}],
-	length: String,
-	height: String,
-	width: String,
+	length: Number,
+	height: Number,
+	width: Number,
 	special: String,
 
 	//optionals
