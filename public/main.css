@@ -166,7 +166,7 @@
 }
 
 
-/*others*/
+/* ========== others ======== */
 
 ._floatedL{
 	float: left;
@@ -180,6 +180,10 @@
 	clear: both;
 }
 
+/*change of boostrap*/
+.card{
+	position: relative;
+}
 
 /* ============== toolip ============ */
 

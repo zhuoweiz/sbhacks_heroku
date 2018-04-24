@@ -259,6 +259,16 @@ app.post("/demanded", isLoggedIn,isActivated, function(req,res){
 	// 		res.redirect("/demanded");
 	// 	}
 	// });
+	var demand_query = req.body.demand;
+
+	//dealing with input data
+	var tempUserEmail = req.user.username;
+	demand_query.d_owner = tempUserEmail;
+	// console.log(" == adding supply... dimention "+ demand_query.length,demand_query.height);
+	//换算
+	var product = demand_query.length * demand_query.height * demand_query.width / 6270;
+	demand_query.unit = Math.round( product * 10 ) / 10;
+	// console.log(" = = = = huansuan: ",product +' - > '+demand_query.unit);
 
 	Dm.create(req.body.demand, function(err, newDemand){
 		if(err){
@@ -267,12 +277,6 @@ app.post("/demanded", isLoggedIn,isActivated, function(req,res){
 		}else{
 			// var tempUser = req.user;
 			console.log("======================== create demand SUCCSSS: ");
-
-			var tempUserEmail = req.user.username;
-			newDemand.d_owner = tempUserEmail;
-			//换算
-			var product = newDemand.length*newDemand.height*newDemand.width/6270;
-			newDemand.unit = Math.round( product * 10 ) / 10;
 
 			User.findOne({username:req.user.username}, function(err, foundUser){
 				if(err){
@@ -319,14 +323,15 @@ app.post("/demanded", isLoggedIn,isActivated, function(req,res){
 					});
 				}
 			});
-
+			res.redirect("/demanded");
 			console.log("================== here is the new demand: ==========");
 			console.log(newDemand);
 			console.log("================== end of the new demand data =======");
-			res.redirect("/demanded");
 		}
 	});
 
+//_testing
+	
 	console.log("后来者");
 });
 

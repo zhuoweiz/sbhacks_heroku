@@ -1,21 +1,31 @@
 <% include ../partials/header %>
 
 <div class="container">
+
+	<h1 class="_textCenter jumbotron">MY LISTINGS</h1>
+
 	<% thisUser.supplyPosts.forEach(function(supply){ %>
 
-		<div class="card" style="width: 18rem;">
+		<div class="card _floatedL" style="width: 18rem;">
 			<div class="_cardImgBox">
-				<!-- <img class="card-img-top" src="..." alt="Do u know the way"> -->
+				<!-- /img/logo2.png -->
+				<img class="card-img-top" style="height: 100%;object-fit: cover;" src="/photo-db/<%=supply.s_owner+"-supply-"+supply.s_ownedId%>" alt="Do u know the way" onerror="this.onerror=null;this.src='/img/logo2.png';">
 			</div>
 		  <div class="card-body">
 		    <h6 class="card-title"><%= supply.s_unit%> unit(s) available</h6>
 		    <p class="card-text"><%= supply.s_description%></p>
+
+				<% var s = supply.s_college; %>
+				<% s = s.substring(0, s.indexOf('(')); %>
+		    <p style="font-size: 0.8em;"><%=s %>: <%=supply.s_starting%> -> <%=supply.s_ending%></p>
 		    <a href="#" class="btn btn-primary">Detail</a>
 		    <a href="#" class="btn btn-secondary">Edit</a>
 		  </div>
 		</div>
 
 	<% }); %>
+
+	<div class="_clearFloat"></div>
 </div>
 
 <% include ../partials/footer %>

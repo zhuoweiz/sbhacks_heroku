@@ -1,36 +1,69 @@
 <% include ../partials/header %>
+<link rel="stylesheet" type="text/css" href="/css/myaccount.css">
 
 <div class="container">
 
 	<h1 class="_textCenter jumbotron">MY REQUESTS</h1>
 
-	<p class="_footer" style="font-style: italic;">"One uze unit refers to a 76cm/30&#34;(Height) * 48cm/19&#34;(Width) * 29cm/11&#34;(Depth) sized travel case"  —— A uzespace cofounder</p>
+	<p class="_note" style="font-style: italic;">"One uze unit refers to a 76cm/30&#34;(Height) * 48cm/19&#34;(Width) * 29cm/11&#34;(Depth) sized travel case"  —— A uzespace cofounder</p>
 
 	<% thisUser.demandPosts.forEach(function(demand){ %>
 
 		<div class="card _floatedL" style="width: 18rem;">
-			<div class="_cardImgBox" style="padding-top: 25px;">
-				<p style="font-size: 2em; color: #5fb6e6; text-align: left;" ><%= demand.starting%></p>
-				<p style="font-size: 2em; color: #5fb6e6; text-align: right;" ><%= demand.ending%></p>
+			<div class="_cardImgBox" style="padding-top: 20px;">
+				<p style="font-size: 2em; color: #5fb6e6; text-align: left; margin: 0px;" ><%= demand.starting%></p>
+				<p class="_textCenter" style="margin: 0px;">to</p>
+				<p style="font-size: 2em; color: #5fb6e6; text-align: right; margin: 0px;" ><%= demand.ending%></p>
 			</div>
 		  <div class="card-body">
 		    <h5 class="card-title"><span style="color: #00aae7;"><%= demand.unit%></span> units demand</h5>
 		    <p class="card-text"><%= demand.college%> </p>
 		    
 		    <% if(!demand.matched){ %>
-		    	<p>Not matched yet</p>
+		    	<p style="color: orange;">Not matched yet</p>
+		    	<script type="text/javascript">
+		    	</script>
 		    <% }else{ %>
-		    	<p>Matched </p>
+		    	<p style="color: blue;">Matched </p>
+		    	<script type="text/javascript">
+		    	</script>
 		    <% } %>
 		    
-        <form action="/payment/demand/<%= demand._id%>" method="post">
-          <button type="submit">Reserve the space</button>
+        <form action="/payment/demand/<%= demand._id%>" method="post" style="width: 80%;">
+          <button id="_reserveSpaceButton" type="submit">Reserve the space</button>
           <label class="_note" data-toggle="tooltip" title="We recommend you pay the reserve fee after confirmation, because reserve fees are not refundable">&#8505;</label>
         </form>
+
+        <% if(!demand.matched){ %>
+		    	<script type="text/javascript">
+		    		$("#_reserveSpaceButton").attr("disabled",true);
+		    	</script>
+		    <% }else{ %>
+		    	<script type="text/javascript">
+		    		$("#_reserveSpaceButton").attr("disabled",false);
+		    	</script>
+		    <% } %>
+
+        <form class="_deleteform" onsubmit="return confirm('Do you really want DELETE this storage request?');" action="/userpage/<%= demand._id %>/delete?_method=DELETE" method="POST">
+					<button type="submit"  class="oi oi-trash" style="
+						background:none!important;
+    				border:none; 
+    				padding:0!important;">
+						<!-- <span class="oi oi-trash"></span> -->
+					</button>
+				</form>
 		  </div>
 		</div>
 
 	<% }); %>
+
+	<% if(thisUser.demandPosts.length===0){%>
+		<div class="_textCenter">
+			<h3>Sorry you dont have any storage request uploaded yet. </h3>
+			<h3>You can start creating one <a href="/demand">here</a></h3>
+		</div>
+	<%}%>
+
 	<div class="_clearFloat"></div>
   <br>
 </div>

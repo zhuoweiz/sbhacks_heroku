@@ -6,13 +6,12 @@
 	<h2>You can choose to pay with either venmo or paypal</h2>
 	<hr>
 
-	<h4><span style="color: #00aae7;">Total for 3 months: </span>$ <span id="in_finalPrice"></span></h4>
+	<h4><span style="color: #00aae7;">Reservation fee for 3 months: </span>$ <span id="in_finalPrice"></span></h4>
 	
 		<label for="promocodeRedemptionInput">Redem promocode</label>
 		<input type="" name="promocode" id="promocodeRedemptionInput">
 		<button onclick="testaj();">Submit</button>
-		<div style="color: orange;" id="ajaxtestbox"></div>
-
+		<div style="color: orangered;" id="ajaxtestbox"></div>
 
 	<!-- test -->
 	<script type="text/javascript">
@@ -52,10 +51,13 @@
 	    	
 	    	if(data.self=='1'){
 	    		$("#ajaxtestbox").html('sorry you cant redem your own promocode');
+	    		$("#ajaxtestbox").css("color","tomato");
 	    	}else if(data.found=="0"){
 	    		$("#ajaxtestbox").html('sorry but your promocode was not from any uzer');
+	    		$("#ajaxtestbox").css("color","tomato");
 	    	}else if(data.used=='1'){
 	    		$("#ajaxtestbox").html('sorry but you have used this type of promocde once, other coupons coming soon!');
+	    		$("#ajaxtestbox").css("color","tomato");
 	    	}else if(data.added=="1"){
 	    		$("#ajaxtestbox").html('Thank you for using the promocode! your will get a 10 dollar discount for this order');
 	    		$("#in_finalPrice").html(data.newPrice);
@@ -69,17 +71,20 @@
 	</script>
 
 	<hr>
-	<h4>Method 1: Scan the QR code below to pay the amount shown above, and we will process your order in 1 hour</h4>
-	<div style="width: 100%;">
+	<h4>Method 1: Scan the QR code below to pay the amount shown above, and we will process your order in 1 hour. </h4>
+
+	<div style="">
 		<img class="_checkoutimg" src="/img/venmoCheckout.png">
+		<p style=""><span style="color: orangered;">Makesure you include your username email in the description.</span> Sorry for the inconvenience. We will automatically give you a $2 discount after payment is successful.</p>
 	</div>
+	<div class="_clearFloat"></div>
 	
 	<hr>
 	<h4>Method 2: Click the button below using PayPal and we will direct you through the process</h4>
 	<form action="/payment/<%= foundDemand._id %>/paypal/" method="post">
     <button disabled type="submit">PayPal</button>
     <label class="_note" data-toggle="tooltip" title="If you dont have a PayPal account, choose Pay with Debit or Credit Card">&#8505;</label>
-    <label style="color: red;">papal still in testing</label>
+    <label style="color: red;">sorry but papal routings are still in testing</label>
   </form>
 </div>
 

@@ -14,7 +14,12 @@ var supplySchema = new mongoose.Schema({
 	s_email: String,
 	s_postcode: String,
 	s_street: String,
+
 	s_unit: Number,
+	s_length: Number,
+	s_height: Number,
+	s_width: Number,
+	
 	s_starting: String,
 	s_ending: String,
 	s_description: String,
@@ -25,9 +30,6 @@ var supplySchema = new mongoose.Schema({
 
 	//optional
 	s_code: String,
-	s_length: Number,
-	s_height: Number,
-	s_width: Number,
 	s_special: String,
 	s_img: { data: Buffer, contentType: String },
 

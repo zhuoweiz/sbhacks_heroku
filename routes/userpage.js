@@ -3,6 +3,8 @@ var express 	= require("express"),
 		router  	= express.Router(),
 		Supply		= require('../models/supply');
 
+		// /userpage/
+
 //get user page
 router.get("/:id/myaccount",isLoggedIn, function(req,res){
 	
@@ -37,6 +39,30 @@ router.get('/:id/ds', isLoggedIn, function(req,res){
 		else{
 			res.render('./user/userDemand',{thisUser,thisUser});
 		}
+	});
+});
+
+//delete demand
+router.delete('/:demandId/delete', isLoggedIn, (req,res)=>{
+	Dm.findByIdAndRemove(req.params.demandId, (err)=>{
+		if(err){
+			console.log(err);
+			console.log("== oops ==, you failed to delete this demand post")
+		}else{
+			
+		}
+	});
+
+	User.findById(req.user.id, (err, foundUser)=>{
+		foundUser.demandPosts.pull(req.params.demandId);
+		foundUser.save(function(err,data){
+			if(err){
+				console.log("zhuo: new demand save user error after deleting a demandPosts element");
+				console.log(err);
+			}else{
+				res.redirect('/userpage/'+req.user._id+'/ds');
+			}
+		});
 	});
 });
 

@@ -14,7 +14,7 @@
 
 	
 	<form class="_form" action="/demanded" method="POST">
-		<p class="_footer" style="font-style: italic;">"Easy as 1, 2, 3"                   庆绅黄</p>
+		<p class="_note" style="font-style: italic;">"Easy as 1, 2, 3"                  ———— Gary</p>
 
 	    <!-- <div id="map"></div>
 	    <script>
@@ -93,7 +93,7 @@
 	      <input type="name" class="form-control" id="inputEmail4" placeholder="Bobby" name="demand[usernameF]" style="text-transform: uppercase;" required>
 	    </div>
 	    <div class="form-group col-md-6">
-	      <label for="inputPassword4">Last Name</label>
+	      <label for="inputPassword4">Last Name<span class="_required">*</span></label>
 	      <input type="name" class="form-control" id="inputPassword4" placeholder="Axerald" name="demand[usernameL]" style="text-transform: uppercase;" required>
 	    </div>
 	  </div>
@@ -110,8 +110,11 @@
 	  </div> -->
 
 	  <div class="form-group">
-	    <label for="exampleFormControlInput1">Your phone number<span class="_required">*</span></label>
-	    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="2132735477" name="demand[number]" required="">
+	    <label for="exampleFormControlInput1">Your phone number (US +1)<span class="_required">*</span></label>
+	    <input type="tel" class="form-control" pattern="\d{3}\d{3}\d{4}" id="exampleFormControlInput1" placeholder="2132735477" name="demand[number]" required="">
+	    <div class="invalid-feedback">
+	     	Phone number input invalid
+	    </div>
 	  </div>
 
 	  <div class="form-row">
@@ -196,6 +199,24 @@
 
 	  <hr>
 	  <h3 class=""><span style="color: #00aae7;">3/3</span> OTHERS</h3>
+
+	  <div class="form-group">
+	  	<label for="">Do you need pick up services?<span class="_required">*</span></label>
+	  	<br>
+		  <div class="custom-control custom-radio custom-control-inline">
+			  <input type="radio" id="customRadioInline1" value="yes" name="demand[d_needPickUp]" class="custom-control-input">
+			  <label class="custom-control-label" for="customRadioInline1">Yes</label>
+			</div>
+			<div class="custom-control custom-radio custom-control-inline">
+			  <input type="radio" id="customRadioInline2" value="no" name="demand[d_needPickUp]" class="custom-control-input">
+			  <label class="custom-control-label" for="customRadioInline2">No</label>
+			</div>
+			<div class="custom-control custom-radio custom-control-inline">
+			  <input type="radio" id="customRadioInline3" value="maybe" name="demand[d_needPickUp]" class="custom-control-input">
+			  <label class="custom-control-label" for="customRadioInline3">Maybe(decide later)</label>
+			</div>
+	  </div>
+
 	  <div class="form-group">
 	    <label for="exampleFormControlTextarea1">Any special needs?</label>
 	    <textarea class="form-control" id="exampleFormControlTextarea1" name="demand[special]" rows="2" placeholder="Temperature control, Humidity control etc."></textarea>

@@ -3,67 +3,14 @@
 
 <div class="container">
 
-	<h2>You can choose to pay with either venmo or paypal</h2>
-	<hr>
+	<div class="container _textCenter">
+		<h1>Congratulations on your demand posted :)</h1>
+		<hr>
+		<p>We will get back to you through <span style="color: #5fb6e6">email/number</span> ASAP when we find a match for your request (usually in 12 hours). You can alwasy check your requests <a href="/userpage/<%=currentUser._id%>/myaccount">here</a></p>
 
-	<h4><span style="color: #00aae7;">Total for 3 months: </span>$ <span id="in_finalPrice"></span></h4>
-	
-		<label for="promocodeRedemptionInput">Redem promocode</label>
-		<input type="" name="promocode" id="promocodeRedemptionInput">
-		<button onclick="testaj();">Submit</button>
-		<div style="color: orange;" id="ajaxtestbox"></div>
-
-
-	<!-- test -->
-	<script type="text/javascript">
-		// $("#promocodeRedemptionInput").val("haha");
-		$("#in_finalPrice").html('<%= foundDemand.price%>'+'.00');
-
-		function testaj(){
-	  	var promocode = $("#promocodeRedemptionInput").val();
-	  	var data = {
-	  		promocode: promocode
-	  	};
-
-	    $.ajax({
-	        type: "POST",
-	        url: "/payment/<%= foundDemand._id%>/promo",
-	        data: data
-	    }).done((data)=>{
-	    	var response = JSON.stringify(data);
-	    	console.log(data, typeof response, typeof data);
-	    	
-	    	if(data.self=='1'){
-	    		$("#ajaxtestbox").html('sorry you cant redem your own promocode');
-	    	}else if(data.found=="0"){
-	    		$("#ajaxtestbox").html('sorry but your promocode was not from any uzer');
-	    	}else if(data.used=='1'){
-	    		$("#ajaxtestbox").html('sorry but you have used this type of promocde once, other coupons coming soon!');
-	    	}else if(data.added=="1"){
-	    		$("#ajaxtestbox").html('Thank you for using the promocode! your will get a 10 dollar discount for this order');
-	    		$("#in_finalPrice").html(data.newPrice);
-	    		$("#ajaxtestbox").css("color","#00aae7");
-	    	};
-
-	    }).fail((jqXHR, testStatus, err)=>{
-	    	console.log("Ajax error response: "+ testStatus);
-	    });
-		}
-	</script>
-
-	<hr>
-	<h4>Method 1: Scan the QR code below to pay the amount shown above, and we will process your order in 1 hour</h4>
-	<div style="width: 100%;">
-		<img class="_checkoutimg" src="/img/venmoCheckout.png">
+		<p>If you have any questions, please dont hesitate to contact us through the contact tab or <a href="https://www.facebook.com/uzespace/" target="_blank">facebook page</a></p>
+		<a href="/" type="" class="btn btn-outline-primary">return Home</a>
 	</div>
-	
-	<hr>
-	<h4>Method 2: Click the button below using PayPal and we will direct you through the process</h4>
-	<form action="/payment/<%= foundDemand._id %>/paypal/" method="post">
-    <button disabled type="submit">PayPal</button>
-    <label class="_note" data-toggle="tooltip" title="If you dont have a PayPal account, choose Pay with Debit or Credit Card">&#8505;</label>
-    <label style="color: red;">papal still in testing</label>
-  </form>
 </div>
 
 <% include partials/footer %>

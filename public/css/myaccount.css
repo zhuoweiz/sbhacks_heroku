@@ -7,3 +7,13 @@
 #_myaccountListingButton:hover{
 	background-color: DeepSkyBlue;
 }
+
+._deleteform{
+	position: absolute;
+	right: 15px;
+	bottom: 15px;
+}
+
+._deleteform:hover{
+	transform: scale(1.3);
+}
