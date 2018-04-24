@@ -80,16 +80,17 @@
 	    </ul>
 
 	    <% if(!currentUser){ %>
-    		<div class="nav-item">
-	        	<a class="nav-link" href="/login">login</a>
-	    	</div>
-	    	<div class="nav-item">
-	    		<a class="nav-link" href="/signup">signup</a>
-	    	</div>
-  		<% }else{ %>
-  			<div class="nav-item">
-        		<a class="nav-link" href="/logout">logout</a>
-    		</div>
+    		<span class="nav-item">
+	        	<a class="nav-link" style="padding-left: 0px; padding-right: 0px;" href="/login">login</a>
+	    	</span>
+	    	<span class="nav-item">
+	    		<a class="nav-link" style="padding-left: 0px; padding-right: 0px;" href="/signup">signup</a>
+	    	</span>
+  		<% }else{ %> 
+  		<!-- nav-item nav-link -->
+  			<span class="nav-item">
+        		<a class="nav-link" style="padding-left: 0px; padding-right: 0px;" href="/logout">logout</a>
+    		</span>
   		<% } %>
 
 	    <% if(currentUser){ %>
