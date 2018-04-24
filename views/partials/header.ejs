@@ -18,7 +18,7 @@
 
 <!-- online css lib -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+	<link href="/css/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
 	
 	<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css"> -->
 
@@ -81,15 +81,15 @@
 
 	    <% if(!currentUser){ %>
     		<span class="nav-item">
-	        	<a class="nav-link" style="padding-left: 0px; padding-right: 0px;" href="/login">login</a>
+	        	<a class="nav-link" style="padding-left: 0px;" href="/login">login</a>
 	    	</span>
 	    	<span class="nav-item">
-	    		<a class="nav-link" style="padding-left: 0px; padding-right: 0px;" href="/signup">signup</a>
+	    		<a class="nav-link" style="padding-left: 0px;" href="/signup">signup</a>
 	    	</span>
   		<% }else{ %> 
   		<!-- nav-item nav-link -->
   			<span class="nav-item">
-        		<a class="nav-link" style="padding-left: 0px; padding-right: 0px;" href="/logout">logout</a>
+        		<a class="nav-link" style="padding-left: 0px;" href="/logout">logout</a>
     		</span>
   		<% } %>
 
