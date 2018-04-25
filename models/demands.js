@@ -22,7 +22,7 @@ var demandSchema = new mongoose.Schema({
 	supply: {type: mongoose.Schema.Types.ObjectId, ref: 'Supply'},
 	price: {type: Number, default: '0'},
 	d_realPrice: {type: Number, default: '0'},
-	payed: {type: Boolean, default: false},
+	d_payedReserve: {type: Boolean, default: false},
 	closed: {type: Boolean, default: false},
 
 	//size refactor

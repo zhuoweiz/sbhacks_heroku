@@ -23,24 +23,32 @@
 		    	<p style="color: orange;">Not matched yet</p>
 		    	<script type="text/javascript">
 		    	</script>
+	    	<% }else if(!demand.d_payedReserve){ %>
+	    		<p style="color: blue;">Matched! not reserved</p>
+		    	<script type="text/javascript">
+		    	</script>
 		    <% }else{ %>
-		    	<p style="color: blue;">Matched </p>
+		    	<p style="color: blue;">Reserved </p>
 		    	<script type="text/javascript">
 		    	</script>
 		    <% } %>
 		    
         <form action="/payment/demand/<%= demand._id%>" method="post" style="width: 80%;">
-          <button id="_reserveSpaceButton" type="submit">Reserve the space</button>
+          <button class="_reserveSpaceButton" type="submit">Reserve the space</button>
           <label class="_note" data-toggle="tooltip" title="We recommend you pay the reserve fee after confirmation, because reserve fees are not refundable">&#8505;</label>
         </form>
 
         <% if(!demand.matched){ %>
 		    	<script type="text/javascript">
-		    		$("#_reserveSpaceButton").attr("disabled",true);
+		    		$("._reserveSpaceButton").attr("disabled",true);
+		    	</script>
+	    	<% }else if((!demand.d_payedReserve)){ %>
+	    		<script type="text/javascript">
+	    			$("._reserveSpaceButton").attr("disabled",false);
 		    	</script>
 		    <% }else{ %>
 		    	<script type="text/javascript">
-		    		$("#_reserveSpaceButton").attr("disabled",false);
+		    		$("._reserveSpaceButton").html('Next step coming..');
 		    	</script>
 		    <% } %>
 

@@ -267,7 +267,7 @@ app.post("/demanded", isLoggedIn,isActivated, function(req,res){
 	// console.log(" == adding supply... dimention "+ demand_query.length,demand_query.height);
 	//换算
 	var product = demand_query.length * demand_query.height * demand_query.width / 6270;
-	demand_query.unit = Math.round( product * 10 ) / 10;
+	demand_query.unit = (Math.round( product * 100 ) / 100).toFixed(2);
 	// console.log(" = = = = huansuan: ",product +' - > '+demand_query.unit);
 
 	Dm.create(req.body.demand, function(err, newDemand){
@@ -353,7 +353,7 @@ app.post("/supplied", isLoggedIn,isActivated, multer(multerConfig).single('photo
 	console.log(" == adding supply... dimention "+ supply_query.s_length,supply_query.s_height);
 	//换算
 	var product = supply_query.s_length * supply_query.s_height * supply_query.s_width / 6270;
-	supply_query.s_unit = Math.round( product * 10 ) / 10;
+	supply_query.s_unit = (Math.round( product * 100 ) / 100).toFixed(2);
 	console.log(" = = = = huansuan: ",product +' - > '+supply_query.s_unit);
 	//图片命名id
 	var supplyOwnedIdNumber = req.user.supplyPosts.length+1;

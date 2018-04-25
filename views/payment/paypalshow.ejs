@@ -1,0 +1,15 @@
+<% include ../partials/header %>
+<!-- included var: currentUser, paymentStatus, demand  -->
+
+<%if(paymentStatus){%>
+<h1>PAYMENT SUCCESS</h1>
+
+<%}else{%>
+<h1>We are sorry the payment failed. Try another payment method on paypal or use venmo</h1>
+<h2><a href="/feedack">Contact</a> us if you have any questions</h2>
+
+<!-- <a href="/payment/demand/<%= demand._id%>">here</a> -->
+
+<%}%>
+
+<% include ../partials/footer %>

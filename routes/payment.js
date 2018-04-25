@@ -8,13 +8,17 @@ paypal.configure({
   'client_secret': 'EC0ocDbg7ghekY0g8uiIqWWGStd_FgFF3L1-TVsaiPb0MHdkw3HUHn5GUFtkwOvdPhvjxIYfE6ueLKLH'
 });
 
-payRouter.post('/demand/:id',isLoggedIn, isActivated, (req,res) => {
-	Dm.findById(req.params.id, (err, foundDemand) => {
+payRouter.post('/demand/:demandId',isLoggedIn, isActivated, (req,res) => {
+	Dm.findById(req.params.demandId, (err, foundDemand) => {
 		//old users who posted uncalculated prices gets this price, so are new users tbh
-		if(foundDemand.price == 0){
-			foundDemand.price = Number(foundDemand.unit)*7+15;
-			console.log('recalculating the price');
+		var newPrice = foundDemand.unit*7+15;
+		//if didnt use promo
+		if(req.user.demandpromoUsed){
+			newPrice = newPrice - 10;
 		}
+
+		var tempPrice = (Math.round( newPrice * 100 ) / 100).toFixed(2);
+		foundDemand.price = tempPrice;
 
 		foundDemand.save(function(err){
 			if(err){
@@ -74,9 +78,8 @@ payRouter.post('/:demandId/promo', (req,res)=>{
 									}else{
 										data.added = '1';
 										Dm.findById(req.params.demandId, (err, foundDemand)=>{
-
-											foundDemand.price = foundDemand.price-10;
-											data.newPrice = foundDemand.price.toString()+'.00';
+											foundDemand.price = (Math.round((foundDemand.price-10)*100)/100).toFixed(2);
+											data.newPrice = foundDemand.price.toString();
 											console.log("price price price: ",foundDemand.price);
 											foundDemand.save((err)=>{
 												if(err){
@@ -119,7 +122,9 @@ payRouter.get('/ajaxtest', (req,res)=>{
 	res.send(data);
 });
 
-payRouter.post('/:id/buy', (req, res) => {
+payRouter.post('/demand/:demandId/paypal', (req, res) => {
+	
+	var paypalPrice = '0';
 	var create_payment_json = {
 	    "intent": "sale",
 	    "payer": {
@@ -132,23 +137,29 @@ payRouter.post('/:id/buy', (req, res) => {
 	    "transactions": [{
 	        "item_list": {
 	            "items": [{
-	                "name": "item",
-	                "sku": "item",
-	                "price": "14.00",
+	                "name": "storagebox",
+	                "sku": "001",
+	                "price": "1",
 	                "currency": "USD",
 	                "quantity": 1
 	            }]
 	        },
 	        "amount": {
 	            "currency": "USD",
-	            "total": "14.00"
+	            "total": "1"
 	        },
 	        "description": "This is the payment description."
 	    }]
-	}
+	};
 
+	Dm.findById(req.params.demandId, (err, foundDemand)=>{
+		paypalPrice = foundDemand.price.toString();
+		create_payment_json.transactions[0].item_list.items[0].price = paypalPrice;
+		create_payment_json.transactions[0].amount.total = paypalPrice;
+		create_payment_json.redirect_urls.return_url = "http://localhost:5000/payment/demand/"+req.params.demandId+"/success/";
+		// console.log(' COMING ------- ',create_payment_json.transactions[0].item_list.items[0].price, create_payment_json.transactions[0].amount.total);
 
-	paypal.payment.create(create_payment_json, function (error, payment) {
+		paypal.payment.create(create_payment_json, function (error, payment) {
 	    if (error) {
 	        throw error;
 	    } else {
@@ -161,39 +172,65 @@ payRouter.post('/:id/buy', (req, res) => {
 	        // console.log(payment);
 	        // res.redirect('/payment/success');
 	    }
+		});
 	});
 });
 
-payRouter.get('/success',(req, res)=>{
+payRouter.get('/demand/:demandId/success/', (req, res)=>{
 	const payerId = req.query.PayerID;
 	const paymentId = req.query.paymentId;
 
+	var paypalPrice="";
 	var execute_payment_json = {
     "payer_id": payerId,
     "transactions": [{
         "amount": {
             "currency": "USD",
-            "total": "14.00"
+            "total": "1"
         }
     }]
 	};
 
-	paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
-    if (error) {
-        console.log(error.response);
-        throw error;
-    } else {
-        console.log("Get Payment Response");
-        console.log(JSON.stringify(payment));
-        
-        res.send('success');
-    }
+	Dm.findById(req.params.demandId, (err, foundDemand)=>{
+		var tempPrice = foundDemand.price;
+		paypalPrice = tempPrice.toFixed(2);
+		console.log('kill me ',paypalPrice);
+		
+		execute_payment_json.transactions[0].amount.total = paypalPrice;
+		console.log("hehe ==? ", execute_payment_json.transactions[0].amount.total);
+		foundDemand.d_payedReserve = true;
+		foundDemand.save((err)=>{
+			if(err){
+				console.log(err);
+				console.log('zhuowei ==> oops you failed to save the demand file after successful paypal reserve payment');
+			}else{
+
+			}
+		});
+
+		paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+	    if (error) {
+	        console.log(error.response);
+	        throw error;
+	    } else {
+	        console.log("Get Payment Response");
+	        console.log(JSON.stringify(payment));
+	        
+	        var paymentStatus = true;
+	        // res.send('paypal payment success');
+	        req.flash('success','You hae successfully made a payment to uze tech Inc.');
+	        res.render('payment/paypalshow.ejs', {paymentStatus:paymentStatus, demand: foundDemand});
+	    }
+		});
 	});
 });
 
-payRouter.get('/cancel/:token', (req, res)=>{
-	res.send('cancelled');
-})
+payRouter.get('/cancel', (req, res)=>{
+	var paymentStatus = true;
+	// res.send('paypal payment cancelled');
+	req.flash('success','Payment ended');
+	res.render('payment/paypalshow.ejs', {paymentStatus:paymentStatus})
+});
 
 //middle wares
 function isActivated(req, res, next){
