@@ -132,7 +132,7 @@ payRouter.post('/demand/:demandId/paypal', (req, res) => {
 	    },
 	    "redirect_urls": {
 	        "return_url": "http://localhost:5000/payment/success/",
-	        "cancel_url": "http://localhost:5000/payment/cancel/"
+	        "cancel_url": "https://mighty-escarpment-53563.herokuapp.com/payment/cancel/"
 	    },
 	    "transactions": [{
 	        "item_list": {
@@ -156,7 +156,7 @@ payRouter.post('/demand/:demandId/paypal', (req, res) => {
 		paypalPrice = foundDemand.price.toString();
 		create_payment_json.transactions[0].item_list.items[0].price = paypalPrice;
 		create_payment_json.transactions[0].amount.total = paypalPrice;
-		create_payment_json.redirect_urls.return_url = "http://localhost:5000/payment/demand/"+req.params.demandId+"/success/";
+		create_payment_json.redirect_urls.return_url = "https://mighty-escarpment-53563.herokuapp.com/payment/demand/"+req.params.demandId+"/success/";
 		// console.log(' COMING ------- ',create_payment_json.transactions[0].item_list.items[0].price, create_payment_json.transactions[0].amount.total);
 
 		paypal.payment.create(create_payment_json, function (error, payment) {
