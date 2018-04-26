@@ -92,6 +92,32 @@
 	border-color: skyblue;
 }
 
+
+	/* ==== myaccount.css ======*/
+#_myaccountListingButton2{
+	width: 240px; 
+	margin-left: 10px;
+	background-color: lightskyblue; 
+	border-color: lightskyblue;
+	float: left;
+}
+
+#_myaccountListingButton2:hover{
+	background-color: DeepSkyBlue;
+}
+
+#_accountPageButtonBox{
+	width: 500px;
+	margin: auto;
+}
+
+#_myaccountListingButton1{
+	width: 240px;
+	margin-right: 10px;
+	float: left;
+}
+/* ==== END of myaccount.css ======*/
+
 ._main{
 	margin-top: 10px;
 }

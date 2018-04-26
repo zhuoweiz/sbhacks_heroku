@@ -18,16 +18,18 @@
 		<div class="_form">
 
 			<hr>
-			<div>
-				<a href="/userpage/<%= currentUser._id %>/ds" style="width: 240px;" class="btn btn-primary btn-lg _floatedL" >
+			<div id="_accountPageButtonBox">
+				<a href="/userpage/<%= currentUser._id %>/ds" id="_myaccountListingButton1" class="btn btn-primary btn-lg" >
 				  Request <span class="badge badge-light"><%= thisUser.demandPosts.length%></span>
 				  <span class="sr-only">unread messages</span>
 				</a>
 
-				<a href="/userpage/<%= currentUser._id %>/ss" id="_myaccountListingButton" class="btn btn-primary btn-lg _floatedR" >
+				<a href="/userpage/<%= currentUser._id %>/ss" id="_myaccountListingButton2" class="btn btn-primary btn-lg" >
 				  Listing <span class="badge badge-light"><%= thisUser.supplyPosts.length%></span>
 				  <span class="sr-only">unread messages</span>
 				</a>
+
+				<div class="_clearFloat"></div>
 			</div>
 			<div class="_clearFloat"></div>
 
@@ -53,7 +55,7 @@
 			<hr>
 			<label>My promocode</label>
 			<!-- The text field -->
-			<input readonly type="text" value="<%= currentUser.username+'2018'%>" id="myInput">
+			<input readonly type="text" id="_acountPagePromocodeInput" value="<%= currentUser.username+'2018'%>" id="myInput">
 
 			<!-- The button used to copy the text -->
 			<button id="promocodeCopyButton" onclick="myFunction()" data-toggle="tooltip" title="click to copy">copy</button>

@@ -1,13 +1,3 @@
-#_myaccountListingButton{
-	width: 240px; 
-	background-color: lightskyblue; 
-	border-color: lightskyblue;
-}
-
-#_myaccountListingButton:hover{
-	background-color: DeepSkyBlue;
-}
-
 ._deleteform{
 	position: absolute;
 	right: 15px;
