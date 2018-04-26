@@ -11,14 +11,10 @@ paypal.configure({
 payRouter.post('/demand/:demandId',isLoggedIn, isActivated, (req,res) => {
 	Dm.findById(req.params.demandId, (err, foundDemand) => {
 		//old users who posted uncalculated prices gets this price, so are new users tbh
-		
-		//if didnt use promo, update price
-		// if(!req.user.demandpromoUsed){
-		// 	var newPrice = foundDemand.unit*0.5+15;
-		// }
-
-		if(foundDemand.price==0){
-			var newPrice = foundDemand.unit*0.5+15;
+		var newPrice = 0;
+		//if didnt use promo
+		if(foundDemand.price===0){
+			newPrice = foundDemand.unit*0.2+15;
 		}
 
 		var tempPrice = (Math.round( newPrice * 100 ) / 100).toFixed(2);
