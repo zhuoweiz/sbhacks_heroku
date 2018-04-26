@@ -185,6 +185,13 @@
 	position: relative;
 }
 
+/* ========== responsive =======*/
+
+._cardComplex{
+	width: 900px;
+	margin: auto;
+}
+
 /* ============== toolip ============ */
 
 /*.tooltip {

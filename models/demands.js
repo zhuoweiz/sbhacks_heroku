@@ -42,7 +42,8 @@ var demandSchema = new mongoose.Schema({
 
 	//other
 	created: 
-		{type: Date, default: Date.now}
+		{type: Date, default: Date.now},
+	stage: {type: String, default: "0"}, //1-request, 2-matched, 3-payed
 });
 
 var Dm = mongoose.model("Demand", demandSchema);

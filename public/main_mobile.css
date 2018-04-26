@@ -80,4 +80,9 @@
 		width: 280px;
 	}
 
+	._cardComplex{
+		width: 300px;
+		margin: auto;
+	}
+
 }
