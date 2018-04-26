@@ -1,4 +1,7 @@
 @media(max-width: 900px){
-	
+	._cardComplex{
+		width: 600px;
+		margin: auto;
+	}
 
 }
