@@ -67,7 +67,7 @@ mongoose.connect(uri);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
-const S3_BUCKET = process.env.S3_BUCKET;
+const S3_BUCKET = process.env.S3_BUCKET_NAME;
 aws.config.region = 'us-west-1';
 
 //================== PASSPORT CONFIGURATION
