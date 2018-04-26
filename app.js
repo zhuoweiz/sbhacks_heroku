@@ -30,8 +30,8 @@ const bodyParser 		= require("body-parser"),
 require('dotenv').config();
 
 //env configurations
-var api_key = 'key-1c2251d88f27f8bf7a7bc29542816f5c';
-var domain = 'mail.uzespace.com';
+var api_key = process.env.MAILGUN_API_KEY;
+var domain = process.env.MAILGUN_API_DOMAIN;
 var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 //system configuration
