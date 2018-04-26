@@ -13,9 +13,9 @@ payRouter.post('/demand/:demandId',isLoggedIn, isActivated, (req,res) => {
 		//old users who posted uncalculated prices gets this price, so are new users tbh
 		
 		//if didnt use promo, update price
-		if(!req.user.demandpromoUsed){
-			var newPrice = foundDemand.unit*0.5+15;
-		}
+		// if(!req.user.demandpromoUsed){
+		// 	var newPrice = foundDemand.unit*0.5+15;
+		// }
 
 		if(foundDemand.price==0){
 			var newPrice = foundDemand.unit*0.5+15;
