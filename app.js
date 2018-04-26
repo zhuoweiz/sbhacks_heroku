@@ -459,7 +459,7 @@ app.get('/sign-s3', (req, res) => {
   const fileType = req.query['file-type'];
   const s3Params = {
     Bucket: "uzesupply",
-    Key: req.user.username+'-demand-'+filename,
+    Key: fileName,
     Expires: 60,
     ContentType: fileType,
     ACL: 'public-read'

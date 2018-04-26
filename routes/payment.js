@@ -130,7 +130,7 @@ payRouter.post('/demand/:demandId/paypal', (req, res) => {
 	        "payment_method": "paypal"
 	    },
 	    "redirect_urls": {
-	        "return_url": "http://localhost:5000/payment/success/",
+	        "return_url": "https://mighty-escarpment-53563.herokuapp.com/payment/success/",
 	        "cancel_url": "https://mighty-escarpment-53563.herokuapp.com/payment/cancel/"
 	    },
 	    "transactions": [{
