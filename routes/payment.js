@@ -11,7 +11,7 @@ paypal.configure({
 payRouter.post('/demand/:demandId',isLoggedIn, isActivated, (req,res) => {
 	Dm.findById(req.params.demandId, (err, foundDemand) => {
 		//old users who posted uncalculated prices gets this price, so are new users tbh
-		var newPrice = foundDemand.unit*7+15;
+		var newPrice = foundDemand.unit*0.5+15;
 		//if didnt use promo
 		if(req.user.demandpromoUsed){
 			newPrice = newPrice - 10;
