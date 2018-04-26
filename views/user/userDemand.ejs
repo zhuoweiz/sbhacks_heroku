@@ -21,10 +21,7 @@
 		    
 		    <% if(!demand.matched){ %>
 		    	<p style="color: orange;">Not matched yet</p>
-		    	<form action="/payment/demand/<%= demand._id%>" method="post" style="width: 80%;">
-	          <button class="_reserveSpaceButton" type="submit">Reserve the space</button>
-	          <label class="_note" data-toggle="tooltip" title="We recommend you pay the reserve fee after confirmation, because reserve fees are not refundable">&#8505;</label>
-	        </form>
+		    	
 	    	<% }else if(!demand.d_payedReserve){ %>
 	    		<p style="color: blue;">Matched! not reserved</p>
 		    	<form action="/payment/demand/<%= demand._id%>" method="post" style="width: 80%;">
