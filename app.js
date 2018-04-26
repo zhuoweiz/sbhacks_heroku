@@ -7,7 +7,8 @@ const bodyParser 		= require("body-parser"),
 	request 		= require("request"),
 	mongoose 		= require("mongoose"),
 	express 		= require("express"),
-	multer = require('multer'); 
+	multer = require('multer'),
+	aws = require('aws-sdk'), 
 
 	passport 		= require("passport"),
 	LocalStrategy 	= require("passport-local"),
@@ -21,7 +22,6 @@ const bodyParser 		= require("body-parser"),
 	Sp 				= require("./models/supply"),
 	User 			= require("./models/user"),
 	haha				= require("./models/googleMapApi"),
-	mailgun   = require("./models/mailgun.js"), //not used
 	// middleware = require("./models/middleware.js"), //not used
 	seedDB 			= require("./models/seeds");
 
@@ -66,6 +66,9 @@ mongoose.connect(uri);
 //mongoose.connect("process.env.DATABASEURL");
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
+
+const S3_BUCKET = process.env.S3_BUCKET;
+aws.config.region = 'us-west-1';
 
 //================== PASSPORT CONFIGURATION
 app.use(require("express-session")({
@@ -448,6 +451,32 @@ app.post("/supplied", isLoggedIn,isActivated, multer(multerConfig).single('photo
 			res.redirect('/supplied');
 		}
 	});
+});
+
+app.get('/sign-s3', (req, res) => {
+  const s3 = new aws.S3();
+  const fileName = req.query['file-name'];
+  const fileType = req.query['file-type'];
+  const s3Params = {
+    Bucket: "uzesupply",
+    Key: fileName,
+    Expires: 60,
+    ContentType: fileType,
+    ACL: 'public-read'
+  };
+
+  s3.getSignedUrl('putObject', s3Params, (err, data) => {
+    if(err){
+      console.log(err);
+      return res.end();
+    }
+    const returnData = {
+      signedRequest: data,
+      url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+    };
+    res.write(JSON.stringify(returnData));
+    res.end();
+  });
 });
 
 // ====================== market route ===============

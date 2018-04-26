@@ -9,6 +9,8 @@ var supplySchema = new mongoose.Schema({
 	s_usernameL: String,
 	s_owner: String,
   s_ownedId: String, //idnumber + .type
+  s_photoUrl: String,
+  // s_photoSet: [{type:String}], //urls of ph
 
 	s_number: Number,
 	s_email: String,

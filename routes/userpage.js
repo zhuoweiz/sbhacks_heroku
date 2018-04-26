@@ -1,7 +1,6 @@
 var express 	= require("express"),
+		router  	= express.Router();
 
-		router  	= express.Router(),
-		Supply		= require('../models/supply');
 
 		// /userpage/
 
@@ -42,8 +41,8 @@ router.get('/:id/ds', isLoggedIn, function(req,res){
 	});
 });
 
-//delete demand
-router.delete('/:demandId/delete', isLoggedIn, (req,res)=>{
+//delete
+router.delete('/demand/:demandId/delete', isLoggedIn, (req,res)=>{
 	Dm.findByIdAndRemove(req.params.demandId, (err)=>{
 		if(err){
 			console.log(err);
@@ -61,6 +60,29 @@ router.delete('/:demandId/delete', isLoggedIn, (req,res)=>{
 				console.log(err);
 			}else{
 				res.redirect('/userpage/'+req.user._id+'/ds');
+			}
+		});
+	});
+});
+
+router.delete('/supply/:supplyId/delete', isLoggedIn, (req,res)=>{
+	Sp.findByIdAndRemove(req.params.supplyId, (err)=>{
+		if(err){
+			console.log(err);
+			console.log("== oops ==, you failed to delete this supply post")
+		}else{
+			
+		}
+	});
+
+	User.findById(req.user.id, (err, foundUser)=>{
+		foundUser.supplyPosts.pull(req.params.supplyId);
+		foundUser.save(function(err,data){
+			if(err){
+				console.log("zhuo: new supply save user error after deleting a supplyPosts element");
+				console.log(err);
+			}else{
+				res.redirect('/userpage/'+req.user._id+'/ss');
 			}
 		});
 	});

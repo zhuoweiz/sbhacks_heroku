@@ -32,18 +32,8 @@
 			    <% }else{ %>
 			    	<p style="color: blue;">Reserved </p>
 			    <% } %>
-			    
-	        
 
-	        <% if(!demand.matched){ %>
-			    	
-		    	<% }else if(!demand.d_payedReserve){ %>
-		    		
-			    <% }else{ %>
-
-			    <% } %>
-
-	        <form class="_deleteform" onsubmit="return confirm('Do you really want DELETE this storage request?');" action="/userpage/<%= demand._id %>/delete?_method=DELETE" method="POST">
+	        <form class="_deleteform" onsubmit="return confirm('Do you really want DELETE this storage request?');" action="/userpage/demand/<%= demand._id %>/delete?_method=DELETE" method="POST">
 						<button type="submit"  class="oi oi-trash" style="
 							background:none!important;
 	    				border:none; 
@@ -57,7 +47,7 @@
 		<% }); %>
 	</div>
 
-	
+	<div class="_clearFloat"></div>
 
 	<% if(thisUser.demandPosts.length===0){%>
 		<div class="_textCenter">
@@ -66,7 +56,7 @@
 		</div>
 	<%}%>
 
-	<div class="_clearFloat"></div>
+	
   <br>
 </div>
 

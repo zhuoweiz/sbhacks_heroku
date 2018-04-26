@@ -20,7 +20,7 @@
 		<label>
 	    Nearest college from you<span class="_required">*</span>
 	  </label>
-	  <label class="_note" data-toggle="tooltip" title="Sorry but we currently only support these three universities ">&#8505;</label>
+	  <label class="_note" data-toggle="tooltip" title="Sorry but we currently only support these three universities">&#8505;</label>
 		<div class="form-group">
 	    <select class="form-control" id="exampleFormControlSelect1" name="supply[s_college]">
 	    	<option>USC (University of Southern California)</option>
@@ -35,11 +35,11 @@
 	  <div class="form-row">
 	    <div class="form-group col-md-6">
 	      <label for="inputSupplyFirstName">First Name<span class="_required">*</span></label>
-	      <input type="name" class="form-control" style="text-transform: uppercase;" id="inputSupplyFirstName" placeholder="Name" name="supply[s_usernameF]" required>
+	      <input type="name" class="form-control" style="text-transform: uppercase;" id="inputSupplyFirstName" placeholder="Tony" name="supply[s_usernameF]" required>
 	    </div>
 	    <div class="form-group col-md-6">
 	      <label for="inputSupplyLastName">Last Name</label>
-	      <input type="name" class="form-control" style="text-transform: uppercase;" id="inputSupplyLastName" placeholder="username2018" name="supply[s_usernameL]" required>
+	      <input type="name" class="form-control" style="text-transform: uppercase;" id="inputSupplyLastName" placeholder="Stark" name="supply[s_usernameL]" required>
 	    </div>
 	  </div>
 
@@ -111,7 +111,7 @@
 	  </div>
 
 	  <div class="form-group">
-	  	<label for="">Are you willing drive for the boxes and get extra income?</label>
+	  	<label for="">Are you willing to drive for the boxes and get extra income?</label>
 	  	<br>
 		  <div class="custom-control custom-radio custom-control-inline">
 			  <input type="radio" id="customRadioInline1" value="yes" name="supply[s_willingToDrive]" class="custom-control-input">
@@ -136,14 +136,17 @@
 	  </div>
 
 	  <div class="form-group">
-	    <label for="uploadAnImage">Photos of your space (strongly recommended)</label>
-	    <input type="file" accept="image/*" class="form-control-file" id="uploadAnImage" name="photo" /><span class="_note">(no other files accepted)</span>
+	    <label for="uploadAnImage">A shining photo of your space (<span style="color: orangered;">strongly recommended</span>)</label>
+	    <input type="hidden" id="avatar_url" name="supply[s_photoUrl]" value="/images/default.png">
+	    <input type="file" accept="image/*" class="form-control-file" id="uploadAnImage" value="/images/default.png"/><span class="_note">(only image files accepted)</span>
 	  </div>
+
+
 
 	  <!-- ======================= modal ======================= -->
 	  <!-- Button trigger modal -->
 		<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
-		  Terms & agreement
+		  Terms & Agreement
 		</button>
 
 		<!-- Modal -->
@@ -176,16 +179,76 @@
 
 <!-- ======================== submit ===================== -->
 	<button class="btn btn-outline-primary" type="submit" id="supplySubmitButton" disabled="">Submit</button>
+	<!-- WARNING: connected to a jquery listener for uploading photoes -->
+
 	<script type="">
 		var checkbox = document.querySelector("#supplyUserAgreementCheckBox");
 		var submitButton = document.querySelector("#supplySubmitButton");
 
-		checkbox.addEventListener("change", function(){
-			submitButton.disabled = !submitButton.disabled;
+		// checkbox.addEventListener("change", function(){
+		// 	submitButton.disabled = !submitButton.disabled;
+		// });
+
+		$('#supplyUserAgreementCheckBox').change(function(){
+	    if($(this).is(':checked')) {
+	        submitButton.disabled = false;
+	    } else {
+	        // Checkbox is not checked..
+	        submitButton.disabled = true;
+	    }
 		});
+			
 	</script>
 
 	</form>
+
+	<script type="text/javascript">
+		(() => {
+			document.getElementById("uploadAnImage").onchange = () => {
+		    const files = document.getElementById('uploadAnImage').files;
+		    const file = files[0];
+		    if(file == null){
+		      return alert('No file selected.');
+		    }
+		    getSignedRequest(file);
+		  };
+		})();
+
+	  function getSignedRequest(file){
+		  const xhr = new XMLHttpRequest();
+		  xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}`);
+		  xhr.onreadystatechange = () => {
+		    if(xhr.readyState === 4){
+		      if(xhr.status === 200){
+		        const response = JSON.parse(xhr.responseText);
+		        uploadFile(file, response.signedRequest, response.url);
+		      }
+		      else{
+		        alert('Could not get signed URL.');
+		      }
+		    }
+		  };
+		  xhr.send();
+		}
+
+		function uploadFile(file, signedRequest, url){
+		  const xhr = new XMLHttpRequest();
+		  xhr.open('PUT', signedRequest);
+		  xhr.onreadystatechange = () => {
+		    if(xhr.readyState === 4){
+		      if(xhr.status === 200){
+		        // document.getElementById('preview').src = url;
+		        document.getElementById('avatar_url').value = url;
+		      }
+		      else{
+		      	console.log(xhr.status);
+		        alert('Sorry, but we are having trouble uploading the file..');
+		      }
+		    }
+		  };
+		  xhr.send(file);
+		}
+	</script>
 
 
 	

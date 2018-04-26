@@ -1,7 +1,7 @@
 {
   "name": "sbhacks",
   "version": "1.0.0",
-  "description": "",
+  "description": "hehe",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,6 +12,7 @@
   "dependencies": {
     "@sendgrid/mail": "^6.2.1",
     "async": "^2.6.0",
+    "aws-sdk": "^2.229.1",
     "body-parser": "^1.18.2",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
@@ -33,6 +34,5 @@
     "paypal-rest-sdk": "^1.8.1",
     "request": "^2.83.0"
   },
-  "optionalDependencies": {},
-  "description": "hehe"
+  "optionalDependencies": {}
 }

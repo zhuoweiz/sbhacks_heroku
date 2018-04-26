@@ -90,11 +90,11 @@
 	  <div class="form-row">
 	    <div class="form-group col-md-6">
 	      <label for="inputEmail4">First Name<span class="_required">*</span></label>
-	      <input type="name" class="form-control" id="inputEmail4" placeholder="Bobby" name="demand[usernameF]" style="text-transform: uppercase;" required>
+	      <input type="name" class="form-control" id="inputEmail4" placeholder="Bruce" name="demand[usernameF]" style="text-transform: uppercase;" required>
 	    </div>
 	    <div class="form-group col-md-6">
 	      <label for="inputPassword4">Last Name<span class="_required">*</span></label>
-	      <input type="name" class="form-control" id="inputPassword4" placeholder="Axerald" name="demand[usernameL]" style="text-transform: uppercase;" required>
+	      <input type="name" class="form-control" id="inputPassword4" placeholder="Wayne" name="demand[usernameL]" style="text-transform: uppercase;" required>
 	    </div>
 	  </div>
 
@@ -277,13 +277,21 @@
 			var checkbox = document.querySelector("#userAgreementCheckBox");
 			var submitButton = document.querySelector("#demandSubmitButton");
 
-			checkbox.addEventListener("change", function(){
-				submitButton.disabled = !submitButton.disabled;
+			// checkbox.addEventListener("change", function(){
+			// 	submitButton.disabled = !submitButton.disabled;
+			// });
+
+			$('#userAgreementCheckBox').change(function(){
+		    if($(this).is(':checked')) {
+		        submitButton.disabled = false;
+		    } else {
+		        // Checkbox is not checked..
+		        submitButton.disabled = true;
+		    }
 			});
 		</script>
 		<!-- <input class="btn btn-outline-primary" type="submit" id="demandSubmitButton" name=""> -->
 	</form>
-
 
 <script>
 $(document).ready(function(){
