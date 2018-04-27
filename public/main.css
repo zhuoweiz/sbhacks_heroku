@@ -92,32 +92,6 @@
 	border-color: skyblue;
 }
 
-
-	/* ==== myaccount.css ======*/
-#_myaccountListingButton2{
-	width: 240px; 
-	margin-left: 10px;
-	background-color: lightskyblue; 
-	border-color: lightskyblue;
-	float: left;
-}
-
-#_myaccountListingButton2:hover{
-	background-color: DeepSkyBlue;
-}
-
-#_accountPageButtonBox{
-	width: 500px;
-	margin: auto;
-}
-
-#_myaccountListingButton1{
-	width: 240px;
-	margin-right: 10px;
-	float: left;
-}
-/* ==== END of myaccount.css ======*/
-
 ._main{
 	margin-top: 10px;
 }
@@ -165,22 +139,6 @@
 	background-color: white;
 }
 
-/*card*/
-._cardImgBox{
-	width: 80%;
-	height: 150px;
-	margin: auto;
-	margin-top: 0px;
-	/*background-image: url('/img/logo2.png');
-	background-size: cover;
-	background-position: center;*/
-}
-
-._cardImgBoxImg{
-
-}
-
-/**/
 ._pageQna{
 	color: #00aae7;
 	font-weight: bold;
@@ -191,6 +149,33 @@
 	margin: auto;
 }
 
+/* === START demand cardcomplex ==== */
+._cardComplex{
+	width: 900px;
+	margin: auto;
+}
+._demandCard{
+	width: 288px; 
+	margin: 6px; 
+	margin-bottom: 10px; 
+	float: left;
+}
+._demandCardTitle{
+	font-size: 2em; 
+	color: #5fb6e6; 
+	margin: 0px;
+}
+._cardImgBox{
+	width: 80%;
+	height: 150px;
+	margin: auto;
+	margin-top: 0px;
+	padding-top: 20px;
+	/*background-image: url('/img/logo2.png');
+	background-size: cover;
+	background-position: center;*/
+}
+/* === END demand request market cardcomplex ==== */
 
 /* ========== others ======== */
 
@@ -213,10 +198,7 @@
 
 /* ========== responsive =======*/
 
-._cardComplex{
-	width: 900px;
-	margin: auto;
-}
+
 
 /* ============== toolip ============ */
 

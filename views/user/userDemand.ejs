@@ -10,11 +10,11 @@
 
 		<% thisUser.demandPosts.forEach(function(demand){ %>
 
-			<div class="card _floatedL" style="width: 288px; margin: 6px; margin-bottom: 10px;">
-				<div class="_cardImgBox" style="padding-top: 20px;">
-					<p style="font-size: 2em; color: #5fb6e6; text-align: left; margin: 0px;" ><%= demand.starting%></p>
+			<div class="card _demandCard">
+				<div class="_cardImgBox">
+					<p style="text-align: left;" class="_demandCardTitle" ><%= demand.starting%></p>
 					<p class="_textCenter" style="margin: 0px;">to</p>
-					<p style="font-size: 2em; color: #5fb6e6; text-align: right; margin: 0px;" ><%= demand.ending%></p>
+					<p style="text-align: right;" class="_demandCardTitle" ><%= demand.ending%></p>
 				</div>
 			  <div class="card-body">
 			    <h5 class="card-title"><span style="color: #00aae7;"><%= demand.unit%></span> units demand</h5>

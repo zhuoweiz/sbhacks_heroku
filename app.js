@@ -61,7 +61,7 @@ app.locals.moment = require('moment');
 
 //================== DB setup ============
 mongoose.Promise = global.Promise;
-var uri = "mongodb://xianhomedroy:19980110.Zz@ds046267.mlab.com:46267/uzedb";
+var uri = process.env.MONGOOSE_URI;
 mongoose.connect(uri);
 //mongoose.connect("process.env.DATABASEURL");
 var db = mongoose.connection;
