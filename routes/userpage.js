@@ -43,6 +43,14 @@ router.get('/:id/ds', isLoggedIn, function(req,res){
 
 //delete
 router.delete('/demand/:demandId/delete', isLoggedIn, (req,res)=>{
+	Dm.findById(req.params.demandId, (err, foundDemand)=>{
+		if(foundDemand.matched){
+			Sp.findById(foundDemand.d_matchedSupply, (err, foundSupply)=>{
+				foundSupply.s_matchedDemandPosts.pull(req.params.demandId);
+			});
+		}
+	});
+
 	Dm.findByIdAndRemove(req.params.demandId, (err)=>{
 		if(err){
 			console.log(err);
@@ -66,10 +74,27 @@ router.delete('/demand/:demandId/delete', isLoggedIn, (req,res)=>{
 });
 
 router.delete('/supply/:supplyId/delete', isLoggedIn, (req,res)=>{
+	Sp.findById(req.params.supplyId, (err, foundSupply)=>{
+		if(err){console.log(err)}
+		foundSupply.s_matchedDemandPosts.forEach((demandId)=>{
+			Dm.findById(demandId, (err,foundDemand)=>{
+				if(err){console.log(err);}
+				if(foundDemand.matched){
+				  foundDemand.matched = false;
+				  foundDemand.d_matchedSupply = null;
+				}else{
+					foundDemand.matched = false;
+				  foundDemand.d_matchedSupply = null;
+					console.log('something wrong with deleting matchedSupply in demand post when deleting supply post');
+				}
+			})；
+		});
+	});
+
 	Sp.findByIdAndRemove(req.params.supplyId, (err)=>{
 		if(err){
 			console.log(err);
-			console.log("== oops ==, you failed to delete this supply post")
+			console.log("== oops ==, you failed to delete this supply post");
 		}else{
 			
 		}

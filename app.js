@@ -482,8 +482,6 @@ app.get('/sign-s3', (req, res) => {
 // ====================== market route ===============
 app.get('/market', (req,res)=>{
 	Sp.find({}, function(err, supplySet) {
-
-
 		res.render("market/market", {supplySet:supplySet});
 	});
 });
