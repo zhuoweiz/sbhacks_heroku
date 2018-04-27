@@ -87,7 +87,7 @@ router.delete('/supply/:supplyId/delete', isLoggedIn, (req,res)=>{
 				  foundDemand.d_matchedSupply = null;
 					console.log('something wrong with deleting matchedSupply in demand post when deleting supply post');
 				}
-			})；
+			});
 		});
 	});
 
