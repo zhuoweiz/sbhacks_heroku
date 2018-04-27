@@ -17,7 +17,7 @@ var demandSchema = new mongoose.Schema({
 	d_needPickUp: String, // "yes", "maybe", "no"
 	
 	//checkout flow
-	matched: {type: Boolean, default: false},
+	d_matchedSupply: {type: Boolean, default: false},
 	supplier: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	supply: {type: mongoose.Schema.Types.ObjectId, ref: 'Supply'},
 	price: {type: Number, default: '0'},

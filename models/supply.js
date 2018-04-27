@@ -10,7 +10,7 @@ var supplySchema = new mongoose.Schema({
 	s_owner: String,
   s_ownedId: String, //idnumber + .type
   s_photoUrl: String,
-  // s_photoSet: [{type:String}], //urls of ph
+  s_photoUrlSet: [{type:String}], //urls of ph
 
 	s_number: Number,
 	s_email: String,
@@ -29,6 +29,10 @@ var supplySchema = new mongoose.Schema({
 		{type: String, default: "maybe"}, // "yes", "maybe", "no"
 
 	//checkout flow
+	s_matchedDemandPosts:[{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Demand'
+	}],
 
 	//optional
 	s_code: String,
