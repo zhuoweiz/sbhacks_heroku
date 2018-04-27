@@ -1,0 +1,13 @@
+{
+	"name": "Uzespace | storage in new era",
+	"short_name": "Uzespace",
+	"icons": [{
+		"src": "/img/logo.png",
+		"sizes": "20*20",
+		"type": "image/png"
+	}],
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "blue",
+	"theme_color": "blue"
+}
