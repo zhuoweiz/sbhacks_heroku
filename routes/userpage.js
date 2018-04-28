@@ -46,7 +46,12 @@ router.delete('/demand/:demandId/delete', isLoggedIn, (req,res)=>{
 	Dm.findById(req.params.demandId, (err, foundDemand)=>{
 		if(foundDemand.matched){
 			Sp.findById(foundDemand.d_matchedSupply, (err, foundSupply)=>{
-				foundSupply.s_matchedDemandPosts.pull(req.params.demandId);
+				if(foundSupply.s_matchedDemandPosts){
+					foundSupply.s_matchedDemandPosts.pull(req.params.demandId);
+				}
+				else{
+					console.log("zhuowei => u try to delete this demand, and no supply has recorded this demand you want to delete")
+				}
 			});
 		}
 	});
