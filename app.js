@@ -32,7 +32,7 @@ require('dotenv').config();
 //env configurations
 var api_key = process.env.MAILGUN_API_KEY;
 var domain = process.env.MAILGUN_API_DOMAIN;
-var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+const mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 //system configuration
 var app = express();

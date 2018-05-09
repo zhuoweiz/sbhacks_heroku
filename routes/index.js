@@ -8,6 +8,11 @@ var express 	= require("express"),
     nodemailer 	= require("nodemailer"),
     User 		= require("../models/user");
 
+//env configurations
+var api_key = process.env.MAILGUN_API_KEY;
+var domain = process.env.MAILGUN_API_DOMAIN;
+const mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+
 require('dotenv').config();
 
 function activateFunc(req,res,next){
@@ -36,45 +41,45 @@ function activateFunc(req,res,next){
 		},
 		function(token, user, done){
 			// -- -- using nodemailer
-			var smtpTransport = nodemailer.createTransport({
-				service: 'Gmail',
-				auth: {
-					user: 'uzespace@gmail.com',
-					pass: process.env.GMAILPW
-					//pass: process.env.GMAILPW -> terminal: export GMAILPW=blablabla
-				}
-			});
-			var link = 'http://' + req.headers.host + '/activate/' + token;
-			var mailOptions = {
-				to: user.username,
-				from: 'zhuoweiz@uzespace.com',
-				subject: 'uzespace account activation',
-				text: 'Activate your account and become a proud uzer today!!!' +
-					'Click on the link below or paste it to the browser to proceed: ' +
-					'http://' + req.headers.host + '/activate/' + token +'\n\n' +
-					'Activation link expires after 30 minutes. You can always request another one in the account page at uzespace.com . If you didnt request this, please ignore this email'
-			};
-			smtpTransport.sendMail(mailOptions, function(err) {
-				console.log('mail sent');
-				req.flash('success', 'An email has been sent to ' + user.username + ' for activation purposes.');
-				done(err, 'done');
-			});
-
-			// var receiptant = req.user.username;
-			// var data2 = {
-			//   from: 'Zhuowei Zhang <zhuoweiz@uzespace.com>',
-			//   to: receiptant,
-			//   subject: '[Uzespace] account activation',
-			//   text: 'Activate your account and become a proud uzer today!!!' +
+			// var smtpTransport = nodemailer.createTransport({
+			// 	service: 'Gmail',
+			// 	auth: {
+			// 		user: 'uzespace@gmail.com',
+			// 		pass: process.env.GMAILPW
+			// 	}
+			// });
+			// var link = 'http://' + req.headers.host + '/activate/' + token;
+			// var mailOptions = {
+			// 	to: user.username,
+			// 	from: 'zhuoweiz@uzespace.com',
+			// 	subject: 'uzespace account activation',
+			// 	text: 'Activate your account and become a proud uzer today!!!' +
 			// 		'Click on the link below or paste it to the browser to proceed: ' +
 			// 		'http://' + req.headers.host + '/activate/' + token +'\n\n' +
 			// 		'Activation link expires after 30 minutes. You can always request another one in the account page at uzespace.com . If you didnt request this, please ignore this email'
 			// };
-			// mailgun.messages().send(data2, function (error, body) {
-			//   console.log(body);
-			//   req.flash('success', 'An email has been sent to ' + user.username + ' for activation purposes.');
+			// smtpTransport.sendMail(mailOptions, function(err) {
+			// 	console.log('mail sent');
+			// 	req.flash('success', 'An email has been sent to ' + user.username + ' for activation purposes.');
 			// 	done(err, 'done');
 			// });
+
+			var receiptant = req.user.username;
+			var data2 = {
+			  from: 'Zhuowei Zhang <zhuoweiz@uzespace.com>',
+			  to: receiptant,
+			  subject: '[Uzespace] Account Activation',
+			  text: 'Activate your account and become a proud uzer today!!!' +
+					'Click on the link below or paste it to the browser to proceed: ' +
+					'http://' + req.headers.host + '/activate/' + token +'\n\n' +
+					' Activation link expires after 30 minutes. You can always request another one in the account page at uzespace.com . If you didnt request this, please ignore this email'
+			};
+			mailgun.messages().send(data2, function (err, body) {
+				console.log('activation email sent: ');
+			  console.log(body);
+			  req.flash('success', 'An email has been sent to ' + user.username + ' for activation purposes.');
+				done(err, 'done');
+			});
 
 		}
 	], function(err) {
