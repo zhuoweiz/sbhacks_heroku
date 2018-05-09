@@ -64,10 +64,10 @@ function activateFunc(req,res,next){
 			// 	done(err, 'done');
 			// });
 
-			var receiptant = req.user.username;
+			// var receiptant = req.user.username;
 			var data2 = {
 			  from: 'Zhuowei Zhang <zhuoweiz@uzespace.com>',
-			  to: receiptant,
+			  to: user.username,
 			  subject: '[Uzespace] Account Activation',
 			  text: 'Activate your account and become a proud uzer today!!!' +
 					'Click on the link below or paste it to the browser to proceed: ' +
