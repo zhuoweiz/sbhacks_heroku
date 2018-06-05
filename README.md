@@ -16,3 +16,6 @@ $ npm install
 $ node app.js
 ```
 
+## Currently working on (2018.06)
+- Transition to using ReactJS
+- Polishing the market place and transaction process.
