@@ -165,6 +165,10 @@ app.use('/payment/', paymentRoute);
 // ===========================================
 // ---------------- ROUTES -------------
 // ===========================================
+app.get("/test", (req,res)=>{
+	res.render("test.ejs");
+});
+
 app.get("/", function(req,res){
 	var formData = {
 	  'homeMobileCountryCode' : 310
@@ -332,10 +336,6 @@ app.post("/demanded", isLoggedIn,isActivated, function(req,res){
 			console.log("================== end of the new demand data =======");
 		}
 	});
-
-//_testing
-	
-	console.log("后来者");
 });
 
 app.get("/demanded", function(req,res){
@@ -486,7 +486,15 @@ app.get('/market', (req,res)=>{
 	});
 });
 
+app.get('/market/supplyshow/:supplyId', (req,res)=>{
+	Sp.findById(supplyId, (foundSupply, err)=>{
+		res.render("market/marketSupplyShow", {supply:foundSupply});
+	});
+});
 
+
+
+// =========================  OTHER ROUTES ==========
 app.get("/supplied", function(req,res){
 	res.render("supplied");
 });
@@ -495,7 +503,6 @@ app.get("/emaillist",function(req,res){
 	res.redirect('http://keybwarrior.com/undecided/undecided.html');
 });
 
-// =========================  OTHER ROUTES ==========
 app.get("/feedback", function(req,res){
 	res.render("webpages/feedback");
 });

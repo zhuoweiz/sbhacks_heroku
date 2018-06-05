@@ -28,6 +28,7 @@ var demandSchema = new mongoose.Schema({
 
 	//size refactor
 	unit: Number,
+	d_realUnit: {type: Number, default: '0'},
 	d_boxes: [{
 		type: Object, 
 		}],

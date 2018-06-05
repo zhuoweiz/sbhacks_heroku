@@ -36,6 +36,7 @@ payRouter.post('/:demandId/promo', (req,res)=>{
 	let promoInvitor = promo.substring(0,promo.length-4);
 	// console.log('tested: ',promoInvitor);
 
+
 	let data = {
 		self: '-1',
 		found: '-1',
