@@ -1,7 +1,7 @@
 # sbhacks_heroku
 A storage space sharing platform | the Airbnb of storage http://uzespace.com
 
-##Stack
+## Stack
 1. Backend: node.js with express
 2. View engine: ejs
 3. Databse: MongoDB with mlab
@@ -9,7 +9,7 @@ A storage space sharing platform | the Airbnb of storage http://uzespace.com
 5. APIs: mailgun, google maps, paypal, AWS
 6. Hosted on Heroku
 
-###Install and run
+### Install and run
 ```shell
 $ npm install
 $ node app.js
