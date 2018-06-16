@@ -121,10 +121,11 @@ router.post('/activate/:token', function(req,res,next){
           // console.log('successful get activation request: date now: ',Date.now());
           return res.redirect('/');
         }
-        user.resetPasswordToken = undefined;
-        user.resetPasswordExpires = undefined;
-        user.isActivated = 'true';
         console.log("aha1:" , user);
+        user.activationToken = undefined;
+        user.activationExpires = undefined;
+        user.isActivated = 'true';
+        console.log("aha2:" , user);
 
         user.save(function(err) {
           req.logIn(user, function(err) {
@@ -146,12 +147,14 @@ router.post('/activate/:token', function(req,res,next){
 			console.log("sending new account activation mailgun email....");
 			mailgun.messages().send(activateSuccessEmail, function (error, body) {
 		  	// console.log(body);
+		  	done(error, 'done');
 			});
 	  }
 	  ], function(err) {
 	  	if (err) return next(err);
-	  	
+
 			res.redirect('/');
+			req.flash('success', 'You just activated your account!');
 			console.log("activation success");
 	  });
 });
@@ -203,37 +206,6 @@ router.post('/forgot', function(req, res, next){
 			});
 		},
 		function(token, user, done){
-			// -- -- using nodemailer
-			// var smtpTransport = nodemailer.createTransport({
-			// 	service: 'Gmail',
-			// 	auth: {
-			// 		user: 'uzespace@gmail.com',
-			// 		pass: process.env.GMAILPW
-			// 		//pass: process.env.GMAILPW -> terminal: export GMAILPW=blablabla
-			// 	}
-			// });
-			// var mailOptions = {
-			// 	to: user.username,
-			// 	from: 'zhuoweiz@uzespace.com',
-			// 	subject: 'uzespace Password Reset',
-			// 	text: 'please click on the link below or paste it to the browser to proceed' +
-			// 		' http://' + req.headers.host + '/reset/' + token +'\n\n' +
-			// 		'if you didnt request this, please ignore this email'
-			// 	// ,html: 
-			// 	// 	' <div style="text-align: center;"> '+
-			// 	// 	' 	<h1>Welcome to uze</h1> '+
-			// 	// 	'		<h2 style="color: lightblue;">password resetting</h2>'+
-			// 	// 	'   <div style="width: 300px;margin: auto;height: 180px; background-color: lightblue;">'+
-			// 	// 	'   <p>Hello, You are receiving this for resetting your uzespace account password!!!</p>'+
-			// 	// 	'   <a href="www.uzespace.com">Click me</a>'+
-			// 	// 	'  <p style="color: grey;font-size: 0.8em;">amazing journey starts</p>'+
-			// 	// 	'</div>'+
-			// 	// 	'</div>'
-			// };
-			// smtpTransport.sendMail(mailOptions, function(err) {
-			// 	req.flash('success', 'An email has been sent to ' + user.username + ' with further instructions.');
-			// 	done(err, 'done');
-			// });
 
 			var forgotEmail = {
 				from: 'Zhuowei Zhang <zhuoweiz@uzespace.com>',
@@ -249,29 +221,8 @@ router.post('/forgot', function(req, res, next){
 		  	// console.log(body);
 		  	console.log('forgot request email sent');
 		  	req.flash('success', 'An email has been sent to ' + user.username + ' with further instructions.');
-				done(err, 'done');
+				done(error, 'done');
 			});
-
-			// using SendGrid's v3 Node.js Library
-			// https://github.com/sendgrid/sendgrid-nodejs
-			// const sgMail = require('@sendgrid/mail');
-			// var content = ' http://' + req.headers.host + '/reset/' + token;
-			// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-			// var msg = {
-			//   to: user.username,
-			//   from: 'zhuoweiz@uzespace.com',
-			//   subject: '[uzespace] Reset password confirmation',
-			//   text: 'You are receiving this because you r a proud uzer horay!!!' +
-			// 		'please click on the link below or paste it to the browser to proceed' +
-			// 		content  + '\n\n' +
-			// 		' if you didnt request this, please ignore this email'
-			//   // ,html: '<button href=content>click me</button>'
-			// };
-			// sgMail.send(msg);
-
-			// req.flash('success', 'An email has been sent to ' + user.username + 'with further instructions.');
-			// res.redirect('/');
-			// console.log("sent");
 		}
 	], function(err) {
 		if (err) return next(err);
@@ -328,12 +279,11 @@ router.post('/reset/:token', function(req, res) {
 	  		// console.log(body);
 	  		console.log('pw reset confirmation email sent');
 	  		req.flash('success', 'An confirmation email has been sent to ' + user.username + '.');
-				done(err, 'done');
+				done(error, 'done');
 			});
     }
   ], function(err) {
 
-  	req.flash('error','still in test');
     res.redirect('/');
   });
 });
