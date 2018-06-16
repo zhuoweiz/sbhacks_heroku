@@ -226,46 +226,35 @@ app.get("/demand", isLoggedIn,isActivated, function(req,res){
 	  body: formData
 	};
 
-	request(options, function (err, httpResponse, body) {
-	  if (!err && httpResponse.statusCode == 200) {
-	      // var info = JSON.parse(body);
-	      var thisLocation = {
-					param1:body.location.lat,
-					param2:body.location.lng
-				}
+	// request(options, function (err, httpResponse, body) {
+	//   if (!err && httpResponse.statusCode == 200) {
+	//       // var info = JSON.parse(body);
+	//       var thisLocation = {
+	// 				param1:body.location.lat,
+	// 				param2:body.location.lng
+	// 			}
 
-	     	console.log('function output: ',thisLocation );
-				res.render('demand',{thisLocation:thisLocation});
+	//      	console.log('function output: ',thisLocation );
+	// 			res.render('demand',{thisLocation:thisLocation});
 
-	  } else {
-	      console.log('err: ',err);
-	      // console.log('res: ', httpResponse);
-	      console.log('body: ',body);
+	//   } else {
+	//       console.log('err: ',err);
+	//       // console.log('res: ', httpResponse);
+	//       console.log('body: ',body);
 
-	      var thisLocation = {
-					param1:'34',
-					param2:'-118'
-				}
-				console.log('function output: ',thisLocation );
-				res.render('demand',{thisLocation:thisLocation});
-	  }
-	});
+	//       var thisLocation = {
+	// 				param1:'34',
+	// 				param2:'-118'
+	// 			}
+	// 			console.log('function output: ',thisLocation );
+	// 			res.render('demand',{thisLocation:thisLocation});
+	//   }
+	// });
 
 });
 
 app.post("/demanded", isLoggedIn,isActivated, function(req,res){
 	//-----------------need modification
-	// Dm.create(req.body.demand, function(err, newDemand){
-	// 	if(err){
-	// 		console.log("storing demand POST error!");
-	// 		console.log(err);
-	// 	}else{
-	// 		console.log("================== here is the new demand: ==========");
-	// 		console.log(newDemand);
-	// 		console.log("================== end of the new demand data =======");
-	// 		res.redirect("/demanded");
-	// 	}
-	// });
 	var demand_query = req.body.demand;
 
 	//dealing with input data

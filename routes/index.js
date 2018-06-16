@@ -40,29 +40,6 @@ function activateFunc(req,res,next){
 			});
 		},
 		function(token, user, done){
-			// -- -- using nodemailer
-			// var smtpTransport = nodemailer.createTransport({
-			// 	service: 'Gmail',
-			// 	auth: {
-			// 		user: 'uzespace@gmail.com',
-			// 		pass: process.env.GMAILPW
-			// 	}
-			// });
-			// var link = 'http://' + req.headers.host + '/activate/' + token;
-			// var mailOptions = {
-			// 	to: user.username,
-			// 	from: 'zhuoweiz@uzespace.com',
-			// 	subject: 'uzespace account activation',
-			// 	text: 'Activate your account and become a proud uzer today!!!' +
-			// 		'Click on the link below or paste it to the browser to proceed: ' +
-			// 		'http://' + req.headers.host + '/activate/' + token +'\n\n' +
-			// 		'Activation link expires after 30 minutes. You can always request another one in the account page at uzespace.com . If you didnt request this, please ignore this email'
-			// };
-			// smtpTransport.sendMail(mailOptions, function(err) {
-			// 	console.log('mail sent');
-			// 	req.flash('success', 'An email has been sent to ' + user.username + ' for activation purposes.');
-			// 	done(err, 'done');
-			// });
 
 			// var receiptant = req.user.username;
 			var data2 = {
@@ -156,32 +133,24 @@ router.post('/activate/:token', function(req,res,next){
         });
       });
     },
-    function(user, done) {
-    	// -- -- using nodemailer
-			var smtpTransport = nodemailer.createTransport({
-				service: 'Gmail',
-				auth: {
-					user: 'uzespace@gmail.com',
-					pass: process.env.GMAILPW
-					//pass: process.env.GMAILPW -> terminal: export GMAILPW=blablabla
-				}
-			});
-			var mailOptions = {
+    function(user, done) 
+    {
+			var activateSuccessEmail = {
+				from: 'Zhuowei Zhang <zhuoweiz@uzespace.com>',
 				to: user.username,
-				from: 'zhuoweiz@uzespace.com',
-				subject: 'uzespace account activation',
+				subject: '[uzespace]Account Activation',
 				text: 'Hello,\n\n' +
 	   			     'This is a confirmation that your account ' + user.username + ' has just been activated.\n'
 			};
-			smtpTransport.sendMail(mailOptions, function(err) {
-				console.log('mail sent');
-				req.flash('success', 'An confirmation email has been sent to ' + user.username + ' .');
-				done(err, 'done');
+
+			console.log("sending new account activation mailgun email....");
+			mailgun.messages().send(activateSuccessEmail, function (error, body) {
+		  	// console.log(body);
 			});
-	    }
+	  }
 	  ], function(err) {
 	  	if (err) return next(err);
-
+	  	
 			res.redirect('/');
 			console.log("activation success");
 	  });
@@ -235,35 +204,51 @@ router.post('/forgot', function(req, res, next){
 		},
 		function(token, user, done){
 			// -- -- using nodemailer
-			var smtpTransport = nodemailer.createTransport({
-				service: 'Gmail',
-				auth: {
-					user: 'uzespace@gmail.com',
-					pass: process.env.GMAILPW
-					//pass: process.env.GMAILPW -> terminal: export GMAILPW=blablabla
-				}
-			});
-			var mailOptions = {
+			// var smtpTransport = nodemailer.createTransport({
+			// 	service: 'Gmail',
+			// 	auth: {
+			// 		user: 'uzespace@gmail.com',
+			// 		pass: process.env.GMAILPW
+			// 		//pass: process.env.GMAILPW -> terminal: export GMAILPW=blablabla
+			// 	}
+			// });
+			// var mailOptions = {
+			// 	to: user.username,
+			// 	from: 'zhuoweiz@uzespace.com',
+			// 	subject: 'uzespace Password Reset',
+			// 	text: 'please click on the link below or paste it to the browser to proceed' +
+			// 		' http://' + req.headers.host + '/reset/' + token +'\n\n' +
+			// 		'if you didnt request this, please ignore this email'
+			// 	// ,html: 
+			// 	// 	' <div style="text-align: center;"> '+
+			// 	// 	' 	<h1>Welcome to uze</h1> '+
+			// 	// 	'		<h2 style="color: lightblue;">password resetting</h2>'+
+			// 	// 	'   <div style="width: 300px;margin: auto;height: 180px; background-color: lightblue;">'+
+			// 	// 	'   <p>Hello, You are receiving this for resetting your uzespace account password!!!</p>'+
+			// 	// 	'   <a href="www.uzespace.com">Click me</a>'+
+			// 	// 	'  <p style="color: grey;font-size: 0.8em;">amazing journey starts</p>'+
+			// 	// 	'</div>'+
+			// 	// 	'</div>'
+			// };
+			// smtpTransport.sendMail(mailOptions, function(err) {
+			// 	req.flash('success', 'An email has been sent to ' + user.username + ' with further instructions.');
+			// 	done(err, 'done');
+			// });
+
+			var forgotEmail = {
+				from: 'Zhuowei Zhang <zhuoweiz@uzespace.com>',
 				to: user.username,
-				from: 'zhuoweiz@uzespace.com',
-				subject: 'uzespace Password Reset',
+				subject: '[uzespace]Password Reset Request',
 				text: 'please click on the link below or paste it to the browser to proceed' +
 					' http://' + req.headers.host + '/reset/' + token +'\n\n' +
 					'if you didnt request this, please ignore this email'
-				// ,html: 
-				// 	' <div style="text-align: center;"> '+
-				// 	' 	<h1>Welcome to uze</h1> '+
-				// 	'		<h2 style="color: lightblue;">password resetting</h2>'+
-				// 	'   <div style="width: 300px;margin: auto;height: 180px; background-color: lightblue;">'+
-				// 	'   <p>Hello, You are receiving this for resetting your uzespace account password!!!</p>'+
-				// 	'   <a href="www.uzespace.com">Click me</a>'+
-				// 	'  <p style="color: grey;font-size: 0.8em;">amazing journey starts</p>'+
-				// 	'</div>'+
-				// 	'</div>'
 			};
-			smtpTransport.sendMail(mailOptions, function(err) {
-				console.log('mail sent');
-				req.flash('success', 'An email has been sent to ' + user.username + ' with further instructions.');
+
+			console.log("sending new account activation mailgun email....");
+			mailgun.messages().send(forgotEmail, function (error, body) {
+		  	// console.log(body);
+		  	console.log('forgot request email sent');
+		  	req.flash('success', 'An email has been sent to ' + user.username + ' with further instructions.');
 				done(err, 'done');
 			});
 
@@ -331,36 +316,20 @@ router.post('/reset/:token', function(req, res) {
       });
     },
     function(user, done) {
-    	// -- -- using nodemailer
-		var smtpTransport = nodemailer.createTransport({
-			service: 'Gmail',
-			auth: {
-				user: 'uzespace@gmail.com',
-				pass: process.env.GMAILPW
-				//pass: process.env.GMAILPW -> terminal: export GMAILPW=blablabla
-			}
-		});
-		var test = 'www.baidu.com';
-		var mailOptions = {
+			var pwResetConfirmEmail = {
+			from: 'Zhuowei Zhang <zhuoweiz@uzespace.com>',
 			to: user.username,
-			from: 'zhuoweiz@uzespace.com',
-			subject: 'uze Password Reset',
-			text:  'test',
-			html:
-			'<div style="text-align: center;">'+
-			'<h1>uze Password Reset</h1>'+
-				'<div style="width: 300px;margin: auto;height: 180px; background-color: lightblue;">'+
-						'<p>Hello, This is a confirmation that the password for your account has just been changed.</p>'+
-					'<a href=<%=test%> >Click me</a>'+
-					'<p style="color: grey;font-size: 0.8em;">amazing journey starts</p>'+
-				'</div>'+
-			'</div>'
-		};
-		smtpTransport.sendMail(mailOptions, function(err) {
-			console.log('mail sent');
-			req.flash('success', 'An email has been sent to ' + user.username + 'with further instructions.');
-			done(err, 'done');
-		});
+			subject: '[uzespace]Password Reset Success',
+			text: 'Hello, This is a confirmation that the password for your account has just been changed. Reply if you have further questions.'
+			};
+
+			console.log("sending activation confirmation mailgun email....");
+			mailgun.messages().send(pwResetConfirmEmail, function (error, body) {
+	  		// console.log(body);
+	  		console.log('pw reset confirmation email sent');
+	  		req.flash('success', 'An confirmation email has been sent to ' + user.username + '.');
+				done(err, 'done');
+			});
     }
   ], function(err) {
 
