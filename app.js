@@ -501,7 +501,7 @@ app.get('/qna', (req,res)=>{
 });
 
 app.get('/.well-known/acme-challenge/3lDX4VxKin5lX1GkFWe5mGPEQNhd7Y-tglO-lIgGS5g', (req,res)=>{
-	res.render("security.ejs");
+	res.send("3lDX4VxKin5lX1GkFWe5mGPEQNhd7Y-tglO-lIgGS5g.Xl8M63AiEcq_s9jljrldMqrrFE9MrvK7AiO8cCgKu8c");
 });
 
 //---------------------server setup---------------------process.env.PORT,process.env.IP
