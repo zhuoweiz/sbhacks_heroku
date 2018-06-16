@@ -500,6 +500,10 @@ app.get('/qna', (req,res)=>{
 	res.render("webpages/qna");
 });
 
+app.get('/.well-known/acme-challenge/3lDX4VxKin5lX1GkFWe5mGPEQNhd7Y-tglO-lIgGS5g', (req,res)=>{
+	res.render("security.ejs");
+});
+
 //---------------------server setup---------------------process.env.PORT,process.env.IP
 var port = process.env.PORT || 5000;
 app.listen(port,function(){
