@@ -1,8 +1,20 @@
+// /userpage/
+
 var express 	= require("express"),
 		router  	= express.Router();
 
+//------------ firebase admin sdk set up
+const admin = require('firebase-admin');
+const serviceAccount = require("./../ServiceAccountKey.json");
 
-		// /userpage/
+admin.initializeApp({
+	credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://uzespaceapi-1516813689822.firebaseio.com"
+});
+
+const fireStore = admin.firestore();
+
+		
 
 //get user page
 router.get("/:id/myaccount",isLoggedIn, function(req,res){

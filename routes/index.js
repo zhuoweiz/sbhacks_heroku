@@ -32,7 +32,7 @@ function activateFunc(req,res,next){
 				}
 
 				user.activationToken = token;
-				user.activationExpires = Date.now() + 3000000; // 30 min
+				user.activationExpires = Date.now() + 1800000; // 30 min
 
 				user.save(function(err){
 					done(err, token, user);

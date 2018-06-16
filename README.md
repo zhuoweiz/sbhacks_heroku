@@ -19,3 +19,11 @@ $ node app.js
 ## Currently working on (2018.06)
 - Transition to using ReactJS
 - Polishing the market place and transaction process.
+
+#For developers
+
+## Naming rules
+
+### comment
+1. Add _ to the front of the name for searching functionality modules in large code files
+2. 
