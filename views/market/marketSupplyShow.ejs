@@ -1,7 +1,30 @@
+<!-- foundSupply -->
+
 <% include ../partials/header %>
 
-<h1>MarketSupplyShow page</h1>
 
+<div class="container">
 
+	<img style="height: 300px; width: 300px; object-fit: cover;" src=<%=foundSupply.s_photoUrl%>>
+
+	<div>
+		<h4>Owner:</h4>
+		<p><%=foundSupply.s_usernameF%> <%=foundSupply.s_usernameL%></p>
+		<p><%=foundSupply.s_number%></p>
+		<a class="btn btn-primary" href="mailto:<%=foundSupply.s_owner%>" target="_blank">Email</a>
+		<a class="btn btn-primary" href="#">Message</a>
+	</div>
+
+	<div>
+		<h4 class=""><%=foundSupply.s_description %></h4>
+		<div class="_note"><%=foundSupply.s_college%></div>
+		<p><%=foundSupply.s_starting%> -> <%=foundSupply.s_ending%></p>
+		<h6><%= foundSupply.s_unit%> unit(s) available</h6>
+	</div>
+
+	
+	
+	<a class="btn btn-primary" href="#">PICK</a>
+</div>
 
 <% include ../partials/footer %>

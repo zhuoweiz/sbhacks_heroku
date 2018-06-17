@@ -96,7 +96,7 @@
 
 	  <div class="form-group">
 	  	<label for="supplyPostcodeInput">Ur postcode<span class="_required">*</span></label>
-	  	<input type="text" class="form-control" pattern="(\d{5}([\-]\d{4})?)" id="supplyPostcodeInput" title="Five digit zip code" required />
+	  	<input type="text" class="form-control" pattern="(\d{5}([\-]\d{4})?)" id="supplyPostcodeInput" name="supply[s_postcode]" title="Five digit zip code" required />
 	  	<div class="invalid-feedback">
 	     	input invalid
 	    </div>
@@ -104,7 +104,7 @@
 
 	  <div class="form-group">
 	  	<label for="supplyAddressInput">Ur street address<span class="_required">*</span></label>
-	  	<input id="mapSearchBox_id" type="text" required class="form-control" id="supplyAddressInput" placeholder="Address" title="" />
+	  	<input id="mapSearchBox_id" type="text" required class="form-control" id="supplyAddressInput" placeholder="Address" name="supply[s_street]" title="" />
 	  	<div class="invalid-feedback">
 	     	input invalid
 	    </div>
@@ -197,6 +197,7 @@
 
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiZJGNbzddhCp0Y4esDRwEHuHm7TJ5oG8&libraries=places&callback=initAutocomplete"
+    
          async defer></script>
 
 	  <div class="form-group">

@@ -37,7 +37,6 @@ var supplySchema = new mongoose.Schema({
 	//optional
 	s_code: String,
 	s_special: String,
-	s_img: { data: Buffer, contentType: String },
 
 	//other
 	s_created: 

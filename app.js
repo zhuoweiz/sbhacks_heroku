@@ -476,8 +476,12 @@ app.get('/market', (req,res)=>{
 });
 
 app.get('/market/supplyshow/:supplyId', (req,res)=>{
-	Sp.findById(supplyId, (foundSupply, err)=>{
-		res.render("market/marketSupplyShow", {supply:foundSupply});
+	Sp.findById(req.params.supplyId, (err, foundSupply)=>{
+		if(err) console.log(err);
+		else{
+			console.log(foundSupply);
+			res.render("market/marketSupplyShow", {foundSupply:foundSupply});
+		}
 	});
 });
 
