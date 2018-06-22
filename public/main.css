@@ -175,6 +175,17 @@
 	background-size: cover;
 	background-position: center;*/
 }
+
+._cardComplexAdd{
+	width: 100%;
+	margin: auto;
+}
+
+._cardComplexAdd:hover{
+	transform: scale(1.1, 1.1);
+}
+
+
 /* === END demand request market cardcomplex ==== */
 
 /* ========== others ======== */
