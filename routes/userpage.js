@@ -134,6 +134,12 @@ router.get('/payment/success', isLoggedIn, function(req,res){
 	res.send('<h1>payment success</h1>');
 });
 
+router.put("/changeDisplayName", function(req,res){
+	User.findByIdAndUpdate(req.user._id, function(err, foundUser){
+		
+	}
+});
+
 function isLoggedIn(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
@@ -150,5 +156,20 @@ function isActivated(req, res, next){
 			res.redirect("/userpage/:id/myaccount");
 		});
 }
+
+//Edit and update
+// app.put("/blogs/:id", function(req,res){
+// 	//sanitize
+// 	// req.body.blog.body = req.sanitize(req.body.blog.body);
+
+// 	Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err,updatedBlog){
+// 		if(err){
+// 			res.redirect("/blogs");
+// 		}else{
+// 			res.redirect("/blogs/"+ req.params.id);
+// 		}
+// 	});
+// });
+
 
 module.exports = router;

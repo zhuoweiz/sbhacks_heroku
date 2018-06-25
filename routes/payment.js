@@ -232,6 +232,8 @@ payRouter.get('/cancel', (req, res)=>{
 	res.render('payment/paypalshow.ejs', {paymentStatus:paymentStatus})
 });
 
+
+
 //middle wares
 function isActivated(req, res, next){
 	User.findOne({username:req.user.username}, function(err, foundUser){
