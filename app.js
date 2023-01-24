@@ -176,7 +176,7 @@ app.get("/", function(req,res){
 	// JSON.stringify(formData);
 	
 	var options = {
-	  uri: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDmnNAnAymv6aHy1S48ABCJNc9DV-F3vtk',
+	  uri: 'https://www.googleapis.com/geolocation/v1/geolocate?key=<%=process.env.GOOGLEJSAPI%>',
 	  method: 'POST',
 	  json: true,
 	  body: formData
@@ -220,7 +220,7 @@ app.get("/demand", isLoggedIn,isActivated, function(req,res){
 	
 	// ajax geolocation usage
 	var options = {
-	  uri: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDmnNAnAymv6aHy1S48ABCJNc9DV-F3vtk',
+	  uri: 'https://www.googleapis.com/geolocation/v1/geolocate?key=<%=process.env.GOOGLEJSAPI%>',
 	  method: 'POST',
 	  json: true,
 	  body: formData

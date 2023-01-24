@@ -123,7 +123,7 @@
       }
 
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiZJGNbzddhCp0Y4esDRwEHuHm7TJ5oG8&libraries=places&callback=initAutocomplete"
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%=process.env.GOOGLEJSAPI%>&libraries=places&callback=initAutocomplete"
          async defer></script>
         <!-- <script>
           function initMap() {
@@ -201,7 +201,7 @@
         </script> -->
       <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
       </script>
-      <!-- <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initAutocomplete"
+      <!-- <script src="https://maps.googleapis.com/maps/api/js?key=<%=process.env.GOOGLEJSAPI%>&libraries=places&callback=initAutocomplete"
          async defer></script> -->
       <!-- ============================== map ends ===================== -->
 
